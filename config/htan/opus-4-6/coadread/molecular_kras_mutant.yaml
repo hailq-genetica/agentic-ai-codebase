@@ -1,0 +1,22 @@
+task_file: tasks/htan/coadread/molecular_kras_mutant.md
+scrna_data_path: data/datasets-mt/htan_datasets/results/scrna/CRC/final_combined_adata_CRC_with_cancertype_sitetype_celltype.h5ad
+scatac_data_path: data/datasets-mt/htan_datasets/results/scatac/CRC/final_combined_adata_CRC_with_cancertype_sitetype_celltype.h5ad
+scatac_snap_path: data/datasets-mt/htan_datasets/results/scatac/CRC/final_combined_adata_CRC_backed.h5ad
+# data_dir: data/datasets-mt/htan_datasets/results/CRC
+cnmf_usage_path: data/datasets-mt/htan_datasets/results/cnmf/CRC/Tumor/usage.csv
+cnmf_spectra_scores_path: data/datasets-mt/htan_datasets/results/cnmf/CRC/Tumor/spectra_scores.csv
+cnmf_top_genes_path: data/datasets-mt/htan_datasets/results/cnmf/CRC/Tumor/top_genes.csv
+tool_category: scselected_scrna, scselected_scatac, scselected_multiome, external_database
+reasoning_effort: medium
+interactive: false
+capture_telemetry: true
+output_base_dir: output/coadread/molecular_kras_mutant/
+
+llm:
+  provider: anthropic
+  model: claude-opus-4-6
+logging:
+  enabled: true
+  project: agentic-ai-htan
+  entity: vanallenlab-agentic-ai
+  run_name: null  # auto-generated if null

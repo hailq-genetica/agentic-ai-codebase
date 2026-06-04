@@ -1,0 +1,84 @@
+cancer_type	task_id	task_name	category	val_metric	label_type	val_endpoint	val_endpoint_file	val_endpoint_modality
+BRCA	B1	ER+ Luminal Identity	Molecular	AUROC	binary-pole	breast_carcinoma_estrogen_receptor_status (binary)	data/clinical/clinical_PANCAN_patient_with_followup.tsv	panel
+BRCA	B2	HER2 Amplification	Molecular	AUROC	binary-pole	ERBB2 CNA ≥ 2 (binary)	data/molecular/brca_tcga_gdc/data_cna.txt	DNA copy number
+BRCA	B3	Invasive Lobular / CDH1-Loss	Pathology	AUROC	binary-pole	fields.histologic_type ILC vs IDC (binary)	results/path_reports/brca_tcga_gdc_extracted.jsonl
+BRCA	B4	Mitotic / Proliferative	Pathology	Spearman ρ	ordinal	fields.nottingham_mitotic_score (ordinal 1–3, N=600)	results/path_reports/brca_tcga_gdc_extracted.jsonl
+BRCA	B5	PIK3CA-Mutant / PI3K-Activated	Molecular	AUROC	binary-pole	PIK3CA non-silent mutations (binary, ~34%)	data/molecular/brca_tcga_gdc/data_mutations.txt	DNA mutation
+BRCA	B6	PR-Negative	Molecular	AUROC	binary-pole	breast_carcinoma_progesterone_receptor_status Negative (binary, ~33%, N=1047)	data/clinical/clinical_PANCAN_patient_with_followup.tsv	panel
+SKCM	SK1	BRAF V600E Proliferative	Molecular	AUROC	binary-pole	BRAF V600E mutation status (binary, ~50%)	data/molecular/skcm_tcga_gdc/data_mutations.txt	DNA mutation
+SKCM	SK2	NRAS-Mutant Subtype	Molecular	AUROC	binary-pole	NRAS non-silent mutations (binary, ~27%)	data/molecular/skcm_tcga_gdc/data_mutations.txt	DNA mutation
+SKCM	SK3	Breslow Thickness [Exploratory]	Pathology	Spearman ρ	continuous	fields.breslow_thickness_mm (continuous, N=102)	results/path_reports/skcm_tcga_gdc_extracted.jsonl
+SKCM	SK4	CDKN2A Deletion	Molecular	AUROC	binary-pole	CDKN2A CNA ≤ -2 (binary, ~24%)	data/molecular/skcm_tcga_gdc/data_cna.txt	DNA copy number
+SKCM	SK5	Melanoma Survival	Clinical	Cox PH |z-score|	survival	OS / OS.time	data/clinical/TCGA-CDR.csv
+HNSC	HN1	HPV-Positive Program	Molecular	AUROC	binary-pole	hpv_status_by_p16_testing Positive (binary, ~36%, N=115)	data/clinical/clinical_PANCAN_patient_with_followup.tsv	panel
+HNSC	HN2	Extracapsular Nodal Extension	Pathology	AUROC	binary-pole	fields.extranodal_extension (binary, HPV-neg only)	results/path_reports/hnsc_tcga_gdc_extracted.jsonl
+HNSC	HN3	Depth of Invasion	Pathology	Spearman ρ	continuous	fields.depth_of_invasion_mm (continuous, N=133)	results/path_reports/hnsc_tcga_gdc_extracted.jsonl
+HNSC	HN4	Perineural Invasion	Pathology	AUROC	binary-pole	fields.perineural_invasion (binary, 52%, N=358)	results/path_reports/hnsc_tcga_gdc_extracted.jsonl
+HNSC	HN5	Bone Invasion	Pathology	AUROC	binary-pole	fields.bone_invasion (binary, ~60%, N=238)	results/path_reports/hnsc_tcga_gdc_extracted.jsonl
+HNSC	HN6	CDKN2A Deletion	Molecular	AUROC	binary-pole	CDKN2A CNA ≤ -2 (binary, ~20%)	data/molecular/hnsc_tcga_gdc/data_cna.txt	DNA copy number
+UCEC	U1	POLE Ultramutator	Molecular	AUROC	binary-pole	POLE exonuclease domain hotspot mutations (binary, ~7–10%)	data/molecular/ucec_tcga_gdc/data_mutations.txt	DNA mutation
+UCEC	U2	Serous vs Endometrioid Histotype	Pathology	max(AUROC, 1-AUROC)	binary-axis	fields.histologic_type serous vs endometrioid (binary)	results/path_reports/ucec_tcga_gdc_extracted.jsonl
+UCEC	U3	Deep Myometrial Invasion	Pathology	AUROC	binary-pole	fields.myometrial_invasion_over_50pct (binary, endometrioid only)	results/path_reports/ucec_tcga_gdc_extracted.jsonl
+UCEC	U4	CTNNB1-Mutant / WNT-Activated	Molecular	AUROC	binary-pole	CTNNB1 non-silent mutations (binary, ~27%, endometrioid only)	data/molecular/ucec_tcga_gdc/data_mutations.txt	DNA mutation
+UCEC	U5	FGFR2-Mutant	Molecular	AUROC	binary-pole	FGFR2 non-silent mutations (binary, ~15%)	data/molecular/ucec_tcga_gdc/data_mutations.txt	DNA mutation
+UCEC	U6	MLH1 Promoter Methylation	Molecular	AUROC	binary-pole	MLH1 cg00893636 beta > 0.3 (binary, ~23%, N=455)	data/molecular/jhu-usc.edu_PANCAN_HumanMethylation450.betaValue_whitelisted.tsv	DNA methylation
+HGSOC	H1	Homologous Recombination Deficiency	Molecular	AUROC	binary-pole	BRCA1/BRCA2 mutation status (binary OR, ~15–20%)	data/molecular/hgsoc_tcga_gdc/data_mutations.txt	DNA mutation
+HGSOC	H2	Platinum Response	Clinical	Cox PH |z-score|	survival	PFI / PFI.time (censored survival)	data/clinical/TCGA-CDR.csv
+HGSOC	H3	CCNE1-Amplified Proliferative	Molecular	AUROC	binary-pole	CCNE1 CNA ≥ 2 (binary, ~19%)	data/molecular/hgsoc_tcga_gdc/data_cna.txt	DNA copy number
+HGSOC	H4	MYC-Amplified	Molecular	AUROC	binary-pole	MYC CNA ≥ 2 (binary, ~22%)	data/molecular/hgsoc_tcga_gdc/data_cna.txt	DNA copy number
+PAAD	PA1	SMAD4-Loss / Metastatic	Molecular	AUROC	binary-pole	SMAD4 non-silent mutations (binary, ~21%)	data/molecular/paad_tcga_gdc/data_mutations.txt	DNA mutation
+PAAD	PA2	CDKN2A Deletion	Molecular	AUROC	binary-pole	CDKN2A CNA ≤ -2 (binary, ~24%)	data/molecular/paad_tcga_gdc/data_cna.txt	DNA copy number
+PAAD	PA3	Pancreatic Survival	Clinical	Cox PH |z-score|	survival	OS / OS.time	data/clinical/TCGA-CDR.csv
+PAAD	PA4	Resection Margin Status	Pathology	AUROC	binary-pole	fields.r_status R0 vs R1 (binary, R1 ~41%, N=147)	results/path_reports/paad_tcga_gdc_extracted.jsonl
+COADREAD	CR1	MSI-H / MMR Deficiency	Molecular	AUROC	binary-pole	loss_expression_of_mismatch_repair_proteins_by_ihc YES (binary, ~16%, N=343)	data/clinical/clinical_PANCAN_patient_with_followup.tsv	panel
+COADREAD	CR2	KRAS-Mutant / Anti-EGFR Resistance	Molecular	AUROC	binary-pole	KRAS non-silent mutations (binary, ~43%)	data/molecular/coad_tcga_gdc/data_mutations.txt	DNA mutation
+COADREAD	CR3	Neoadjuvant CRT Response [Exploratory]	Clinical	Cox PH |z-score|	survival	DFI / DFI.time (censored, READ only)	data/clinical/TCGA-CDR.csv
+COADREAD	CR4	BRAF V600E / Serrated Pathway	Molecular	AUROC	binary-pole	BRAF V600E mutation status (binary, ~14%)	data/molecular/coad_tcga_gdc/data_mutations.txt	DNA mutation
+COADREAD	CR5	Tumor Deposits	Pathology	AUROC	binary-pole	fields.tumor_deposits (binary, ~25%, N=111)	results/path_reports/coad_tcga_gdc_extracted.jsonl
+COADREAD	CR6	MLH1 Promoter Methylation	Molecular	AUROC	binary-pole	MLH1 cg00893636 beta > 0.3 (binary, ~12%, N=328)	data/molecular/jhu-usc.edu_PANCAN_HumanMethylation450.betaValue_whitelisted.tsv	DNA methylation
+CESC	CE1	Squamous vs Glandular Histotype	Pathology	max(AUROC, 1-AUROC)	binary-axis	fields.histologic_type squamous vs adeno (binary)	results/path_reports/cesc_tcga_gdc_extracted.jsonl
+CESC	CE2	PIK3CA-Mutant / PI3K-Activated	Molecular	AUROC	binary-pole	PIK3CA non-silent mutations (binary, ~28%)	data/molecular/cesc_tcga_gdc/data_mutations.txt	DNA mutation
+CESC	CE3	Depth of Stromal Invasion	Pathology	Spearman ρ	continuous	fields.depth_of_stromal_invasion_mm (continuous, N=115)	results/path_reports/cesc_tcga_gdc_extracted.jsonl
+GBM	G1	CDK4-Amplified	Molecular	AUROC	binary-pole	CDK4 CNA ≥ 2 (binary, ~14%)	data/molecular/gbm_tcga_gdc/data_cna.txt	DNA copy number
+GBM	G2	IDH1-Mutant	Molecular	AUROC	binary-pole	IDH1 R132 mutations (binary, ~6%)	data/molecular/gbm_tcga_gdc/data_mutations.txt	DNA mutation
+GBM	G3	MGMT Survival	Clinical	Cox PH |z-score|	survival	OS / OS.time (IDH-wt only)	data/clinical/TCGA-CDR.csv
+GBM	G4	EGFR-Amplified / Classical	Molecular	AUROC	binary-pole	EGFR CNA ≥ 2 (binary, ~46%)	data/molecular/gbm_tcga_gdc/data_cna.txt	DNA copy number
+GBM	G5	Ki-67 Proliferation	Pathology	Spearman ρ	continuous	fields.ki67_percent (continuous, N=170)	results/path_reports/gbm_tcga_gdc_extracted.jsonl
+GBM	G6	MGMT Promoter Methylation	Molecular	AUROC	binary-pole	MGMT cg12434587 beta > 0.3 (binary, ~25%, N=151)	data/molecular/jhu-usc.edu_PANCAN_HumanMethylation450.betaValue_whitelisted.tsv	DNA methylation
+CCRCC	C1	VHL-Loss	Molecular	AUROC	binary-pole	VHL non-silent mutations (binary, ~46%)	data/molecular/ccrcc_tcga_gdc/data_mutations.txt	DNA mutation
+CCRCC	C2	Sarcomatoid Dedifferentiation	Pathology	AUROC	binary-pole	fields.sarcomatoid_differentiation (binary, ~5–8%)	results/path_reports/ccrcc_tcga_gdc_extracted.jsonl
+CCRCC	C3	BAP1-Loss Dedifferentiation	Molecular	AUROC	binary-pole	BAP1 non-silent mutations (binary, ~11%)	data/molecular/ccrcc_tcga_gdc/data_mutations.txt	DNA mutation
+CCRCC	C4	PBRM1-Loss	Molecular	AUROC	binary-pole	PBRM1 non-silent mutations (binary, ~39%)	data/molecular/ccrcc_tcga_gdc/data_mutations.txt	DNA mutation
+CCRCC	C5	Fuhrman Nuclear Grade	Pathology	Spearman ρ	ordinal	fields.fuhrman_grade (ordinal I–IV, N=511)	results/path_reports/ccrcc_tcga_gdc_extracted.jsonl
+CCRCC	C6	Renal Vein Invasion	Pathology	AUROC	binary-pole	fields.renal_vein_involvement (binary, ~25%, N=399)	results/path_reports/ccrcc_tcga_gdc_extracted.jsonl
+BRCA(pancan)	PC1	Chromosomal Instability Response	Molecular	Spearman ρ	continuous	FGA fraction genome altered (continuous, per sample per cancer)	data/molecular/brca_tcga_gdc/data_cna_hg38.seg	DNA segmented CNA
+SKCM(pancan)	PC1	Chromosomal Instability Response	Molecular	Spearman ρ	continuous	FGA fraction genome altered (continuous, per sample per cancer)	data/molecular/skcm_tcga_gdc/data_cna_hg38.seg	DNA segmented CNA
+HNSC(pancan)	PC1	Chromosomal Instability Response	Molecular	Spearman ρ	continuous	FGA fraction genome altered (continuous, per sample per cancer)	data/molecular/hnsc_tcga_gdc/data_cna_hg38.seg	DNA segmented CNA
+UCEC(pancan)	PC1	Chromosomal Instability Response	Molecular	Spearman ρ	continuous	FGA fraction genome altered (continuous, per sample per cancer)	data/molecular/ucec_tcga_gdc/data_cna_hg38.seg	DNA segmented CNA
+HGSOC(pancan)	PC1	Chromosomal Instability Response	Molecular	Spearman ρ	continuous	FGA fraction genome altered (continuous, per sample per cancer)	data/molecular/hgsoc_tcga_gdc/data_cna_hg38.seg	DNA segmented CNA
+PAAD(pancan)	PC1	Chromosomal Instability Response	Molecular	Spearman ρ	continuous	FGA fraction genome altered (continuous, per sample per cancer)	data/molecular/paad_tcga_gdc/data_cna_hg38.seg	DNA segmented CNA
+COADREAD(pancan)	PC1	Chromosomal Instability Response	Molecular	Spearman ρ	continuous	FGA fraction genome altered (continuous, per sample per cancer)	data/molecular/coad_tcga_gdc/data_cna_hg38.seg	DNA segmented CNA
+CESC(pancan)	PC1	Chromosomal Instability Response	Molecular	Spearman ρ	continuous	FGA fraction genome altered (continuous, per sample per cancer)	data/molecular/cesc_tcga_gdc/data_cna_hg38.seg	DNA segmented CNA
+GBM(pancan)	PC1	Chromosomal Instability Response	Molecular	Spearman ρ	continuous	FGA fraction genome altered (continuous, per sample per cancer)	data/molecular/gbm_tcga_gdc/data_cna_hg38.seg	DNA segmented CNA
+CCRCC(pancan)	PC1	Chromosomal Instability Response	Molecular	Spearman ρ	continuous	FGA fraction genome altered (continuous, per sample per cancer)	data/molecular/ccrcc_tcga_gdc/data_cna_hg38.seg	DNA segmented CNA
+BRCA(pancan)	PC2	Histologic Grade	Pathology	Spearman ρ	ordinal	fields.histologic_grade (ordinal G1–G3, per cancer)	results/path_reports/brca_tcga_gdc_extracted.jsonl
+HNSC(pancan)	PC2	Histologic Grade	Pathology	Spearman ρ	ordinal	fields.histologic_grade (ordinal G1–G3, per cancer)	results/path_reports/hnsc_tcga_gdc_extracted.jsonl
+UCEC(pancan)	PC2	Histologic Grade	Pathology	Spearman ρ	ordinal	fields.histologic_grade (ordinal G1–G3, per cancer)	results/path_reports/ucec_tcga_gdc_extracted.jsonl
+PAAD(pancan)	PC2	Histologic Grade	Pathology	Spearman ρ	ordinal	fields.histologic_grade (ordinal G1–G3, per cancer)	results/path_reports/paad_tcga_gdc_extracted.jsonl
+COADREAD(pancan)	PC2	Histologic Grade	Pathology	Spearman ρ	ordinal	fields.histologic_grade (ordinal G1–G3, per cancer)	results/path_reports/coad_tcga_gdc_extracted.jsonl
+CESC(pancan)	PC2	Histologic Grade	Pathology	Spearman ρ	ordinal	fields.histologic_grade (ordinal G1–G3, per cancer)	results/path_reports/cesc_tcga_gdc_extracted.jsonl
+CCRCC(pancan)	PC2	Histologic Grade	Pathology	Spearman ρ	ordinal	fields.histologic_grade (ordinal G1–G3, per cancer)	results/path_reports/ccrcc_tcga_gdc_extracted.jsonl
+BRCA(pancan)	PC3	Lymphovascular Invasion	Pathology	AUROC	binary-pole	fields.lymphovascular_invasion (binary, eligible cancers only)	results/path_reports/brca_tcga_gdc_extracted.jsonl
+HNSC(pancan)	PC3	Lymphovascular Invasion	Pathology	AUROC	binary-pole	fields.lymphovascular_invasion (binary, eligible cancers only)	results/path_reports/hnsc_tcga_gdc_extracted.jsonl
+UCEC(pancan)	PC3	Lymphovascular Invasion	Pathology	AUROC	binary-pole	fields.lymphovascular_invasion (binary, eligible cancers only)	results/path_reports/ucec_tcga_gdc_extracted.jsonl
+PAAD(pancan)	PC3	Lymphovascular Invasion	Pathology	AUROC	binary-pole	fields.lymphovascular_invasion (binary, eligible cancers only)	results/path_reports/paad_tcga_gdc_extracted.jsonl
+COADREAD(pancan)	PC3	Lymphovascular Invasion	Pathology	AUROC	binary-pole	fields.lymphovascular_invasion (binary, eligible cancers only)	results/path_reports/coad_tcga_gdc_extracted.jsonl
+CESC(pancan)	PC3	Lymphovascular Invasion	Pathology	AUROC	binary-pole	fields.lymphovascular_invasion (binary, eligible cancers only)	results/path_reports/cesc_tcga_gdc_extracted.jsonl
+CCRCC(pancan)	PC3	Lymphovascular Invasion	Pathology	AUROC	binary-pole	fields.lymphovascular_invasion (binary, eligible cancers only)	results/path_reports/ccrcc_tcga_gdc_extracted.jsonl
+GBM(pancan)	PC4	Pan-Cancer Survival	Clinical	Cox PH |z-score|	survival	OS or DSS / time (cancers with event rate ≥20%)	data/clinical/TCGA-CDR.csv
+HGSOC(pancan)	PC4	Pan-Cancer Survival	Clinical	Cox PH |z-score|	survival	OS or DSS / time (cancers with event rate ≥20%)	data/clinical/TCGA-CDR.csv
+PAAD(pancan)	PC4	Pan-Cancer Survival	Clinical	Cox PH |z-score|	survival	OS or DSS / time (cancers with event rate ≥20%)	data/clinical/TCGA-CDR.csv
+SKCM(pancan)	PC4	Pan-Cancer Survival	Clinical	Cox PH |z-score|	survival	OS or DSS / time (cancers with event rate ≥20%)	data/clinical/TCGA-CDR.csv
+HNSC(pancan)	PC4	Pan-Cancer Survival	Clinical	Cox PH |z-score|	survival	OS or DSS / time (cancers with event rate ≥20%)	data/clinical/TCGA-CDR.csv
+CCRCC(pancan)	PC4	Pan-Cancer Survival	Clinical	Cox PH |z-score|	survival	OS or DSS / time (cancers with event rate ≥20%)	data/clinical/TCGA-CDR.csv
+CESC(pancan)	PC4	Pan-Cancer Survival	Clinical	Cox PH |z-score|	survival	OS or DSS / time (cancers with event rate ≥20%)	data/clinical/TCGA-CDR.csv

@@ -1,0 +1,29 @@
+task_file: tasks/hai/epimenta_liposarcoma.md
+scrna_data_path: data/epimenta_liposarcoma/final_objects/epimenta_scrna.h5ad
+scatac_data_path: data/epimenta_liposarcoma/final_objects/epimenta_scatac.h5ad
+scatac_snap_path: data/epimenta_liposarcoma/epimenta_scatac_with_fragments.h5ad
+dataset_path: data/epimenta_liposarcoma/DATASET.md
+data_dir: data/epimenta_liposarcoma
+tool_category: scselected_scrna, scselected_scatac, scselected_multiome, external_database
+reasoning_effort: medium
+interactive: true
+output_base_dir: output/
+
+# Optional: exclude the source study from PubMed/search/fetch so the agent cannot shortcut by reading that paper.
+# Use when the dataset comes from a known paper and you want analysis to rely on data exploration, not the manuscript.
+literature_blacklist:
+  pmids: ["41564157"]           # PubMed IDs
+  dois: ["10.1126/scitranslmed.adw4689", "10.1101/2025.01.20.633920"]  # DOIs (substring match)
+  urls: ["https://doi.org/10.1126/scitranslmed.adw4689", "https://pubmed.ncbi.nlm.nih.gov/41564157/","https://www.science.org/doi/10.1126/scitranslmed.adw4689", "https://www.biorxiv.org/content/10.1101/2025.01.20.633920v1", "https://www.biorxiv.org/content/10.1101/2025.01.20.633920", "https://doi.org/10.1101/2025.01.20.633920"] # URL substrings (query params/tracking tokens are ignored)
+  title_contains: ["Epigenetic dysregulation of metabolic programs mediates liposarcoma cell plasticity"]
+
+# LLM: provider is one of: openai (direct API), azure_openai, anthropic
+# For openai: set OPENAI_API_KEY; model e.g. gpt-4o, gpt-4o-mini, o1, o1-mini
+llm:
+  provider: anthropic
+  model: claude-opus-4-6
+logging:
+  enabled: true
+  project: agentic-ai-pilot-final
+  entity: vanallenlab-agentic-ai
+  run_name: null  # auto-generated if null

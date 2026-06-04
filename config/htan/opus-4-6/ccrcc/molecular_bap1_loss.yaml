@@ -1,0 +1,22 @@
+task_file: tasks/htan/ccrcc/molecular_bap1_loss.md
+scrna_data_path: data/datasets-mt/htan_datasets/results/scrna/ccRCC/final_combined_adata_ccRCC_with_cancertype_sitetype_celltype.h5ad
+scatac_data_path: data/datasets-mt/htan_datasets/results/scatac/ccRCC/final_combined_adata_ccRCC_with_cancertype_sitetype_celltype.h5ad
+scatac_snap_path: data/datasets-mt/htan_datasets/results/scatac/ccRCC/final_combined_adata_ccRCC_backed.h5ad
+# data_dir: data/datasets-mt/htan_datasets/results/ccRCC
+cnmf_usage_path: data/datasets-mt/htan_datasets/results/cnmf/ccRCC/Tumor/usage.csv
+cnmf_spectra_scores_path: data/datasets-mt/htan_datasets/results/cnmf/ccRCC/Tumor/spectra_scores.csv
+cnmf_top_genes_path: data/datasets-mt/htan_datasets/results/cnmf/ccRCC/Tumor/top_genes.csv
+tool_category: scselected_scrna, scselected_scatac, scselected_multiome, external_database
+reasoning_effort: medium
+interactive: false
+capture_telemetry: true
+output_base_dir: output/ccrcc/molecular_bap1_loss/
+
+llm:
+  provider: anthropic
+  model: claude-opus-4-6
+logging:
+  enabled: true
+  project: agentic-ai-htan
+  entity: vanallenlab-agentic-ai
+  run_name: null  # auto-generated if null

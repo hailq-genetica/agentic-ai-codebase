@@ -1,0 +1,30 @@
+task_file: tasks/hai/jyates_eac.md
+scrna_data_path: data/jyates_eac/final_objects/jyates_scrna.h5ad
+scatac_data_path: data/jyates_eac/final_objects/jyates_scatac.h5ad
+scatac_snap_path: data/jyates_eac/jyates_scatac_with_fragments.h5ad
+dataset_path: data/jyates_eac/DATASET.md
+data_dir: data/jyates_eac
+tool_category: scselected_scrna, scselected_scatac, scselected_multiome, external_database
+reasoning_effort: medium
+interactive: true
+output_base_dir: output/
+
+# Optional: exclude the source study from PubMed/search/fetch so the agent cannot shortcut by reading that paper.
+# Use when the dataset comes from a known paper and you want analysis to rely on data exploration, not the manuscript.
+literature_blacklist:
+  pmids: ["39229240"]           # PubMed IDs
+  pmcid: ["PMC11370330"]       # PubMed Central IDs (use "pmcid" or "pmcids")
+  dois: ["10.1016/j.xcrm.2025.102188", "10.1101/2024.08.17.608386"]  # DOIs (substring match)
+  urls: ["https://www.biorxiv.org/content/10.1101/2024.08.17.608386", "https://www.biorxiv.org/content/10.1101/2024.08.17.608386v1", "https://www.biorxiv.org/content/10.1101/2024.08.17.608386v2", "https://www.biorxiv.org/content/10.1101/2024.08.17.608386v3", "https://www.sciencedirect.com/science/article/pii/S2666379125002617", "https://doi.org/10.1016/j.xcrm.2025.102188", "https://doi.org/10.1101/2024.08.17.608386"] # URL substrings (query params/tracking tokens are ignored)
+  title_contains: ["Cell states and neighborhoods in distinct clinical stages of primary and metastatic esophageal adenocarcinoma"]
+
+# LLM: provider is one of: openai (direct API), azure_openai, anthropic
+# For openai: set OPENAI_API_KEY; model e.g. gpt-4o, gpt-4o-mini, o1, o1-mini
+llm:
+  provider: anthropic
+  model: claude-opus-4-6
+logging:
+  enabled: true
+  project: agentic-ai-pilot-final
+  entity: vanallenlab-agentic-ai
+  run_name: null  # auto-generated if null

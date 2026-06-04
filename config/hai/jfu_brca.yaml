@@ -1,0 +1,31 @@
+task_file: tasks/hai/jfu_brca.md
+scrna_data_path: data/jfu_brca/final_objects/jfu_scrna.h5ad
+scatac_data_path: data/jfu_brca/final_objects/jfu_scatac.h5ad
+scatac_snap_path: data/jfu_brca/jfu_scatac_with_fragments.h5ad
+dataset_path: data/jfu_brca/DATASET.md
+data_dir: data/jfu_brca
+tool_category: scselected_scrna, scselected_scatac, scselected_multiome, external_database
+reasoning_effort: medium
+interactive: true
+output_base_dir: output/
+
+# Optional: exclude the source study from PubMed/search/fetch so the agent cannot shortcut by reading that paper.
+# Use when the dataset comes from a known paper and you want analysis to rely on data exploration, not the manuscript.
+literature_blacklist:
+  pmids: ["41315371"]           # PubMed IDs
+  pmcid: ["PMC12663104"]       # PubMed Central IDs (use "pmcid" or "pmcids")
+  dois: ["10.1038/s41467-025-66659-y"]  # DOIs (substring match)
+  urls: ["https://www.nature.com/articles/s41467-025-66659-y", "https://pubmed.ncbi.nlm.nih.gov/41315371/", "https://doi.org/10.1038/s41467-025-66659-y"] # URL substrings (query params/tracking tokens are ignored)
+  title_contains: ["Cellular reprogramming during anti-PD-1 and chemotherapy treatment in early-stage primary hormone receptor-positive breast cancer"]
+
+
+# LLM: provider is one of: openai (direct API), azure_openai, anthropic
+# For openai: set OPENAI_API_KEY; model e.g. gpt-4o, gpt-4o-mini, o1, o1-mini
+llm:
+  provider: anthropic
+  model: claude-opus-4-6
+logging:
+  enabled: true
+  project: agentic-ai-pilot-final
+  entity: vanallenlab-agentic-ai
+  run_name: null  # auto-generated if null

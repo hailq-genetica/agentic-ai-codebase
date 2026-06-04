@@ -1,0 +1,19 @@
+task_file: tasks/htan/paad/cancertype_annotation.md
+scrna_data_path: data/datasets-mt/htan_datasets/results/scrna/PDAC/final_combined_adata_PDAC_anonymised.h5ad
+scatac_data_path: data/datasets-mt/htan_datasets/results/scatac/PDAC/final_combined_adata_PDAC_anonymised.h5ad
+# scatac_snap_path: data/datasets-mt/htan_datasets/results/scatac/PDAC/final_combined_adata_PDAC_backed.h5ad
+# data_dir: data/datasets-mt/htan_datasets/results/PDAC
+tool_category: scselected_scrna, scselected_scatac, scselected_multiome, external_database
+reasoning_effort: medium
+interactive: false
+capture_telemetry: true
+output_base_dir: output/paad/cancertype_annotation/
+
+llm:
+  provider: anthropic
+  model: claude-opus-4-6
+logging:
+  enabled: true
+  project: agentic-ai-htan
+  entity: vanallenlab-agentic-ai
+  run_name: null  # auto-generated if null

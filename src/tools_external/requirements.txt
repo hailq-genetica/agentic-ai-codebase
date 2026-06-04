@@ -1,0 +1,70 @@
+# Package dependencies for tools_external/
+# Generated from import analysis of all modules
+
+# Scientific computing
+numpy
+scipy
+pandas
+
+# Machine learning
+torch
+scikit-learn
+transformers
+pykalman
+
+# Visualization
+matplotlib
+plotly
+seaborn
+
+# Image processing
+scikit-image
+opencv-python
+SimpleITK
+nibabel
+nilearn
+
+# Bioinformatics
+biopython
+scanpy
+gseapy
+networkx
+msprime
+pyliftover
+python-libsbml
+cobrapy
+pybiomart
+gget
+fair-esm
+popv
+nnunetv2
+
+# Single-cell analysis
+FlowCytometryTools
+trackpy
+
+# Literature & search
+requests
+beautifulsoup4
+arxiv
+scholarly
+pymed
+googlesearch-python
+anthropic
+PyPDF2
+
+# LLM & AI
+langchain-core
+
+# Utilities
+tqdm
+python-louvain
+
+# Lab automation
+pylabrobot
+
+# Drug discovery
+PyTDC
+
+# Biomni framework
+biomni
