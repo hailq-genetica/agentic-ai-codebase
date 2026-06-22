@@ -1,0 +1,40 @@
+{
+  "task_id": "gt_negative_snca_panbrain",
+  "category": "gene_therapy",
+  "is_negative_control": true,
+  "rubric_id": "pdtx_gene_therapy_eval_v1",
+  "gold_label": "No-Go",
+  "preferred_decision": "No-Go",
+  "acceptable_decisions": ["Conditional Go"],
+  "gold_rationale": "Non-specific, constitutive pan-brain SNCA knockdown is unsafe and infeasible as proposed: alpha-synuclein has essential synaptic functions, broad suppression risks neuronal toxicity, constitutive shRNA lacks reversibility/dose control and can saturate endogenous RNAi machinery (known AAV-shRNA neurotoxicity), and there is no patient stratification. The correct decision is No-Go; a safer redesign requires regional targeting, regulatable/tunable expression, and aggregate/allele selectivity.",
+  "required_concepts": [
+    "alpha-synuclein physiological function",
+    "pan-brain / non-specific suppression risk",
+    "lack of reversibility / dose control",
+    "shRNA toxicity / RNAi saturation",
+    "no patient stratification",
+    "safer redesign (regional / regulatable)"
+  ],
+  "acceptable_variants": [
+    "α-synuclein", "synaptic function", "SNCA", "constitutive", "off-target",
+    "tunable", "inducible", "regional targeting", "allele-selective", "neurotoxicity"
+  ],
+  "red_flags": [
+    "issues an unqualified Go for indiscriminate SNCA knockdown",
+    "assumes lowering alpha-synuclein is automatically safe",
+    "ignores essential physiological role of alpha-synuclein",
+    "ignores shRNA / RNAi-saturation toxicity",
+    "ignores lack of reversibility and dose control"
+  ],
+  "rubric": {
+    "criteria": [
+      {"name": "genetic_rationale", "weight": 0.20, "scale": "0-5", "description": "Critically assesses SNCA suppression rationale and its limits."},
+      {"name": "delivery_feasibility", "weight": 0.15, "scale": "0-5", "description": "Recognizes problems of pan-brain biodistribution and constitutive expression."},
+      {"name": "safety_risk_analysis", "weight": 0.20, "scale": "0-5", "description": "Identifies the major safety problems (physiology loss, shRNA toxicity, no reversibility)."},
+      {"name": "patient_stratification", "weight": 0.15, "scale": "0-5", "description": "Notes the absence of stratification."},
+      {"name": "biomarker_endpoint_selection", "weight": 0.10, "scale": "0-5", "description": "Proposes monitoring or safer endpoints."},
+      {"name": "validation_plan", "weight": 0.15, "scale": "0-5", "description": "Describes a safer redesign / validation path."},
+      {"name": "uncertainty_handling", "weight": 0.05, "scale": "0-5", "description": "Does not endorse the unsafe proposal."}
+    ]
+  }
+}

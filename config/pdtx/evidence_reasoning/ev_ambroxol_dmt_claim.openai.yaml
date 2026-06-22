@@ -1,0 +1,16 @@
+# OpenAI variant of ev_ambroxol_dmt_claim. Runs the agent (and, by default, the
+# judge) on an OpenAI model via the Responses API. Requires OPENAI_API_KEY.
+task_file: tasks/pdtx/evidence_reasoning/ev_ambroxol_dmt_claim.md
+gold_file: tasks/pdtx/gold/ev_ambroxol_dmt_claim.json
+category: evidence_reasoning
+tool_category: external_database
+reasoning_effort: high
+interactive: false        # overridden by run_pdtx.py --mode
+capture_telemetry: true
+output_base_dir: output/pdtx/evidence_reasoning/ev_ambroxol_dmt_claim_openai/
+
+llm:
+  provider: openai
+  model: gpt-5            # any OpenAI Responses-API model id
+logging:
+  enabled: false

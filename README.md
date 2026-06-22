@@ -18,6 +18,32 @@ python run_agent_htan.py --config config/htan/opus-4-6/brca/celltype_annotation.
 
 Interactive mode: add `--interactive`. List available tools: `--list-tools`.
 
+## PD-TxBench (Phase 2 MVP)
+
+An agentic benchmark for **Parkinson's disease therapeutic discovery** built on top of the same
+agent loop. It evaluates whether the model can reason across mechanism → target → modality →
+evidence → safety → Go/No-Go → next experiment across three therapy modalities (small molecule,
+gene therapy, cell therapy) plus evidence-verification tasks, including **negative controls** that
+test for safe No-Go / anti-overclaiming behavior.
+
+```bash
+# Run + judge-score one PD task (autonomous):
+python run_pdtx.py --config config/pdtx/small_molecule/sm_gba1_ambroxol_analog.yaml --mode autonomous
+
+# Run all PD tasks human-in-the-loop:
+python run_pdtx.py --config config/pdtx --mode hitl
+
+# Score an existing deliverable offline (no agent, no API key):
+python run_pdtx.py --eval-only --offline \
+    --deliverable output/pdtx/.../result.json --gold tasks/pdtx/gold/sm_gba1_ambroxol_analog.json
+
+# Aggregate leaderboard report:
+python run_pdtx.py --report
+```
+
+Tasks live in `tasks/pdtx/`, configs in `config/pdtx/`, the LLM-as-judge scorer in `src/pdtx_eval/`.
+See `tasks/pdtx/README.md` and `docs/pdtx_scoring_guide.md`.
+
 ## Config
 
 Each run is driven by a YAML config. Key fields:

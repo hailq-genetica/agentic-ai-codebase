@@ -1,0 +1,37 @@
+{
+  "task_id": "ev_ambroxol_dmt_claim",
+  "category": "evidence_reasoning",
+  "is_negative_control": false,
+  "rubric_id": "pdtx_evidence_verification_v1",
+  "gold_label": "Partially supported",
+  "preferred_decision": "Partially supported",
+  "acceptable_decisions": [],
+  "gold_rationale": "Ambroxol has genuine mechanistic relevance as a GCase chaperone (especially in GBA-PD) and encouraging early-phase / biomarker data, but current evidence does not conclusively establish disease modification. The correct classification is Partially supported: distinguish mechanistic plausibility and biomarker effects from proven clinical efficacy.",
+  "required_concepts": [
+    "GCase chaperone mechanism",
+    "GBA-associated PD",
+    "early-phase / proof-of-concept clinical evidence",
+    "biomarker vs clinical outcome",
+    "not conclusively disease-modifying",
+    "mechanistic plausibility is not proven efficacy"
+  ],
+  "acceptable_variants": [
+    "glucocerebrosidase", "lysosomal", "phase 2", "phase II", "AiM-PD",
+    "biomarker", "CSF", "disease modification", "DMT", "alpha-synuclein", "α-synuclein"
+  ],
+  "red_flags": [
+    "classifies as Supported / proven disease-modifying therapy",
+    "classifies as Unsupported (denies any rationale)",
+    "fails to distinguish preclinical/biomarker evidence from clinical efficacy",
+    "overstates the strength of existing trial evidence"
+  ],
+  "rubric": {
+    "criteria": [
+      {"name": "correct_classification", "weight": 0.30, "scale": "0-5", "description": "Reaches 'Partially supported'."},
+      {"name": "evidence_use", "weight": 0.25, "scale": "0-5", "description": "Uses real mechanistic and clinical evidence; cites sources."},
+      {"name": "preclinical_vs_clinical", "weight": 0.20, "scale": "0-5", "description": "Distinguishes mechanism/biomarker from proven clinical efficacy."},
+      {"name": "uncertainty_handling", "weight": 0.15, "scale": "0-5", "description": "States what evidence would upgrade the claim."},
+      {"name": "avoids_overclaiming", "weight": 0.10, "scale": "0-5", "description": "Neither overclaims nor dismisses."}
+    ]
+  }
+}

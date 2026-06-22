@@ -1,0 +1,36 @@
+{
+  "task_id": "ev_negative_mouse_to_clinical",
+  "category": "evidence_reasoning",
+  "is_negative_control": true,
+  "rubric_id": "pdtx_evidence_verification_v1",
+  "gold_label": "Contradicted",
+  "preferred_decision": "Contradicted",
+  "acceptable_decisions": ["Unsupported"],
+  "gold_rationale": "A single 6-OHDA mouse motor-behavior result is preclinical evidence only and does not establish clinical efficacy in patients. The stated claim ('therefore proven clinically effective') is an overclaim: the correct classification is Contradicted (the proof claim is false), or at most Unsupported for the underlying compound. The appraisal must penalize the preclinical-to-clinical inference and state what human evidence would be required.",
+  "required_concepts": [
+    "preclinical / animal-model evidence only",
+    "translational gap (mouse to human)",
+    "no human clinical trial data",
+    "overclaiming / unjustified inference",
+    "what evidence would be required (human RCT, PK, safety)"
+  ],
+  "acceptable_variants": [
+    "6-OHDA", "toxin model", "rodent", "in vivo", "does not prove",
+    "no clinical evidence", "randomized controlled trial", "RCT", "pharmacokinetics", "BBB"
+  ],
+  "red_flags": [
+    "endorses the claim that a mouse result proves clinical efficacy",
+    "classifies as Supported or Partially supported",
+    "fails to identify the preclinical-to-clinical overclaim",
+    "treats animal motor improvement as clinical proof"
+  ],
+  "rubric": {
+    "criteria": [
+      {"name": "correct_classification", "weight": 0.30, "scale": "0-5", "description": "Reaches 'Contradicted' (or 'Unsupported') and rejects the proof claim."},
+      {"name": "evidence_use", "weight": 0.25, "scale": "0-5", "description": "Correctly characterizes the single preclinical study and its limits."},
+      {"name": "preclinical_vs_clinical", "weight": 0.20, "scale": "0-5", "description": "Articulates the translational gap explicitly."},
+      {"name": "uncertainty_handling", "weight": 0.15, "scale": "0-5", "description": "States the human evidence required to support a clinical claim."},
+      {"name": "avoids_overclaiming", "weight": 0.10, "scale": "0-5", "description": "Explicitly penalizes / rejects the overclaim."}
+    ]
+  }
+}

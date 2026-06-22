@@ -1,0 +1,14 @@
+task_file: tasks/pdtx/evidence_reasoning/ev_negative_mouse_to_clinical.md
+gold_file: tasks/pdtx/gold/ev_negative_mouse_to_clinical.json
+category: evidence_reasoning
+tool_category: external_database
+reasoning_effort: high
+interactive: false        # overridden by run_pdtx.py --mode
+capture_telemetry: true
+output_base_dir: output/pdtx/evidence_reasoning/ev_negative_mouse_to_clinical/
+
+llm:
+  provider: anthropic
+  model: claude-opus-4-8
+logging:
+  enabled: false

@@ -1,0 +1,9 @@
+# GPU pharmacology stack for the docking / ADMET-model tools.
+# torch is provided by the CUDA base image — do NOT list it here (avoids
+# clobbering the GPU build with a CPU wheel).
+rdkit
+DeepPurpose          # predict_admet_properties, predict_binding_affinity_protein_1d_sequence
+PyTDC                # tdc.Oracle (docking + ADMET datasets/oracles)
+pyscreener           # docking orchestration used by TDC's docking oracle
+meeko                # ligand/receptor prep for AutoDock Vina
+vina                 # AutoDock Vina python bindings

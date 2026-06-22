@@ -214,3 +214,7 @@ old/
 wandb/
 debug/
 config_test/
+
+# PD-TxBench run outputs and downloaded grading data (not source)
+output/pdtx/
+data/agentic_ai_review/

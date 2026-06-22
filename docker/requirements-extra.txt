@@ -1,0 +1,15 @@
+# Best-effort tool dependencies (literature/web search, light cheminformatics &
+# database tools used by the PD tasks). Installed with `|| true` in the Dockerfile:
+# these load lazily per tool call, so if one fails to install the agent still boots
+# and only that specific tool errors gracefully at call time.
+beautifulsoup4
+lxml
+arxiv
+scholarly
+pymed
+googlesearch-python
+PyPDF2
+networkx
+rdkit
+gseapy
+biopython

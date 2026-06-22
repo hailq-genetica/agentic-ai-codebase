@@ -1,0 +1,39 @@
+{
+  "task_id": "ct_ipsc_da_neurons",
+  "category": "cell_therapy",
+  "is_negative_control": false,
+  "rubric_id": "pdtx_cell_therapy_eval_v1",
+  "gold_label": "Conditional Go",
+  "preferred_decision": "Conditional Go",
+  "acceptable_decisions": ["Go"],
+  "gold_rationale": "iPSC-derived midbrain DA neurons with correct identity (TH/NURR1/PITX3), floor-plate lineage (FOXA2/LMX1A), undetectable residual pluripotency, and demonstrated dopamine release are a promising product. Progression to preclinical translation should be conditional on in vivo engraftment/survival data, formal tumorigenicity studies, batch reproducibility, and defined potency/release criteria. Encouraging characterization is not a fully de-risked product.",
+  "required_concepts": [
+    "dopaminergic identity (TH, NURR1, PITX3)",
+    "midbrain floor-plate lineage (FOXA2, LMX1A)",
+    "residual pluripotency / tumorigenicity",
+    "functional dopamine release",
+    "graft survival / integration",
+    "release criteria",
+    "batch reproducibility"
+  ],
+  "acceptable_variants": [
+    "TH", "NURR1", "NR4A2", "PITX3", "FOXA2", "LMX1A", "OCT4", "NANOG", "SOX2",
+    "A9", "potency assay", "in vivo", "engraftment", "teratoma", "tumor"
+  ],
+  "red_flags": [
+    "declares the product clinically ready without in vivo or tumorigenicity data",
+    "ignores residual pluripotency / tumor risk",
+    "ignores graft survival or potency/release criteria"
+  ],
+  "rubric": {
+    "criteria": [
+      {"name": "cell_identity_reasoning", "weight": 0.20, "scale": "0-5", "description": "Assesses DA/midbrain identity from the marker panel."},
+      {"name": "safety_tumorigenicity_analysis", "weight": 0.20, "scale": "0-5", "description": "Evaluates residual pluripotency and tumor risk; calls for in vivo studies."},
+      {"name": "functional_maturity_assessment", "weight": 0.15, "scale": "0-5", "description": "Interprets dopamine release / functional maturity."},
+      {"name": "manufacturing_reproducibility", "weight": 0.15, "scale": "0-5", "description": "Addresses batch reproducibility / manufacturing."},
+      {"name": "release_criteria", "weight": 0.15, "scale": "0-5", "description": "Proposes appropriate clinical release criteria."},
+      {"name": "translational_decision", "weight": 0.10, "scale": "0-5", "description": "Calibrated Conditional Go with the right contingencies."},
+      {"name": "uncertainty_handling", "weight": 0.05, "scale": "0-5", "description": "Honest about remaining de-risking work."}
+    ]
+  }
+}
