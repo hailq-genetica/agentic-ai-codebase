@@ -218,3 +218,8 @@ config_test/
 # PD-TxBench run outputs and downloaded grading data (not source)
 output/pdtx/
 data/agentic_ai_review/
+
+# Stray run artifacts (TDC dataset dumps, tool outputs) — generated, not source
+data/*.tab
+physicochemical_properties.csv
+save_folder/
