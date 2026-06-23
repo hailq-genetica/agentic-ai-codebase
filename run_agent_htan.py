@@ -480,18 +480,21 @@ def main():
         epilog="Examples:\n  python run_agent.py --config config/scatac_pilot_v2.yaml\n"
             "  python run_agent.py --config config/scatac_pilot_v2.yaml --name sjohri"
     )
-    parser.add_argument("--config", "-c", required=True, help="Path to YAML config file")
+    parser.add_argument("--config", "-c", help="Path to YAML config file (required unless --list-tools)")
     parser.add_argument("--name", "-n", type=str, default=None,
                        help="Your name (used to group runs in wandb dashboard)")
     parser.add_argument("--list-tools", action="store_true", help="List tool categories")
-    
+
     args = parser.parse_args()
-    
+
     if args.list_tools:
         for cat in sorted(list_categories()):
             print(f"  {cat}")
         return
-    
+
+    if not args.config:
+        parser.error("--config/-c is required (unless using --list-tools)")
+
     run_agent(args.config, user_name=args.name)
 
 

@@ -1,0 +1,18 @@
+# Core runtime: everything run_agent.py / run_pdtx.py import at boot, plus the
+# evaluator. Installation of these MUST succeed for the agent to start.
+numpy
+pandas
+scipy
+scikit-learn
+matplotlib
+scanpy
+snapatac2
+anndata
+nbformat
+questionary
+pyyaml
+anthropic
+jsonschema
+wandb
+weave
+requests

@@ -1,0 +1,39 @@
+{
+  "task_id": "ct_negative_residual_pluripotency",
+  "category": "cell_therapy",
+  "is_negative_control": true,
+  "rubric_id": "pdtx_cell_therapy_eval_v1",
+  "gold_label": "No-Go",
+  "preferred_decision": "No-Go",
+  "acceptable_decisions": ["Conditional Go"],
+  "gold_rationale": "High residual OCT4/NANOG expression plus a proliferative (Ki-67+) uncharacterized fraction and no tumorigenicity study indicate residual pluripotency and unacceptable teratoma/tumor risk. TH positivity does not offset this. The correct decision is No-Go (at most a Conditional Go contingent on eliminating residual pluripotency and completing in vivo tumorigenicity studies).",
+  "required_concepts": [
+    "residual pluripotency (OCT4, NANOG)",
+    "tumorigenicity / teratoma risk",
+    "proliferative cells / Ki-67",
+    "TH positivity is insufficient",
+    "in vivo tumorigenicity study required",
+    "release criteria"
+  ],
+  "acceptable_variants": [
+    "OCT4", "NANOG", "SOX2", "Ki-67", "Ki67", "teratoma", "tumor",
+    "pluripotent", "not ready", "purification", "cell sorting", "FOXA2", "LMX1A"
+  ],
+  "red_flags": [
+    "issues a Go despite high OCT4/NANOG and tumor risk",
+    "treats TH positivity as sufficient for readiness",
+    "ignores residual pluripotency / tumorigenicity",
+    "ignores absence of in vivo tumorigenicity study"
+  ],
+  "rubric": {
+    "criteria": [
+      {"name": "cell_identity_reasoning", "weight": 0.20, "scale": "0-5", "description": "Notes incomplete midbrain identity and the meaning of mixed markers."},
+      {"name": "safety_tumorigenicity_analysis", "weight": 0.20, "scale": "0-5", "description": "Correctly identifies residual pluripotency / tumor risk as disqualifying."},
+      {"name": "functional_maturity_assessment", "weight": 0.15, "scale": "0-5", "description": "Weighs functional data against the safety problem."},
+      {"name": "manufacturing_reproducibility", "weight": 0.15, "scale": "0-5", "description": "Flags purity / process-control gaps."},
+      {"name": "release_criteria", "weight": 0.15, "scale": "0-5", "description": "States release criteria the product fails."},
+      {"name": "translational_decision", "weight": 0.10, "scale": "0-5", "description": "Reaches No-Go for the right reasons."},
+      {"name": "uncertainty_handling", "weight": 0.05, "scale": "0-5", "description": "Does not rationalize away the tumor risk."}
+    ]
+  }
+}

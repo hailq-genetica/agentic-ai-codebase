@@ -1,0 +1,61 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PD-TxBench Phase 2 task",
+  "type": "object",
+  "required": ["task_id", "version", "category", "task_type", "difficulty", "input", "gold", "scoring"],
+  "properties": {
+    "task_id": {"type": "string"},
+    "version": {"type": "string"},
+    "category": {
+      "type": "string",
+      "enum": ["small_molecule", "gene_therapy", "cell_therapy", "evidence_reasoning", "agentic"]
+    },
+    "task_type": {"type": "string"},
+    "difficulty": {"type": "string", "enum": ["easy", "medium", "hard", "expert"]},
+    "is_negative_control": {"type": "boolean"},
+    "input": {
+      "type": "object",
+      "properties": {
+        "disease_context": {"type": "string"},
+        "therapeutic_context": {"type": "string"},
+        "candidate": {"type": "object"},
+        "evidence": {"type": "array"},
+        "tools_allowed": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "expected_output_format": {"type": "object"},
+    "gold": {"$ref": "#/definitions/gold"},
+    "scoring": {
+      "type": "object",
+      "required": ["rubric_id"],
+      "properties": {
+        "rubric_id": {"type": "string"},
+        "automatic_metrics": {"type": "array", "items": {"type": "string"}},
+        "expert_required": {"type": "boolean"}
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "source_ids": {"type": "array"},
+        "license": {"type": "string"},
+        "curator": {"type": "string"},
+        "review_status": {"type": "string", "enum": ["draft", "reviewed", "finalized"]}
+      }
+    }
+  },
+  "definitions": {
+    "gold": {
+      "type": "object",
+      "required": ["gold_label", "required_concepts", "red_flags"],
+      "properties": {
+        "gold_label": {"type": "string"},
+        "preferred_decision": {"type": "string", "enum": ["Go", "No-Go", "Conditional Go", "Supported", "Partially supported", "Unsupported", "Contradicted"]},
+        "gold_rationale": {"type": "string"},
+        "required_concepts": {"type": "array", "items": {"type": "string"}},
+        "acceptable_variants": {"type": "array", "items": {"type": "string"}},
+        "red_flags": {"type": "array", "items": {"type": "string"}}
+      }
+    }
+  }
+}

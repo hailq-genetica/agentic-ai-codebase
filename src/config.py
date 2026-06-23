@@ -24,6 +24,8 @@ MODEL_CONTEXT_LIMITS = {
     "claude-3-haiku-20240307": 200_000,
     "claude-4-sonnet-latest": 200_000,
     "claude-opus-4-6": 200_000,
+    "claude-opus-4-7": 200_000,
+    "claude-opus-4-8": 200_000,
     "claude-sonnet-4-6": 200_000,
 }
 
@@ -46,6 +48,8 @@ MODEL_OUTPUT_LIMITS = {
     "claude-3-haiku-20240307": 4096,
     "claude-4-sonnet-latest": 8192,
     "claude-opus-4-6": 16384,
+    "claude-opus-4-7": 64000,
+    "claude-opus-4-8": 64000,
     "claude-sonnet-4-6": 16384,
 }
 

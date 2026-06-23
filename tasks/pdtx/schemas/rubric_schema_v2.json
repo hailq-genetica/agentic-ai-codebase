@@ -1,0 +1,63 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PD-TxBench Phase 2 gold + rubric file",
+  "description": "Schema for tasks/pdtx/gold/<task_id>.json — combines the gold answer and the scoring rubric for one task.",
+  "type": "object",
+  "required": ["task_id", "category", "rubric_id", "preferred_decision", "required_concepts", "red_flags", "rubric"],
+  "properties": {
+    "task_id": {"type": "string"},
+    "category": {
+      "type": "string",
+      "enum": ["small_molecule", "gene_therapy", "cell_therapy", "evidence_reasoning"]
+    },
+    "is_negative_control": {"type": "boolean"},
+    "rubric_id": {"type": "string"},
+    "gold_label": {"type": "string"},
+    "preferred_decision": {
+      "type": "string",
+      "description": "The decision a strong answer should reach. Go/No-Go/Conditional Go for therapy tasks; Supported/Partially supported/Unsupported/Contradicted for evidence tasks.",
+      "enum": ["Go", "No-Go", "Conditional Go", "Supported", "Partially supported", "Unsupported", "Contradicted"]
+    },
+    "acceptable_decisions": {
+      "type": "array",
+      "description": "Other decisions that are still defensible (partial credit on the decision criterion).",
+      "items": {"type": "string"}
+    },
+    "gold_rationale": {"type": "string"},
+    "required_concepts": {
+      "type": "array",
+      "description": "Concepts a strong answer must engage with.",
+      "items": {"type": "string"}
+    },
+    "acceptable_variants": {
+      "type": "array",
+      "description": "Synonyms / alternative phrasings that count as covering a required concept.",
+      "items": {"type": "string"}
+    },
+    "red_flags": {
+      "type": "array",
+      "description": "Failure modes that should be penalized if present (e.g. overclaiming, ignoring BBB/toxicity).",
+      "items": {"type": "string"}
+    },
+    "rubric": {
+      "type": "object",
+      "required": ["criteria"],
+      "properties": {
+        "criteria": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["name", "weight"],
+            "properties": {
+              "name": {"type": "string"},
+              "description": {"type": "string"},
+              "weight": {"type": "number", "minimum": 0, "maximum": 1},
+              "scale": {"type": "string", "default": "0-5"}
+            }
+          }
+        }
+      }
+    }
+  }
+}

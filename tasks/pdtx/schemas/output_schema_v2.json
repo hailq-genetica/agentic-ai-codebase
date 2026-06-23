@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PD-TxBench Phase 2 deliverable (result.json)",
+  "description": "Schema for the result.json the agent writes. Validation enforces the structural contract only: the required keys must be present, the decision field must be a valid enum value, and confidence must be a 0-1 number. Descriptive/content fields accept any JSON shape (string, object, or array) so a model that returns a richer structure than a plain string still validates. Validate against the per-category definition matching the task's category.",
+  "definitions": {
+    "_decision_go": {
+      "type": "string",
+      "enum": ["Go", "No-Go", "Conditional Go"]
+    },
+    "_decision_classification": {
+      "type": "string",
+      "enum": ["Supported", "Partially supported", "Unsupported", "Contradicted"]
+    },
+    "_confidence": {"type": "number", "minimum": 0, "maximum": 1},
+
+    "small_molecule": {
+      "type": "object",
+      "required": ["mechanism_hypothesis", "admet_assessment", "go_no_go", "main_risks", "next_experiment", "confidence"],
+      "properties": {
+        "go_no_go": {"$ref": "#/definitions/_decision_go"},
+        "confidence": {"$ref": "#/definitions/_confidence"}
+      }
+    },
+    "gene_therapy": {
+      "type": "object",
+      "required": ["therapeutic_rationale", "delivery_strategy", "key_risks", "go_no_go", "confidence"],
+      "properties": {
+        "go_no_go": {"$ref": "#/definitions/_decision_go"},
+        "confidence": {"$ref": "#/definitions/_confidence"}
+      }
+    },
+    "cell_therapy": {
+      "type": "object",
+      "required": ["cell_product", "identity_assessment", "safety_assessment", "go_no_go", "release_criteria", "confidence"],
+      "properties": {
+        "go_no_go": {"$ref": "#/definitions/_decision_go"},
+        "confidence": {"$ref": "#/definitions/_confidence"}
+      }
+    },
+    "evidence_reasoning": {
+      "type": "object",
+      "required": ["classification", "rationale", "confidence"],
+      "properties": {
+        "classification": {"$ref": "#/definitions/_decision_classification"},
+        "confidence": {"$ref": "#/definitions/_confidence"}
+      }
+    }
+  }
+}

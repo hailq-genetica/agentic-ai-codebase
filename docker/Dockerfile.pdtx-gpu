@@ -1,0 +1,91 @@
+# GPU PD-TxBench runtime: the CPU image (Dockerfile.pdtx) plus the GPU-heavy
+# pharmacology tools — ADMET / binding-affinity models (DeepPurpose + CUDA torch),
+# AutoDock Vina docking (PyTDC + pyscreener + Vina + prepare_receptor), and the
+# Docker CLI so run_diffdock_with_smiles can drive the rbgcsail/diffdock sibling
+# container.
+#
+# Build (context = this docker/ directory):
+#   docker build -f docker/Dockerfile.pdtx-gpu -t pdtx-runtime:gpu docker/
+#
+# Run (GPU + Docker socket for DiffDock; PD tasks need no h5ad data):
+#   docker run --rm -it --gpus all \
+#     -e ANTHROPIC_API_KEY \
+#     -v /var/run/docker.sock:/var/run/docker.sock \
+#     -v "$(pwd)":/workspace -w /workspace pdtx-runtime:gpu bash
+#
+# Layering: the agent boot stack is must-succeed; the docking/ADMET layers are
+# best-effort (|| true) so one fiddly dependency can't sink the whole image.
+FROM pytorch/pytorch:2.5.1-cuda12.4-cudnn9-runtime
+
+ENV PYTHONUNBUFFERED=1 \
+    PIP_NO_CACHE_DIR=1 \
+    PIP_DISABLE_PIP_VERSION_CHECK=1 \
+    MPLBACKEND=Agg \
+    DEBIAN_FRONTEND=noninteractive \
+    HOME=/tmp \
+    NUMBA_CACHE_DIR=/tmp/numba-cache \
+    MPLCONFIGDIR=/tmp/mpl \
+    XDG_CACHE_HOME=/tmp/.cache \
+    XDG_CONFIG_HOME=/tmp/.config
+
+# System deps: build tools; zlib/bz2/lzma for macs3 (snapatac2 dep); swig + boost
+# + openbabel for AutoDock Vina / pyscreener; wget/tar for ADFRsuite.
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        build-essential git curl wget pkg-config libgomp1 ca-certificates \
+        zlib1g-dev libbz2-dev liblzma-dev \
+        swig libboost-all-dev openbabel \
+    && rm -rf /var/lib/apt/lists/*
+
+# Docker CLI (static binary) — lets run_diffdock_with_smiles run the DiffDock
+# sibling container against the mounted host docker socket.
+RUN curl -fsSL https://download.docker.com/linux/static/stable/x86_64/docker-27.3.1.tgz \
+        | tar -xz -C /tmp \
+    && mv /tmp/docker/docker /usr/local/bin/docker \
+    && rm -rf /tmp/docker
+
+RUN python -m pip install --upgrade pip setuptools wheel
+
+# --- Must succeed: agent boot stack (no torch — provided by the CUDA base) ---
+COPY requirements-core.txt /tmp/requirements-core.txt
+RUN pip install -r /tmp/requirements-core.txt
+
+# --- Best-effort: literature/web + light cheminformatics tool deps ---
+COPY requirements-extra.txt /tmp/requirements-extra.txt
+RUN pip install -r /tmp/requirements-extra.txt || \
+    echo "WARN: some optional tool deps failed."
+
+# --- Best-effort: GPU pharmacology (ADMET / binding / docking python) ---
+COPY requirements-gpu-pharma.txt /tmp/requirements-gpu-pharma.txt
+RUN pip install -r /tmp/requirements-gpu-pharma.txt || \
+    echo "WARN: some pharmacology deps failed; affected tools error at call time."
+
+# --- Best-effort: AutoDock Vina executable via conda (bioconda) ---
+RUN conda install -y -c conda-forge -c bioconda autodock-vina smina 2>/dev/null \
+    || echo "WARN: vina/smina executable install failed."
+
+# --- Best-effort: ADFRsuite for the prepare_receptor binary the Vina tool calls ---
+RUN cd /tmp \
+    && wget -q "https://ccsb.scripps.edu/adfr/download/1038/" -O adfr.tar.gz \
+    && tar -xzf adfr.tar.gz \
+    && cd ADFRsuite_x86_64Linux_1.0 \
+    && echo "Y" | ./install.sh -d /opt/ADFRsuite -c 0 \
+    && ln -sf /opt/ADFRsuite/bin/* /usr/local/bin/ \
+    && cd /tmp && rm -rf ADFRsuite_x86_64Linux_1.0 adfr.tar.gz \
+    || echo "WARN: ADFRsuite install failed; prepare_receptor unavailable (docking_autodock_vina degraded)."
+
+# --- Best-effort: transitive deps the pharma packages need at import time ---
+#   descriptastorus -> DeepPurpose feature generation (git-only package)
+#   gemmi           -> meeko structure I/O
+#   setuptools<81   -> restores pkg_resources (removed in 81+), needed by tdc.Oracle
+RUN pip install "setuptools<81" gemmi \
+        "git+https://github.com/bp-kelley/descriptastorus" \
+    || echo "WARN: pharma transitive deps (descriptastorus/gemmi/setuptools) failed."
+
+# OpenAI SDK — lets the agent and/or judge run on provider: openai (Responses API).
+RUN pip install openai
+
+RUN mkdir -p /tmp/numba-cache /tmp/mpl /tmp/.cache /tmp/.config \
+    && chmod -R 1777 /tmp/numba-cache /tmp/mpl /tmp/.cache /tmp/.config
+
+WORKDIR /workspace
+CMD ["bash"]

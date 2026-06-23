@@ -1,0 +1,39 @@
+{
+  "task_id": "sm_negative_herg_bbb",
+  "category": "small_molecule",
+  "is_negative_control": true,
+  "rubric_id": "pdtx_sm_candidate_eval_v1",
+  "gold_label": "No-Go",
+  "preferred_decision": "No-Go",
+  "acceptable_decisions": ["Conditional Go"],
+  "gold_rationale": "Despite strong predicted GCase binding, the molecule has poor BBB penetration (cannot reach a CNS target) and a strong hERG cardiac liability. Strong docking does not rescue an undeliverable, unsafe molecule. The correct decision is No-Go, or at most a Conditional Go contingent on major redesign to fix CNS exposure and hERG.",
+  "required_concepts": [
+    "blood-brain barrier",
+    "hERG",
+    "CNS penetration",
+    "safety liability",
+    "docking is not sufficient",
+    "GCase"
+  ],
+  "acceptable_variants": [
+    "BBB", "blood brain barrier", "cardiac", "QT", "efflux", "P-gp",
+    "cannot reach the brain", "developability", "binding does not", "glucocerebrosidase"
+  ],
+  "red_flags": [
+    "issues a Go driven by docking score despite BBB and hERG liabilities",
+    "ignores blood-brain barrier / CNS penetration",
+    "ignores hERG / cardiac safety liability",
+    "treats strong binding as sufficient for progression"
+  ],
+  "rubric": {
+    "criteria": [
+      {"name": "pd_mechanism_relevance", "weight": 0.20, "scale": "0-5", "description": "Engages the GCase/GBA1-PD context."},
+      {"name": "target_moa_reasoning", "weight": 0.15, "scale": "0-5", "description": "Interprets the docking/binding signal correctly (necessary, not sufficient)."},
+      {"name": "admet_interpretation", "weight": 0.20, "scale": "0-5", "description": "Correctly weighs poor BBB penetration for a CNS target."},
+      {"name": "safety_risk_identification", "weight": 0.15, "scale": "0-5", "description": "Flags the hERG liability as disqualifying without redesign."},
+      {"name": "go_no_go_quality", "weight": 0.15, "scale": "0-5", "description": "Reaches No-Go (or tightly Conditional) for the right reasons."},
+      {"name": "next_experiment_quality", "weight": 0.10, "scale": "0-5", "description": "Next step targets the BBB/hERG liabilities or kills the program."},
+      {"name": "uncertainty_handling", "weight": 0.05, "scale": "0-5", "description": "Does not overclaim from the docking signal."}
+    ]
+  }
+}

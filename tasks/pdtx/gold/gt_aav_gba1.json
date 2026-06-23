@@ -1,0 +1,43 @@
+{
+  "task_id": "gt_aav_gba1",
+  "category": "gene_therapy",
+  "is_negative_control": false,
+  "rubric_id": "pdtx_gene_therapy_eval_v1",
+  "gold_label": "Conditional Go",
+  "preferred_decision": "Conditional Go",
+  "acceptable_decisions": ["Go"],
+  "gold_rationale": "AAV-GBA1 gene addition is mechanistically rationalized in GBA-PD (restore GCase). Progression should be conditional on resolving CNS delivery/serotype-tropism, controlling overexpression of GCase, addressing capsid/transgene immunity, defining patient stratification (GBA1 carriers), and selecting biomarkers (GCase activity, glucosylceramide) plus preclinical models. Sound rationale is not the same as demonstrated efficacy/safety.",
+  "required_concepts": [
+    "GBA1",
+    "GCase",
+    "AAV delivery",
+    "CNS targeting",
+    "overexpression risk",
+    "immune response",
+    "patient stratification",
+    "biomarkers",
+    "preclinical model"
+  ],
+  "acceptable_variants": [
+    "glucocerebrosidase", "serotype", "tropism", "capsid", "immunogenicity",
+    "GBA carriers", "glucosylceramide", "GluCer", "lysosomal", "alpha-synuclein", "α-synuclein"
+  ],
+  "red_flags": [
+    "claims proven efficacy/safety without clinical evidence",
+    "ignores GCase overexpression / dose-control risk",
+    "ignores capsid or transgene immune response",
+    "ignores CNS delivery / biodistribution challenge",
+    "no patient stratification"
+  ],
+  "rubric": {
+    "criteria": [
+      {"name": "genetic_rationale", "weight": 0.20, "scale": "0-5", "description": "Correct GBA1/GCase loss-of-function rationale for gene addition."},
+      {"name": "delivery_feasibility", "weight": 0.15, "scale": "0-5", "description": "Realistic AAV serotype/route/CNS-targeting considerations."},
+      {"name": "safety_risk_analysis", "weight": 0.20, "scale": "0-5", "description": "Overexpression, immunogenicity, off-target, reversibility risks."},
+      {"name": "patient_stratification", "weight": 0.15, "scale": "0-5", "description": "Defines appropriate (e.g. GBA1-carrier) population."},
+      {"name": "biomarker_endpoint_selection", "weight": 0.10, "scale": "0-5", "description": "Sensible biomarkers/endpoints (GCase activity, substrate)."},
+      {"name": "validation_plan", "weight": 0.15, "scale": "0-5", "description": "Credible preclinical validation plan."},
+      {"name": "uncertainty_handling", "weight": 0.05, "scale": "0-5", "description": "Honest about unknowns; no overclaiming."}
+    ]
+  }
+}

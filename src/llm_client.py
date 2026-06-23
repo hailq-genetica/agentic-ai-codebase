@@ -12,6 +12,20 @@ from typing import Any, Optional
 from dataclasses import dataclass
 
 
+# Anthropic models that use adaptive thinking + output_config.effort instead of
+# the legacy {type:"enabled", budget_tokens} thinking config. The legacy form
+# returns HTTP 400 on Opus 4.7/4.8.
+_ADAPTIVE_THINKING_MARKERS = (
+    "opus-4-5", "opus-4-6", "opus-4-7", "opus-4-8",
+    "sonnet-4-6", "fable-5", "mythos-5",
+)
+
+
+def _supports_adaptive_thinking(model: str) -> bool:
+    m = (model or "").lower()
+    return any(marker in m for marker in _ADAPTIVE_THINKING_MARKERS)
+
+
 class UsageInfo:
     """Unified usage object that exposes attributes like the Azure OpenAI usage object."""
     def __init__(self, input_tokens: int = 0, output_tokens: int = 0,
@@ -208,7 +222,16 @@ class LLMClient:
             "max_tokens": max_tokens_map.get(reasoning_effort, 8192),
             "messages": filtered_history,
         }
-        if reasoning_effort == "high":
+        # Thinking configuration is model-dependent. Newer models (Opus 4.5+,
+        # Sonnet 4.6, Fable 5) use adaptive thinking + output_config.effort; the
+        # legacy {type:"enabled", budget_tokens} form returns HTTP 400 on Opus
+        # 4.7/4.8. Older models keep the legacy form.
+        if _supports_adaptive_thinking(self.model):
+            effort = reasoning_effort if reasoning_effort in ("low", "medium", "high") else "medium"
+            kwargs["output_config"] = {"effort": effort}
+            if reasoning_effort == "high":
+                kwargs["thinking"] = {"type": "adaptive"}
+        elif reasoning_effort == "high":
             kwargs["thinking"] = {"type": "enabled", "budget_tokens": 10000}
         if self._system_prompt:
             kwargs["system"] = self._system_prompt
@@ -538,13 +561,13 @@ def create_llm_client_from_config(config: dict) -> tuple[LLMClient, str]:
     """Create LLM client from configuration.
     
     Config under `llm`:
-        provider: "openai" | "azure_openai" | "anthropic"
+        provider: "openai" | "azure_openai" | "anthropic" (default: "openai")
         model: model name or deployment name (required for provider selection)
         api_key: optional; otherwise uses OPENAI_API_KEY, AZURE_OPENAI_API_KEY, or ANTHROPIC_API_KEY
         For Azure: api_version, azure_endpoint (or env AZURE_OPENAI_API_VERSION, AZURE_OPENAI_ENDPOINT)
     """
     llm_config = config.get("llm", {})
-    provider = (llm_config.get("provider") or "azure_openai").strip().lower()
+    provider = (llm_config.get("provider") or "openai").strip().lower()
     
     if provider == "openai":
         model = llm_config.get("model") or os.environ.get("OPENAI_MODEL", "gpt-4o")

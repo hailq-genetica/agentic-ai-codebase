@@ -139,12 +139,12 @@ description = [
     },
     {
         "name": 'predict_admet_properties',
-        "description": 'Function predict_admet_properties',
+        "description": 'Predict ADMET (absorption, distribution, metabolism, excretion, toxicity) properties for one or more compounds using pretrained DeepPurpose models (e.g. aqueous solubility, Caco-2, HIA, P-gp, bioavailability, BBB, PPBR, CYP450 isoforms, ClinTox, lipophilicity, half-life, clearance).',
         "required_parameters": [
             {
                 "name": 'smiles_list',
-                "type": 'str',
-                "description": 'Parameter smiles_list',
+                "type": 'list',
+                "description": 'List of SMILES strings, one entry per compound (e.g. ["CCO", "c1ccccc1O"]). Pass a list even for a single molecule, e.g. ["CCO"]; do not pass a bare SMILES string.',
                 "default": None
             },
         ],
@@ -152,25 +152,25 @@ description = [
             {
                 "name": 'ADMET_model_type',
                 "type": 'str',
-                "description": 'Parameter ADMET_model_type',
+                "description": 'Model architecture for the pretrained ADMET predictors. One of "MPNN", "CNN", or "Morgan".',
                 "default": 'MPNN'
             },
         ],
     },
     {
         "name": 'predict_binding_affinity_protein_1d_sequence',
-        "description": 'Function predict_binding_affinity_protein_1d_sequence',
+        "description": 'Predict drug-target binding affinity between one or more compounds and a protein target (given as a 1D amino-acid sequence) using a pretrained DeepPurpose DTI model.',
         "required_parameters": [
             {
                 "name": 'smiles_list',
-                "type": 'str',
-                "description": 'Parameter smiles_list',
+                "type": 'list',
+                "description": 'List of SMILES strings, one entry per compound (e.g. ["CCO", "c1ccccc1O"]). Pass a list even for a single molecule, e.g. ["CCO"]; do not pass a bare SMILES string.',
                 "default": None
             },
             {
                 "name": 'amino_acid_sequence',
                 "type": 'str',
-                "description": 'Parameter amino_acid_sequence',
+                "description": 'Target protein sequence as a single-letter amino-acid string (e.g. "MKTAYIAKQR..."). Affinity is predicted for every compound in smiles_list against this target.',
                 "default": None
             },
         ],
@@ -178,7 +178,7 @@ description = [
             {
                 "name": 'affinity_model_type',
                 "type": 'str',
-                "description": 'Parameter affinity_model_type',
+                "description": 'Pretrained DeepPurpose DTI model encoder to use (e.g. "MPNN-CNN").',
                 "default": 'MPNN-CNN'
             },
         ],

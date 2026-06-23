@@ -1,0 +1,54 @@
+# Local PD-TxBench runtime (CPU). A from-source alternative to the private
+# ghcr.io/vanallenlab/agentic-sc-runtime:v2 image, for environments without GHCR
+# access. Covers everything needed to boot the M3A agent and run the PD-TxBench
+# tasks. It does NOT include the GPU-heavy tools (torch/ESM/nnU-Net/docking) that
+# the full runtime ships; those tools will error gracefully if a PD task calls them.
+#
+# Build (context = this docker/ directory):
+#   docker build -f docker/Dockerfile.pdtx -t pdtx-runtime:local docker/
+#
+# Run (mount the repo; PD tasks need no h5ad data):
+#   docker run --rm -it -e ANTHROPIC_API_KEY \
+#     -v "$(pwd)":/workspace -w /workspace pdtx-runtime:local bash
+FROM python:3.11-slim
+
+ENV PYTHONUNBUFFERED=1 \
+    PIP_NO_CACHE_DIR=1 \
+    PIP_DISABLE_PIP_VERSION_CHECK=1 \
+    MPLBACKEND=Agg
+
+# Build toolchain + libs a few deps fall back to compiling against.
+# zlib/bz2/lzma dev headers are required to build macs3 (a snapatac2 dependency),
+# whose fermi-lite C extension includes <zlib.h>.
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        build-essential git curl pkg-config libgomp1 \
+        zlib1g-dev libbz2-dev liblzma-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN python -m pip install --upgrade pip setuptools wheel
+
+# Core deps must succeed.
+COPY requirements-core.txt /tmp/requirements-core.txt
+RUN pip install -r /tmp/requirements-core.txt
+
+# Extra tool deps are best-effort: a failure here must not break the image.
+COPY requirements-extra.txt /tmp/requirements-extra.txt
+RUN pip install -r /tmp/requirements-extra.txt || \
+    echo "WARNING: some optional tool deps failed to install; affected tools will error at call time."
+
+# OpenAI SDK — lets the agent and/or judge run on provider: openai (Responses API).
+RUN pip install openai
+
+# Writable caches so the image works when run as a non-root --user (which doesn't
+# own site-packages and has no $HOME): numba JIT cache (scanpy uses @njit(cache=True)),
+# matplotlib config, and a home dir for libraries that write to ~/.cache or ~/.config.
+ENV HOME=/tmp \
+    NUMBA_CACHE_DIR=/tmp/numba-cache \
+    MPLCONFIGDIR=/tmp/mpl \
+    XDG_CACHE_HOME=/tmp/.cache \
+    XDG_CONFIG_HOME=/tmp/.config
+RUN mkdir -p /tmp/numba-cache /tmp/mpl /tmp/.cache /tmp/.config \
+    && chmod -R 1777 /tmp/numba-cache /tmp/mpl /tmp/.cache /tmp/.config
+
+WORKDIR /workspace
+CMD ["bash"]

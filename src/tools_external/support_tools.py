@@ -205,6 +205,9 @@ def run_python_repl(command: str, adata_rna=None, adata_atac=None,
 
     if output_dir is not None:
         sc.settings.figdir = str(output_dir)
+        # Expose output_dir to user code so deliverables (e.g. result.json) can be
+        # written to the run directory reliably, as the docstring above promises.
+        _persistent_namespace['output_dir'] = str(output_dir)
 
     try:
         _apply_plot_patches(output_dir)
