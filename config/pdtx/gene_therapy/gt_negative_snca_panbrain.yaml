@@ -8,7 +8,7 @@ capture_telemetry: true
 output_base_dir: output/pdtx/gene_therapy/gt_negative_snca_panbrain/
 
 llm:
-  provider: anthropic
-  model: claude-opus-4-8
+  provider: openai
+  model: gpt-5.5-2026-04-23
 logging:
   enabled: false
