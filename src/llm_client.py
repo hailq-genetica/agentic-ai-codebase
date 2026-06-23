@@ -561,13 +561,13 @@ def create_llm_client_from_config(config: dict) -> tuple[LLMClient, str]:
     """Create LLM client from configuration.
     
     Config under `llm`:
-        provider: "openai" | "azure_openai" | "anthropic"
+        provider: "openai" | "azure_openai" | "anthropic" (default: "openai")
         model: model name or deployment name (required for provider selection)
         api_key: optional; otherwise uses OPENAI_API_KEY, AZURE_OPENAI_API_KEY, or ANTHROPIC_API_KEY
         For Azure: api_version, azure_endpoint (or env AZURE_OPENAI_API_VERSION, AZURE_OPENAI_ENDPOINT)
     """
     llm_config = config.get("llm", {})
-    provider = (llm_config.get("provider") or "azure_openai").strip().lower()
+    provider = (llm_config.get("provider") or "openai").strip().lower()
     
     if provider == "openai":
         model = llm_config.get("model") or os.environ.get("OPENAI_MODEL", "gpt-4o")
