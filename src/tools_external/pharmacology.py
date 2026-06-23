@@ -247,6 +247,21 @@ def retrieve_topk_repurposing_drugs_from_disease_txgnn(disease_name, data_lake_p
 
 # ADMET prediction function with research log format
 def predict_admet_properties(smiles_list, ADMET_model_type="MPNN"):
+    """Predict ADMET (absorption, distribution, metabolism, excretion, toxicity)
+    properties for one or more compounds using pretrained DeepPurpose models
+    (e.g. aqueous solubility, Caco-2, HIA, P-gp, bioavailability, BBB, PPBR,
+    CYP450 isoforms, ClinTox, lipophilicity, half-life, clearance).
+
+    Parameters
+    ----------
+    smiles_list : list of str
+        List of SMILES strings, one entry per compound (e.g. ``["CCO", "c1ccccc1O"]``).
+        Pass a list even for a single molecule, e.g. ``["CCO"]``; do not pass a
+        bare SMILES string.
+    ADMET_model_type : str, optional (default: "MPNN")
+        Model architecture for the pretrained ADMET predictors. One of
+        "MPNN", "CNN", or "Morgan".
+    """
     try:
         from DeepPurpose import CompoundPred, utils
     except Exception:
@@ -362,6 +377,23 @@ def predict_admet_properties(smiles_list, ADMET_model_type="MPNN"):
 
 # Binding Affinity prediction function with model_type validation
 def predict_binding_affinity_protein_1d_sequence(smiles_list, amino_acid_sequence, affinity_model_type="MPNN-CNN"):
+    """Predict drug-target binding affinity between one or more compounds and a
+    protein target (given as a 1D amino-acid sequence) using a pretrained
+    DeepPurpose DTI model.
+
+    Parameters
+    ----------
+    smiles_list : list of str
+        List of SMILES strings, one entry per compound (e.g. ``["CCO", "c1ccccc1O"]``).
+        Pass a list even for a single molecule, e.g. ``["CCO"]``; do not pass a
+        bare SMILES string.
+    amino_acid_sequence : str
+        Target protein sequence as a single-letter amino-acid string
+        (e.g. ``"MKTAYIAKQR..."``). Affinity is predicted for every compound in
+        ``smiles_list`` against this target.
+    affinity_model_type : str, optional (default: "MPNN-CNN")
+        Pretrained DeepPurpose DTI model encoder to use (e.g. "MPNN-CNN").
+    """
     try:
         from DeepPurpose import DTI, utils
     except Exception:
