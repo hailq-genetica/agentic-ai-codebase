@@ -8,7 +8,7 @@ capture_telemetry: true
 output_base_dir: output/pdtx/small_molecule/sm_gba1_ambroxol_analog/
 
 llm:
-  provider: anthropic
-  model: claude-opus-4-8
+  provider: openai
+  model: gpt-5.5-2026-04-23
 logging:
   enabled: false          # set true (+ project/entity) to log to W&B/Weave
