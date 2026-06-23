@@ -19,9 +19,15 @@ def run_diffdock_with_smiles(pdb_path, smiles_string, local_output_dir, gpu_devi
             raise FileNotFoundError(f"The PDB file '{pdb_path}' does not exist.")
         summary.append(f"PDB file '{pdb_path}' found.")
 
-        # Ensure the output directory exists
-        if not os.path.exists(local_output_dir):
-            os.makedirs(local_output_dir)
+        # Ensure the output directory exists and is writable by the DiffDock
+        # container, which runs internally as the non-root user 'appuser'. The
+        # mount is owned by this process's uid (often root), so without this the
+        # container hits PermissionError creating /home/appuser/output/complex_0.
+        os.makedirs(local_output_dir, exist_ok=True)
+        try:
+            os.chmod(local_output_dir, 0o777)
+        except OSError:
+            pass
         summary.append(f"Output directory '{local_output_dir}' is ready.")
 
         # Pull the pre-built container from Docker Hub
