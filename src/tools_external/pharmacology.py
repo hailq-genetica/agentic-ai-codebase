@@ -99,6 +99,40 @@ def run_diffdock_with_smiles(pdb_path, smiles_string, local_output_dir, gpu_devi
         return f"An error occurred: {e}"
 
 
+def _sanitize_receptor_pdb(receptor_pdb_file):
+    """Return a protein-only copy of ``receptor_pdb_file`` for receptor prep.
+
+    ADFRsuite's ``prepare_receptor`` (MGLTools PyBabel) crashes while assigning
+    Gasteiger charges on HETATM/non-standard residues — waters, ions, glycans
+    (e.g. NAG), and bound ligands — failing with
+    ``AttributeError: member babel_type not found``. Stripping everything but
+    the protein ``ATOM`` records (keeping ``TER``/``END``) lets prep succeed.
+    Atom coordinates are untouched, so the caller's box_center stays valid.
+
+    Falls back to the original path if the file has no ATOM records or can't be
+    read/written.
+    """
+    try:
+        with open(receptor_pdb_file) as fh:
+            lines = fh.readlines()
+    except OSError:
+        return receptor_pdb_file
+
+    kept = [ln for ln in lines if ln[:6].rstrip() in ("ATOM", "TER", "END")]
+    if not any(ln.startswith("ATOM") for ln in kept):
+        # Nothing to strip (already clean, or no protein) — use as-is.
+        return receptor_pdb_file
+
+    base, ext = os.path.splitext(receptor_pdb_file)
+    clean_path = f"{base}_protein{ext or '.pdb'}"
+    try:
+        with open(clean_path, "w") as fh:
+            fh.writelines(kept)
+    except OSError:
+        return receptor_pdb_file
+    return clean_path
+
+
 def docking_autodock_vina(smiles_list, receptor_pdb_file, box_center, box_size, ncpu=1):
     from tdc import Oracle
     import json as _json
@@ -121,16 +155,22 @@ def docking_autodock_vina(smiles_list, receptor_pdb_file, box_center, box_size, 
 
     log = []
 
+    # prepare_receptor (ADFRsuite/PyBabel) chokes on HETATM/non-standard residues
+    # (waters, ions, glycans, ligands), so dock against a protein-only copy.
+    receptor_for_docking = _sanitize_receptor_pdb(receptor_pdb_file)
+
     # Log the start of the process
     log.append("Step 1: Initializing the Oracle")
     log.append(f"Receptor PDB File: {receptor_pdb_file}")
+    if receptor_for_docking != receptor_pdb_file:
+        log.append(f"Sanitized protein-only receptor: {receptor_for_docking}")
     log.append(f"Box Center: {box_center}")
     log.append(f"Box Size: {box_size}")
 
     # Initialize the Oracle object
     oracle = Oracle(
         name="pyscreener",
-        receptor_pdb_file=receptor_pdb_file,
+        receptor_pdb_file=receptor_for_docking,
         box_center=box_center,
         box_size=box_size,
         ncpu=ncpu,

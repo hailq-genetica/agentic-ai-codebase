@@ -8,10 +8,15 @@
 #   docker build -f docker/Dockerfile.pdtx-gpu -t pdtx-runtime:gpu docker/
 #
 # Run (GPU + Docker socket for DiffDock; PD tasks need no h5ad data):
-#   docker run --rm -it --gpus all \
+#   docker run --rm -it --gpus all --shm-size=4g \
 #     -e ANTHROPIC_API_KEY \
 #     -v /var/run/docker.sock:/var/run/docker.sock \
 #     -v "$(pwd)":/workspace -w /workspace pdtx-runtime:gpu bash
+#
+# --shm-size=4g: docking_autodock_vina runs pyscreener under Ray, whose object
+# store wants shared memory. Docker's default 64 MB /dev/shm forces Ray to spill
+# to disk ("/dev/shm has only 67108864 bytes ... will harm performance"); 4g
+# clears that. Docking still completes without it, just slower.
 #
 # Layering: the agent boot stack is must-succeed; the docking/ADMET layers are
 # best-effort (|| true) so one fiddly dependency can't sink the whole image.
