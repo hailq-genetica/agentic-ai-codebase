@@ -53,34 +53,34 @@ description = [
         "required_parameters": [
             {
                 "name": 'smiles_list',
-                "type": 'str',
-                "description": 'Parameter smiles_list',
+                "type": 'List[str]',
+                "description": 'List of SMILES strings representing small molecules to dock',
                 "default": None
             },
             {
                 "name": 'receptor_pdb_file',
                 "type": 'str',
-                "description": 'Parameter receptor_pdb_file',
+                "description": 'Path to the receptor protein structure PDB file',
                 "default": None
             },
             {
                 "name": 'box_center',
                 "type": 'str',
-                "description": 'Parameter box_center',
-                "default": None
+                "description": '3D coordinates [x, y, z] of the docking box center',
+                "default": "List[float]"
             },
             {
                 "name": 'box_size',
                 "type": 'str',
-                "description": 'Parameter box_size',
-                "default": None
+                "description": 'Dimensions [x, y, z] of the docking box',
+                "default": "List[float]"
             },
         ],
         "optional_parameters": [
             {
                 "name": 'ncpu',
                 "type": 'int',
-                "description": 'Parameter ncpu',
+                "description": 'Number of CPU cores to use for docking',
                 "default": 1
             },
         ],
