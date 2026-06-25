@@ -1,0 +1,44 @@
+{
+  "task_id": "gt_aav_aadc_putamen",
+  "category": "gene_therapy",
+  "is_negative_control": false,
+  "rubric_id": "pdtx_gene_therapy_eval_v1",
+  "gold_label": "Conditional Go",
+  "preferred_decision": "Conditional Go",
+  "acceptable_decisions": ["Go"],
+  "gold_rationale": "AAV-AADC intraputaminal delivery is a mechanistically sound, clinically precedented symptomatic approach: restoring putaminal AADC improves local levodopa-to-dopamine conversion and levodopa responsiveness. Progression should be conditional on solving putaminal coverage/biodistribution, controlling enzyme dose to avoid dyskinesia from ectopic/excess dopamine (titrated against oral levodopa), managing capsid/transgene immunity and pre-existing anti-AAV antibodies, defining the levodopa-responsive advanced-PD population, selecting biomarkers/endpoints (F-DOPA/AADC PET, ON/OFF time, dyskinesia scales) and a sham-controlled design. Crucially this is symptomatic, not disease-modifying, and the irreversibility of the transgene is a real consideration. Sound rationale is not demonstrated efficacy/safety.",
+  "required_concepts": [
+    "AADC converts levodopa to dopamine",
+    "symptomatic not disease-modifying",
+    "intraputaminal / stereotactic delivery and coverage",
+    "enzyme dose control / dyskinesia risk",
+    "irreversibility of the transgene",
+    "capsid / transgene immunity (anti-AAV antibodies)",
+    "patient stratification (levodopa-responsive advanced PD)",
+    "biomarkers / endpoints (AADC or F-DOPA PET, ON/OFF time) and sham control"
+  ],
+  "acceptable_variants": [
+    "DDC", "AADC", "aromatic L-amino acid decarboxylase", "levodopa", "L-DOPA",
+    "dopamine", "putamen", "convection-enhanced", "serotype", "tropism", "capsid",
+    "neutralizing antibodies", "dyskinesia", "F-DOPA", "PET", "levodopa-equivalent",
+    "ON time", "OFF time", "sham", "biodistribution", "coverage"
+  ],
+  "red_flags": [
+    "claims disease modification or neuroprotection from a symptomatic enzyme-restoration approach",
+    "ignores enzyme dose control / dyskinesia risk from excess or ectopic dopamine",
+    "ignores putaminal coverage / biodistribution limitation",
+    "ignores capsid/transgene immunity or pre-existing anti-AAV antibodies",
+    "ignores the need for a sham-controlled trial given PD placebo effects"
+  ],
+  "rubric": {
+    "criteria": [
+      {"name": "genetic_rationale", "weight": 0.20, "scale": "0-5", "description": "Correct AADC/levodopa symptomatic rationale; states it is not disease-modifying."},
+      {"name": "delivery_feasibility", "weight": 0.15, "scale": "0-5", "description": "Realistic intraputaminal delivery, coverage/biodistribution, AAV serotype/tropism considerations."},
+      {"name": "safety_risk_analysis", "weight": 0.20, "scale": "0-5", "description": "Enzyme dose control / dyskinesia, irreversibility, immunogenicity, off-target dopamine risks."},
+      {"name": "patient_stratification", "weight": 0.15, "scale": "0-5", "description": "Defines a levodopa-responsive advanced-PD population and screens anti-AAV antibodies."},
+      {"name": "biomarker_endpoint_selection", "weight": 0.10, "scale": "0-5", "description": "Sensible biomarkers/endpoints (AADC/F-DOPA PET, ON/OFF time, dyskinesia scales) and sham control."},
+      {"name": "validation_plan", "weight": 0.15, "scale": "0-5", "description": "Credible preclinical validation and dose-finding plan."},
+      {"name": "uncertainty_handling", "weight": 0.05, "scale": "0-5", "description": "Honest about unknowns; does not overclaim disease modification."}
+    ]
+  }
+}

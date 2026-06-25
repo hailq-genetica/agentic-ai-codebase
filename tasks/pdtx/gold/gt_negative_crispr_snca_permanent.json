@@ -1,0 +1,45 @@
+{
+  "task_id": "gt_negative_crispr_snca_permanent",
+  "category": "gene_therapy",
+  "is_negative_control": true,
+  "rubric_id": "pdtx_gene_therapy_eval_v1",
+  "gold_label": "No-Go",
+  "preferred_decision": "No-Go",
+  "acceptable_decisions": ["Conditional Go"],
+  "gold_rationale": "Permanent, irreversible in vivo CRISPR knockout of SNCA via broadly biodistributed, constitutively expressed Cas9 is unsafe and not ready: alpha-synuclein has essential synaptic functions, so permanent loss risks irreversible harm; there is no unbiased off-target/genotoxicity analysis (double-strand breaks, large deletions, translocations); long-term Cas9 expression adds anti-Cas9 immunity and ongoing genotoxic exposure; and a permanent genomic edit cannot be titrated or reversed. 'Alpha-synuclein causes PD, so deleting it is curative' is an overclaim. The correct decision is No-Go; a safer approach uses regulatable/tunable, regionally restricted, aggregate- or allele-selective lowering (not permanent knockout) with thorough off-target characterization and patient stratification.",
+  "required_concepts": [
+    "alpha-synuclein essential physiological function",
+    "permanent irreversible knockout risk",
+    "off-target editing / genotoxicity (no unbiased off-target analysis)",
+    "long-term Cas9 expression / anti-Cas9 immunity",
+    "irreversibility (cannot titrate or reverse a genomic edit)",
+    "broad biodistribution / lack of cell-type restriction",
+    "'deleting alpha-synuclein is curative' is an overclaim",
+    "safer approach: regulatable, regionally restricted, selective lowering"
+  ],
+  "acceptable_variants": [
+    "α-synuclein", "SNCA", "synaptic function", "CRISPR", "Cas9", "guide RNA",
+    "off-target", "GUIDE-seq", "double-strand break", "large deletion", "translocation",
+    "genotoxicity", "anti-Cas9", "immunogenicity", "irreversible", "knockout",
+    "tunable", "inducible", "regulatable", "allele-selective", "aggregate-selective",
+    "regional targeting", "not safe", "not ready"
+  ],
+  "red_flags": [
+    "issues a Go for permanent, irreversible in vivo SNCA knockout",
+    "assumes deleting alpha-synuclein is curative / automatically safe",
+    "ignores essential physiological role of alpha-synuclein",
+    "ignores off-target editing / genotoxicity or the absence of off-target analysis",
+    "ignores long-term Cas9 immunity/genotoxicity or the irreversibility of a genomic edit"
+  ],
+  "rubric": {
+    "criteria": [
+      {"name": "genetic_rationale", "weight": 0.20, "scale": "0-5", "description": "Critically assesses permanent SNCA knockout and why eliminating essential alpha-synuclein is the wrong target action."},
+      {"name": "delivery_feasibility", "weight": 0.15, "scale": "0-5", "description": "Recognizes problems of broad biodistribution, constitutive long-term Cas9, and lack of cell-type restriction."},
+      {"name": "safety_risk_analysis", "weight": 0.20, "scale": "0-5", "description": "Identifies loss-of-function harm, off-target/genotoxicity, anti-Cas9 immunity, and irreversibility as disqualifying."},
+      {"name": "patient_stratification", "weight": 0.15, "scale": "0-5", "description": "Notes the absence of stratification."},
+      {"name": "biomarker_endpoint_selection", "weight": 0.10, "scale": "0-5", "description": "Calls for off-target/genotoxicity characterization and safety monitoring."},
+      {"name": "validation_plan", "weight": 0.15, "scale": "0-5", "description": "Describes a safer approach (regulatable, regionally restricted, selective lowering with off-target analysis)."},
+      {"name": "uncertainty_handling", "weight": 0.05, "scale": "0-5", "description": "Does not endorse the 'permanent deletion is curative' overclaim."}
+    ]
+  }
+}

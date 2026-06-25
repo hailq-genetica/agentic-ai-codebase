@@ -1,0 +1,44 @@
+{
+  "task_id": "gt_aav_prkn_recessive",
+  "category": "gene_therapy",
+  "is_negative_control": false,
+  "rubric_id": "pdtx_gene_therapy_eval_v1",
+  "gold_label": "Conditional Go",
+  "preferred_decision": "Conditional Go",
+  "acceptable_decisions": ["Go"],
+  "gold_rationale": "AAV-PRKN gene addition is the mechanistically correct modality for autosomal-recessive, biallelic loss-of-function PRKN PD: restoring parkin addresses the causal mitophagy/mitochondrial-QC defect (unlike dominant gain-of-function targets, which need lowering). Progression should be conditional on CNS delivery/coverage of nigrostriatal regions, controlling parkin overexpression, managing capsid/transgene immunity, genetically confirming the rare biallelic-PRKN population and treating early given slow progression, selecting mitochondrial/imaging biomarkers and endpoints sensitive enough for a slowly progressive rare disease, and validating in PRKN/PINK1 models despite their mild phenotypes. A clean genetic rationale is not demonstrated efficacy/safety, and the rare-population, slow-progression trial design is a major challenge.",
+  "required_concepts": [
+    "biallelic PRKN loss-of-function rationale",
+    "mitophagy / mitochondrial quality control (PINK1-parkin)",
+    "gene addition correct for recessive loss-of-function",
+    "CNS delivery / nigrostriatal coverage",
+    "parkin overexpression / dose-control risk",
+    "rare genetically-defined population / stratification",
+    "mitochondrial or imaging biomarkers / endpoints",
+    "rare-disease slow-progression trial design"
+  ],
+  "acceptable_variants": [
+    "PRKN", "parkin", "PINK1", "mitophagy", "mitochondria", "E3 ubiquitin ligase",
+    "autosomal recessive", "biallelic", "loss of function", "early-onset",
+    "gene addition", "serotype", "tropism", "substantia nigra", "overexpression",
+    "DAT", "F-DOPA", "PET", "UPDRS", "genetic confirmation", "levodopa-responsive"
+  ],
+  "red_flags": [
+    "claims proven efficacy/safety without clinical evidence",
+    "ignores parkin overexpression / dose-control risk",
+    "ignores capsid or transgene immune response",
+    "ignores CNS delivery / nigrostriatal coverage challenge",
+    "fails to require genetic confirmation of biallelic PRKN status / mismatches the modality to the genetics"
+  ],
+  "rubric": {
+    "criteria": [
+      {"name": "genetic_rationale", "weight": 0.20, "scale": "0-5", "description": "Correct biallelic-PRKN loss-of-function / mitophagy rationale and why gene addition fits a recessive disease."},
+      {"name": "delivery_feasibility", "weight": 0.15, "scale": "0-5", "description": "Realistic AAV serotype/route and nigrostriatal coverage considerations."},
+      {"name": "safety_risk_analysis", "weight": 0.20, "scale": "0-5", "description": "Overexpression, immunogenicity, off-target, reversibility risks."},
+      {"name": "patient_stratification", "weight": 0.15, "scale": "0-5", "description": "Requires genetic confirmation of biallelic PRKN status; treats early given slow progression."},
+      {"name": "biomarker_endpoint_selection", "weight": 0.10, "scale": "0-5", "description": "Mitochondrial/imaging biomarkers and endpoints suited to a slowly progressive rare disease."},
+      {"name": "validation_plan", "weight": 0.15, "scale": "0-5", "description": "Credible preclinical plan acknowledging mild PRKN/PINK1 model phenotypes."},
+      {"name": "uncertainty_handling", "weight": 0.05, "scale": "0-5", "description": "Honest about rare-population trial-design difficulty; no overclaiming."}
+    ]
+  }
+}

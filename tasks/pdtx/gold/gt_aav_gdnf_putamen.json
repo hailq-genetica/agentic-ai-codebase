@@ -1,0 +1,45 @@
+{
+  "task_id": "gt_aav_gdnf_putamen",
+  "category": "gene_therapy",
+  "is_negative_control": false,
+  "rubric_id": "pdtx_gene_therapy_eval_v1",
+  "gold_label": "Conditional Go",
+  "preferred_decision": "Conditional Go",
+  "acceptable_decisions": ["No-Go"],
+  "gold_rationale": "AAV-GDNF to the putamen by CED has a plausible trophic rationale, but prior GDNF/neurturin PD gene-therapy and protein-infusion trials largely failed on efficacy with putaminal coverage/biodistribution repeatedly implicated, and the current constitutive design lacks dose control and reversibility despite dose-dependent GDNF off-target effects (sprouting, host TH downregulation, weight loss, cerebellar toxicity) and anti-GDNF immunogenicity. Progression should be a Conditional Go contingent on demonstrating adequate putaminal coverage (CED with intraoperative imaging), adding a regulatable/reversible dose-control strategy, dose-ranging and biodistribution studies, capsid/transgene immune management, patient stratification, and a sham-controlled biomarker/endpoint plan. A defensible alternative is No-Go for the constitutive, uncontrolled design as presented. Treating 'GDNF is neuroprotective, so it will work' as settled is wrong given prior trial failures.",
+  "required_concepts": [
+    "GDNF trophic-support rationale",
+    "prior GDNF/neurturin PD trial failures (coverage implicated)",
+    "putaminal coverage / biodistribution as the gating problem",
+    "convection-enhanced delivery (CED)",
+    "lack of dose control / reversibility (constitutive AAV)",
+    "GDNF dose-dependent off-target effects / immunogenicity",
+    "patient stratification",
+    "sham-controlled biomarker/endpoint plan"
+  ],
+  "acceptable_variants": [
+    "GDNF", "neurturin", "CERE-120", "neurotrophic", "trophic", "CED",
+    "convection enhanced", "coverage", "biodistribution", "serotype", "tropism",
+    "constitutive", "regulatable", "inducible", "reversibility", "sprouting",
+    "weight loss", "cerebellar", "anti-GDNF antibodies", "immunogenicity",
+    "F-DOPA", "DAT", "PET", "UPDRS", "sham"
+  ],
+  "red_flags": [
+    "assumes GDNF will work because it is neuroprotective, ignoring prior trial failures",
+    "ignores putaminal coverage / biodistribution as the central design problem",
+    "ignores lack of dose control / reversibility of a constitutive AAV-GDNF transgene",
+    "ignores GDNF dose-dependent off-target effects or anti-GDNF immunogenicity",
+    "claims demonstrated efficacy without a sham-controlled design"
+  ],
+  "rubric": {
+    "criteria": [
+      {"name": "genetic_rationale", "weight": 0.20, "scale": "0-5", "description": "Assesses GDNF trophic rationale and the preclinical-to-clinical gap shown by prior trials."},
+      {"name": "delivery_feasibility", "weight": 0.15, "scale": "0-5", "description": "Treats putaminal coverage/biodistribution (CED, imaging) as the central feasibility problem."},
+      {"name": "safety_risk_analysis", "weight": 0.20, "scale": "0-5", "description": "Lack of dose control/reversibility, GDNF off-target effects, immunogenicity."},
+      {"name": "patient_stratification", "weight": 0.15, "scale": "0-5", "description": "Defines an appropriate disease-stage population."},
+      {"name": "biomarker_endpoint_selection", "weight": 0.10, "scale": "0-5", "description": "Sensible biomarkers/endpoints (F-DOPA/DAT PET, UPDRS) with a sham control."},
+      {"name": "validation_plan", "weight": 0.15, "scale": "0-5", "description": "Coverage, dose-ranging, and reversibility-engineering validation plan."},
+      {"name": "uncertainty_handling", "weight": 0.05, "scale": "0-5", "description": "Honest about prior failures; no 'it will work' overclaiming."}
+    ]
+  }
+}

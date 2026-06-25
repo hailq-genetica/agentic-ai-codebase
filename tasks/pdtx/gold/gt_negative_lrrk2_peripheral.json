@@ -1,0 +1,45 @@
+{
+  "task_id": "gt_negative_lrrk2_peripheral",
+  "category": "gene_therapy",
+  "is_negative_control": true,
+  "rubric_id": "pdtx_gene_therapy_eval_v1",
+  "gold_label": "No-Go",
+  "preferred_decision": "No-Go",
+  "acceptable_decisions": ["Conditional Go"],
+  "gold_rationale": "Lowering LRRK2 is a valid direction for LRRK2 gain-of-function PD, but a systemic, non-CNS-restricted, constitutive, irreversible shRNA knockdown is unsafe: LRRK2 is highly expressed in lung (type II pneumocytes; surfactant/lamellar-body abnormalities seen with LRRK2 inhibition), kidney, and immune cells, so broad peripheral knockdown risks lung/kidney pathology and immune effects. The design adds no CNS restriction or cell-type targeting, no dose control or reversibility, and constitutive shRNA can cause RNAi-saturation neurotoxicity, with no patient stratification. The correct decision is No-Go; the correct target direction does not excuse an unsafe route/biodistribution. A safer redesign is CNS-restricted, dose-controlled/regulatable, partial LRRK2 lowering with attention to the peripheral therapeutic window and stratification of LRRK2-variant carriers.",
+  "required_concepts": [
+    "lowering LRRK2 is the right direction (gain-of-function)",
+    "peripheral LRRK2 loss-of-function toxicity (lung type II pneumocytes / kidney)",
+    "no CNS restriction / no cell-type targeting",
+    "route and biodistribution determine safety, not just direction",
+    "no dose control / no reversibility (constitutive shRNA)",
+    "shRNA / RNAi-saturation neurotoxicity",
+    "no patient stratification",
+    "safer redesign: CNS-restricted, regulatable, partial lowering"
+  ],
+  "acceptable_variants": [
+    "LRRK2", "G2019S", "kinase", "gain of function", "shRNA", "RNAi",
+    "type II pneumocyte", "lung", "surfactant", "lamellar body", "kidney",
+    "biodistribution", "systemic", "intravenous", "CNS restriction", "cell-type targeting",
+    "constitutive", "regulatable", "inducible", "reversibility", "dose control",
+    "stratification", "not safe", "not ready", "therapeutic window"
+  ],
+  "red_flags": [
+    "issues a Go for systemic, non-CNS-restricted, constitutive LRRK2 knockdown",
+    "lets the correct target direction ('lower LRRK2') excuse an unsafe route/biodistribution",
+    "ignores peripheral LRRK2 loss-of-function toxicity (lung/kidney/immune)",
+    "ignores lack of CNS restriction / cell-type targeting",
+    "ignores lack of dose control / reversibility or shRNA RNAi-saturation toxicity"
+  ],
+  "rubric": {
+    "criteria": [
+      {"name": "genetic_rationale", "weight": 0.20, "scale": "0-5", "description": "Affirms lowering LRRK2 as a valid direction while separating it from the unsafe route/biodistribution."},
+      {"name": "delivery_feasibility", "weight": 0.15, "scale": "0-5", "description": "Identifies systemic, non-CNS-restricted biodistribution and lack of cell-type targeting as core problems."},
+      {"name": "safety_risk_analysis", "weight": 0.20, "scale": "0-5", "description": "Identifies peripheral lung/kidney/immune LRRK2-loss toxicity, no reversibility, and shRNA toxicity as disqualifying."},
+      {"name": "patient_stratification", "weight": 0.15, "scale": "0-5", "description": "Notes the absence of stratification (LRRK2-variant carriers vs idiopathic)."},
+      {"name": "biomarker_endpoint_selection", "weight": 0.10, "scale": "0-5", "description": "Calls for peripheral-safety monitoring (pulmonary/renal) and relevant endpoints."},
+      {"name": "validation_plan", "weight": 0.15, "scale": "0-5", "description": "Describes a safer redesign (CNS-restricted, regulatable, partial lowering)."},
+      {"name": "uncertainty_handling", "weight": 0.05, "scale": "0-5", "description": "Does not let the correct direction rationalize the unsafe design."}
+    ]
+  }
+}

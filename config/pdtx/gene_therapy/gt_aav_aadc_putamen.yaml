@@ -1,0 +1,14 @@
+task_file: tasks/pdtx/gene_therapy/gt_aav_aadc_putamen.md
+gold_file: tasks/pdtx/gold/gt_aav_aadc_putamen.json
+category: gene_therapy
+tool_category: external_database, external_pharmacology
+reasoning_effort: high
+interactive: false        # overridden by run_pdtx.py --mode
+capture_telemetry: true
+output_base_dir: output/pdtx/gene_therapy/gt_aav_aadc_putamen/
+
+llm:
+  provider: openai
+  model: gpt-5.5-2026-04-23
+logging:
+  enabled: false

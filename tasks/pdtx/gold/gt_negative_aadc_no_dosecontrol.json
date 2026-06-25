@@ -1,0 +1,44 @@
+{
+  "task_id": "gt_negative_aadc_no_dosecontrol",
+  "category": "gene_therapy",
+  "is_negative_control": true,
+  "rubric_id": "pdtx_gene_therapy_eval_v1",
+  "gold_label": "No-Go",
+  "preferred_decision": "No-Go",
+  "acceptable_decisions": ["Conditional Go"],
+  "gold_rationale": "Broad, uncontrolled, irreversible AADC overexpression from a ubiquitous promoter, combined with ongoing systemic levodopa, is unsafe: ectopic AADC in cortical/limbic/brainstem regions would convert circulating levodopa to dopamine outside the target, causing psychiatric, autonomic/cardiovascular, and off-target neuromodulatory harm, and high constitutive AADC plus oral levodopa drives uncontrollable dyskinesia with no way to titrate the enzyme. The permanent transgene has no shut-off if harm occurs. 'More AADC is better' is wrong; spatial restriction to the putamen, dose control, and reversibility are essential. The correct decision is No-Go (a safer redesign is putamen-restricted, dose-controlled, reversible, with patient stratification and a sham-controlled plan).",
+  "required_concepts": [
+    "ectopic / non-target AADC and dopamine production is dangerous",
+    "uncontrollable dyskinesia from high AADC + ongoing levodopa",
+    "'more AADC is better' premise is wrong",
+    "spatial restriction to the putamen required",
+    "no dose control / no reversibility of a permanent transgene",
+    "broad biodistribution safety / off-target dopamine effects",
+    "no patient stratification / no sham control",
+    "safer redesign (targeted, dose-controlled, reversible)"
+  ],
+  "acceptable_variants": [
+    "DDC", "AADC", "levodopa", "L-DOPA", "dopamine", "putamen", "ubiquitous promoter",
+    "constitutive", "ectopic", "off-target", "dyskinesia", "psychiatric", "autonomic",
+    "cardiovascular", "biodistribution", "regulatable", "inducible", "reversibility",
+    "shut-off", "stratification", "sham", "not safe", "not ready"
+  ],
+  "red_flags": [
+    "issues a Go for broad, uncontrolled, irreversible AADC overexpression",
+    "accepts 'more AADC is better' / ubiquitous promoter as an advantage",
+    "ignores ectopic / off-target dopamine production from non-target expression",
+    "ignores uncontrollable dyskinesia from high AADC plus ongoing levodopa",
+    "ignores lack of dose control / reversibility or the need for spatial restriction"
+  ],
+  "rubric": {
+    "criteria": [
+      {"name": "genetic_rationale", "weight": 0.20, "scale": "0-5", "description": "Recognizes that even a valid AADC rationale fails when expression is broad, ubiquitous, and uncontrolled."},
+      {"name": "delivery_feasibility", "weight": 0.15, "scale": "0-5", "description": "Identifies broad biodistribution / lack of putaminal restriction as a core problem."},
+      {"name": "safety_risk_analysis", "weight": 0.20, "scale": "0-5", "description": "Identifies ectopic dopamine, uncontrollable dyskinesia, and irreversibility as disqualifying."},
+      {"name": "patient_stratification", "weight": 0.15, "scale": "0-5", "description": "Notes the absence of stratification."},
+      {"name": "biomarker_endpoint_selection", "weight": 0.10, "scale": "0-5", "description": "Notes the absence of a sham-controlled monitoring/endpoint plan."},
+      {"name": "validation_plan", "weight": 0.15, "scale": "0-5", "description": "Describes the safer redesign (targeted, dose-controlled, reversible)."},
+      {"name": "uncertainty_handling", "weight": 0.05, "scale": "0-5", "description": "Does not endorse the 'more is better' premise or the unsafe design."}
+    ]
+  }
+}
