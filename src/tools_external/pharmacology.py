@@ -197,13 +197,23 @@ def docking_autodock_vina(smiles_list, receptor_pdb_file, box_center, box_size, 
 
 
 def run_autosite(pdb_file, output_dir, spacing=1.0):
-    # Prepare the output directory
-    if not os.path.exists(output_dir):
-        os.makedirs(output_dir)
+    # AutoSite requires the output directory to already exist.
+    os.makedirs(output_dir, exist_ok=True)
 
-    # Convert the PDB file to PDBQT format (assuming prepare_receptor4.py is accessible)
-    pdbqt_file = pdb_file.replace(".pdb", ".pdbqt")
-    subprocess.run(["prepare_receptor", "-r", pdb_file, "-o", pdbqt_file], check=True)
+    # prepare_receptor (ADFRsuite/PyBabel) chokes on HETATM/non-standard residues
+    # (waters, ions, glycans, ligands), so run pocket detection on a protein-only
+    # copy of the structure.
+    receptor = _sanitize_receptor_pdb(pdb_file)
+
+    # Convert the PDB to PDBQT. `-A checkhydrogens` adds missing hydrogens; without
+    # them autogrid aborts with "hydrogen atoms are missing in the receptor" — the
+    # common failure for AlphaFold models, which ship no hydrogen atoms.
+    stem = os.path.splitext(os.path.basename(pdb_file))[0]
+    pdbqt_file = os.path.join(output_dir, f"{stem}.pdbqt")
+    subprocess.run(
+        ["prepare_receptor", "-r", receptor, "-A", "checkhydrogens", "-o", pdbqt_file],
+        check=True,
+    )
 
     # Run AutoSite
     autosite_cmd = [
@@ -217,28 +227,55 @@ def run_autosite(pdb_file, output_dir, spacing=1.0):
     ]
     subprocess.run(autosite_cmd, check=True)
 
-    # Parse the results to find the box center and size
+    # AutoSite v1.0.0 writes "<stem>_summary.csv" (clusters ranked by the final
+    # column, v*buriedness^2/rg) plus one "<stem>_cl_<NNN>.pdb" of fill points per
+    # cluster — not the "_AutoSiteSummary.log" with "Box center:" lines this code
+    # used to parse. Pick the top-scoring pocket and derive a docking box from the
+    # bounding box of its fill points.
     box_center, box_size = None, None
-    log_path = os.path.join(output_dir, "_AutoSiteSummary.log")
-    with open(log_path) as log_file:
-        log_content = log_file.read()
+    best_cluster = None
+    summary_csv = os.path.join(output_dir, f"{stem}_summary.csv")
+    try:
+        with open(summary_csv) as fh:
+            rows = [ln.strip() for ln in fh if ln.strip()][1:]  # skip header
+        best_score = float("-inf")
+        for row in rows:
+            cols = row.split(",")
+            cid, score = int(float(cols[0])), float(cols[-1])
+            if score > best_score:
+                best_score, best_cluster = score, cid
+    except (OSError, ValueError, IndexError):
+        best_cluster = None
 
-        # Extract box center and size from the log (assuming standard output format)
-        box_center_match = re.search(r"Box center:\s*\(([^)]+)\)", log_content)
-        box_size_match = re.search(r"Box size:\s*\(([^)]+)\)", log_content)
-
-        if box_center_match:
-            box_center = box_center_match.group(1)
-        if box_size_match:
-            box_size = box_size_match.group(1)
+    if best_cluster is not None:
+        cluster_pdb = os.path.join(output_dir, f"{stem}_cl_{best_cluster:03d}.pdb")
+        coords = []
+        try:
+            with open(cluster_pdb) as fh:
+                for ln in fh:
+                    if ln.startswith(("ATOM", "HETATM")):
+                        coords.append(
+                            (float(ln[30:38]), float(ln[38:46]), float(ln[46:54]))
+                        )
+        except OSError:
+            coords = []
+        if coords:
+            arr = np.array(coords)
+            mins, maxs = arr.min(axis=0), arr.max(axis=0)
+            center = (mins + maxs) / 2.0
+            # Pad the pocket bounding box by 4 Angstrom each side for the search space.
+            size = (maxs - mins) + 8.0
+            box_center = ", ".join(f"{v:.3f}" for v in center)
+            box_size = ", ".join(f"{v:.3f}" for v in size)
 
     # Create a research log string
     research_log = f"AutoSite run for {pdb_file} with spacing {spacing}\n"
     research_log += f"Output directory: {output_dir}\n"
     if box_center and box_size:
+        research_log += f"Top pocket: cluster {best_cluster}\n"
         research_log += f"Box Center: {box_center}\nBox Size: {box_size}"
     else:
-        research_log += "Box Center and Size information not found in log."
+        research_log += "Box Center and Size information not found in AutoSite output."
 
     return research_log
 
