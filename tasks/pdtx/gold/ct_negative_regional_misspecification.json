@@ -1,0 +1,42 @@
+{
+  "task_id": "ct_negative_regional_misspecification",
+  "category": "cell_therapy",
+  "is_negative_control": true,
+  "rubric_id": "pdtx_cell_therapy_eval_v1",
+  "gold_label": "No-Go",
+  "preferred_decision": "No-Go",
+  "acceptable_decisions": ["Conditional Go"],
+  "gold_rationale": "TH positivity without authentic midbrain floor-plate identity (FOXA2/LMX1A low in TH+ cells) means the product is not genuine A9 mDA neurons. The forebrain (FOXG1+) and serotonergic (5-HT/TPH2+) contamination plus an A10/VTA-skewed rather than A9/SNc phenotype are disqualifying: non-A9 cells will not restore nigrostriatal dopaminergic tone, and serotonergic contamination is a recognized cause of graft-induced dyskinesias. Clean residual-pluripotency QC does not rescue a regionally mis-specified product. The correct decision is No-Go (at most a Conditional Go contingent on re-deriving authentic A9 mDA neurons and removing serotonergic/forebrain contamination via floor-plate protocol correction and marker-based sorting such as CORIN+).",
+  "required_concepts": [
+    "TH positivity is insufficient without A9 midbrain identity",
+    "midbrain floor-plate markers FOXA2 / LMX1A low",
+    "serotonergic contamination -> graft-induced dyskinesia",
+    "forebrain / off-target regional contamination",
+    "A9 (SNc) vs A10 (VTA) specification",
+    "marker-based sorting / re-differentiation required",
+    "release criteria for regional identity / purity"
+  ],
+  "acceptable_variants": [
+    "FOXA2", "LMX1A", "FOXG1", "OTX2", "EN1", "TH", "serotonergic", "5-HT",
+    "TPH2", "SERT", "raphe", "A9", "A10", "SNc", "VTA", "graft-induced dyskinesia",
+    "GID", "CORIN", "cell sorting", "purification", "re-differentiation",
+    "not ready", "regional identity", "floor plate", "floor-plate"
+  ],
+  "red_flags": [
+    "issues a Go treating TH positivity as sufficient despite low FOXA2/LMX1A",
+    "ignores serotonergic contamination and graft-induced-dyskinesia risk",
+    "ignores forebrain / off-target regional contamination or A9-vs-A10 identity",
+    "treats clean residual-pluripotency QC as making the product ready"
+  ],
+  "rubric": {
+    "criteria": [
+      {"name": "cell_identity_reasoning", "weight": 0.20, "scale": "0-5", "description": "Correctly identifies the regional mis-specification: TH+ but not authentic A9 midbrain floor-plate, with forebrain/serotonergic contamination."},
+      {"name": "safety_tumorigenicity_analysis", "weight": 0.20, "scale": "0-5", "description": "Identifies serotonergic-contamination -> graft-induced-dyskinesia risk as a key safety problem (and notes pluripotency QC does not rescue it)."},
+      {"name": "functional_maturity_assessment", "weight": 0.15, "scale": "0-5", "description": "Recognizes that non-A9 / off-target cells will not restore nigrostriatal function."},
+      {"name": "manufacturing_reproducibility", "weight": 0.15, "scale": "0-5", "description": "Flags the differentiation-protocol / purity / sorting gaps producing the contamination."},
+      {"name": "release_criteria", "weight": 0.15, "scale": "0-5", "description": "States regional-identity and purity release criteria the product fails."},
+      {"name": "translational_decision", "weight": 0.10, "scale": "0-5", "description": "Reaches No-Go for the right reasons (regional mis-specification + GID risk)."},
+      {"name": "uncertainty_handling", "weight": 0.05, "scale": "0-5", "description": "Does not rationalize TH positivity into readiness."}
+    ]
+  }
+}

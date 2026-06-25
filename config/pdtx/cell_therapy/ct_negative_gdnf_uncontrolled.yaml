@@ -1,0 +1,14 @@
+task_file: tasks/pdtx/cell_therapy/ct_negative_gdnf_uncontrolled.md
+gold_file: tasks/pdtx/gold/ct_negative_gdnf_uncontrolled.json
+category: cell_therapy
+tool_category: external_database
+reasoning_effort: high
+interactive: false        # overridden by run_pdtx.py --mode
+capture_telemetry: true
+output_base_dir: output/pdtx/cell_therapy/ct_negative_gdnf_uncontrolled/
+
+llm:
+  provider: openai
+  model: gpt-5.5-2026-04-23
+logging:
+  enabled: false

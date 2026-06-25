@@ -1,0 +1,45 @@
+{
+  "task_id": "ct_gdnf_engineered_graft",
+  "category": "cell_therapy",
+  "is_negative_control": false,
+  "rubric_id": "pdtx_cell_therapy_eval_v1",
+  "gold_label": "Conditional Go",
+  "preferred_decision": "Conditional Go",
+  "acceptable_decisions": ["No-Go"],
+  "gold_rationale": "An mDA graft engineered to secrete GDNF has a plausible mechanistic rationale (trophic support improves graft survival and host reinnervation) and otherwise meets standard mDA-identity/pluripotency expectations. But the current design's constitutive, non-inducible, irreversible/non-retrievable GDNF secretion is a serious liability: prior GDNF clinical and primate experience shows dosing/biodistribution problems, off-target sprouting, host TH downregulation, weight loss, cerebellar toxicity, and anti-GDNF immunogenicity, and engineering adds insertional-mutagenesis risk. The correct decision is Conditional Go contingent on re-engineering for dose control (inducible/regulatable promoter), reversibility/retrievability, biodistribution and dose-ranging studies, integration-site safety analysis, and a GDNF-secretion release specification. A defensible alternative is No-Go for the constitutive design as presented. A Go without addressing transgene controllability is wrong.",
+  "required_concepts": [
+    "GDNF trophic-support rationale",
+    "constitutive vs inducible / regulatable transgene control",
+    "reversibility / retrievability of secretion",
+    "GDNF off-target effects (sprouting, host TH downregulation, weight loss, cerebellar toxicity)",
+    "anti-GDNF immunogenicity",
+    "insertional mutagenesis / integration-site risk",
+    "mDA identity and residual pluripotency / tumorigenicity",
+    "GDNF-secretion release specification / potency assay"
+  ],
+  "acceptable_variants": [
+    "GDNF", "neurotrophic factor", "trophic", "TH", "FOXA2", "LMX1A", "NURR1",
+    "inducible", "Tet", "regulatable", "promoter", "reversibility", "retrievable",
+    "biodistribution", "dose control", "dose-ranging", "sprouting", "immunogenicity",
+    "anti-GDNF antibodies", "insertional mutagenesis", "integration site", "teratoma",
+    "tumor", "cerebellar", "weight loss", "potency assay", "release criteria"
+  ],
+  "red_flags": [
+    "issues a Go without requiring dose control / inducible regulation of GDNF secretion",
+    "ignores reversibility / retrievability for an irreversible secreting graft",
+    "ignores GDNF-specific off-target / immunogenicity / prior-trial safety signals",
+    "ignores insertional-mutagenesis / integration risk from the engineering step",
+    "ignores standard mDA tumorigenicity / residual-pluripotency considerations"
+  ],
+  "rubric": {
+    "criteria": [
+      {"name": "cell_identity_reasoning", "weight": 0.20, "scale": "0-5", "description": "Assesses mDA identity and the standard graft considerations on top of the engineering."},
+      {"name": "safety_tumorigenicity_analysis", "weight": 0.20, "scale": "0-5", "description": "Evaluates transgene controllability/reversibility, GDNF off-target/immunogenicity risk, insertional mutagenesis, and tumorigenicity."},
+      {"name": "functional_maturity_assessment", "weight": 0.15, "scale": "0-5", "description": "Interprets the GDNF trophic rationale and functional/graft-survival data."},
+      {"name": "manufacturing_reproducibility", "weight": 0.15, "scale": "0-5", "description": "Addresses transgene/integration consistency and batch reproducibility."},
+      {"name": "release_criteria", "weight": 0.15, "scale": "0-5", "description": "Proposes release criteria including a GDNF-secretion specification and integration-safety checks."},
+      {"name": "translational_decision", "weight": 0.10, "scale": "0-5", "description": "Calibrated Conditional Go contingent on re-engineering for control/reversibility (No-Go also defensible)."},
+      {"name": "uncertainty_handling", "weight": 0.05, "scale": "0-5", "description": "Honest about the mechanistic appeal vs the controllability liability; no overclaiming."}
+    ]
+  }
+}

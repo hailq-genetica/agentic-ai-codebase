@@ -1,0 +1,43 @@
+{
+  "task_id": "ct_autologous_ipsc_mda",
+  "category": "cell_therapy",
+  "is_negative_control": false,
+  "rubric_id": "pdtx_cell_therapy_eval_v1",
+  "gold_label": "Conditional Go",
+  "preferred_decision": "Conditional Go",
+  "acceptable_decisions": ["Go"],
+  "gold_rationale": "Autologous patient-specific iPSC-derived mDA neurons with correct identity, undetectable residual pluripotency, and a genuine immunological advantage (reduced HLA mismatch and immunosuppression burden) are a scientifically attractive strategy (mirroring real autologous mDA case reports). Progression should be conditional on solving the strategy's defining problem: every bespoke line must individually pass identity, genomic-integrity, and in vivo tumorigenicity QC, and manufacturing must be reproducible, timely, and affordable at n-of-1 scale. The autologous origin reduces but does not eliminate per-line safety testing — tumorigenicity and genomic-integrity release criteria cannot be skipped. A strong answer credits the immune advantage while gating on per-line release testing and manufacturing consistency.",
+  "required_concepts": [
+    "dopaminergic / midbrain identity (TH, FOXA2, LMX1A)",
+    "autologous immunological advantage (reduced rejection / immunosuppression)",
+    "per-line tumorigenicity testing required",
+    "residual pluripotency / tumor risk",
+    "genomic integrity of patient iPSC lines",
+    "manufacturing reproducibility at n-of-1 scale (cost, time)",
+    "graft survival / integration",
+    "release criteria / potency assay"
+  ],
+  "acceptable_variants": [
+    "TH", "NURR1", "NR4A2", "PITX3", "FOXA2", "LMX1A", "OCT4", "NANOG",
+    "A9", "HLA", "immunosuppression", "rejection", "teratoma", "tumor",
+    "karyotype", "genomic integrity", "bespoke", "batch", "in vivo",
+    "engraftment", "potency assay", "release criteria", "cost", "scalability"
+  ],
+  "red_flags": [
+    "treats autologous origin as eliminating the need for per-line tumorigenicity or genomic-integrity testing",
+    "declares the product clinically ready without per-line release criteria or in vivo tumorigenicity data",
+    "ignores the manufacturing reproducibility / cost / scale burden of bespoke n-of-1 production",
+    "ignores residual pluripotency, genomic instability, or graft-survival considerations"
+  ],
+  "rubric": {
+    "criteria": [
+      {"name": "cell_identity_reasoning", "weight": 0.20, "scale": "0-5", "description": "Assesses A9 midbrain DA identity and functional maturity from the marker panel."},
+      {"name": "safety_tumorigenicity_analysis", "weight": 0.20, "scale": "0-5", "description": "Evaluates residual pluripotency, genomic integrity, and why per-line tumorigenicity testing is still required despite autologous origin."},
+      {"name": "functional_maturity_assessment", "weight": 0.15, "scale": "0-5", "description": "Interprets dopamine release / functional maturity and in vivo data."},
+      {"name": "manufacturing_reproducibility", "weight": 0.15, "scale": "0-5", "description": "Addresses the bespoke n-of-1 manufacturing burden: cost, time, and batch consistency."},
+      {"name": "release_criteria", "weight": 0.15, "scale": "0-5", "description": "Proposes release criteria appropriate to a per-patient product."},
+      {"name": "translational_decision", "weight": 0.10, "scale": "0-5", "description": "Calibrated Conditional Go that credits the immune advantage but gates on per-line QC and manufacturing."},
+      {"name": "uncertainty_handling", "weight": 0.05, "scale": "0-5", "description": "Honest about remaining de-risking work; does not let the autologous label excuse skipped testing."}
+    ]
+  }
+}

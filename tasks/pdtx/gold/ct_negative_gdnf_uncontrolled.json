@@ -1,0 +1,46 @@
+{
+  "task_id": "ct_negative_gdnf_uncontrolled",
+  "category": "cell_therapy",
+  "is_negative_control": true,
+  "rubric_id": "pdtx_cell_therapy_eval_v1",
+  "gold_label": "No-Go",
+  "preferred_decision": "No-Go",
+  "acceptable_decisions": ["Conditional Go"],
+  "gold_rationale": "Unregulated, irreversible, very high constitutive GDNF over-secretion is unsafe, and the 'neuroprotective, so more is better' premise is wrong. Prior GDNF clinical/preclinical experience shows dose-dependent off-target effects (aberrant sprouting, host TH downregulation, weight loss, cerebellar toxicity) and anti-GDNF immunogenicity; an irreversible graft removes any ability to manage them. Random lentiviral integration without integration-site analysis adds insertional-mutagenesis risk, and identity/pluripotency/tumorigenicity characterization is incomplete with no in vivo biodistribution or tumor data. The correct decision is No-Go: re-engineer for regulated/inducible, dose-controlled, reversible/retrievable secretion using a defined safe-harbor integration, and complete identity, tumorigenicity, biodistribution, and dose-ranging studies. A Go (or accepting 'more is better') is wrong.",
+  "required_concepts": [
+    "unregulated / irreversible GDNF over-secretion is unsafe",
+    "'more is better' premise is wrong (dose-dependent toxicity)",
+    "GDNF off-target effects (sprouting, host TH downregulation, weight loss, cerebellar toxicity)",
+    "no dose control / inducible regulation / reversibility",
+    "random lentiviral integration / insertional mutagenesis / safe-harbor",
+    "incomplete identity & residual-pluripotency / tumorigenicity characterization",
+    "no in vivo biodistribution / tumorigenicity study",
+    "release criteria including GDNF-dose specification"
+  ],
+  "acceptable_variants": [
+    "GDNF", "neurotrophic", "trophic", "inducible", "Tet", "regulatable",
+    "dose control", "dose titration", "reversibility", "retrievable", "biodistribution",
+    "sprouting", "cerebellar", "weight loss", "anti-GDNF antibodies", "immunogenicity",
+    "lentiviral", "integration site", "insertional mutagenesis", "safe harbor", "AAVS1",
+    "FOXA2", "LMX1A", "TH", "OCT4", "NANOG", "teratoma", "tumor", "in vivo",
+    "not ready", "release criteria", "dose-ranging"
+  ],
+  "red_flags": [
+    "issues a Go for an unregulated, irreversible, high-dose GDNF-secreting graft",
+    "accepts 'GDNF is neuroprotective, so more is better' without dose/toxicity reasoning",
+    "ignores reversibility / dose control / inducible regulation",
+    "ignores random-integration / insertional-mutagenesis risk or the safe-harbor need",
+    "ignores incomplete identity / pluripotency / tumorigenicity characterization and missing in vivo data"
+  ],
+  "rubric": {
+    "criteria": [
+      {"name": "cell_identity_reasoning", "weight": 0.20, "scale": "0-5", "description": "Flags the incomplete identity / residual-pluripotency characterization on top of the engineering."},
+      {"name": "safety_tumorigenicity_analysis", "weight": 0.20, "scale": "0-5", "description": "Correctly identifies unregulated/irreversible GDNF over-secretion, integration/insertional-mutagenesis risk, and missing tumorigenicity data as disqualifying."},
+      {"name": "functional_maturity_assessment", "weight": 0.15, "scale": "0-5", "description": "Rejects 'more is better'; reasons about GDNF dose-dependent off-target effects."},
+      {"name": "manufacturing_reproducibility", "weight": 0.15, "scale": "0-5", "description": "Flags random integration / lack of safe-harbor control and consistency gaps."},
+      {"name": "release_criteria", "weight": 0.15, "scale": "0-5", "description": "States release criteria (regulated GDNF-dose spec, integration safety, identity, tumorigenicity) the product fails."},
+      {"name": "translational_decision", "weight": 0.10, "scale": "0-5", "description": "Reaches No-Go for the right reasons (controllability + integration + characterization gaps)."},
+      {"name": "uncertainty_handling", "weight": 0.05, "scale": "0-5", "description": "Does not rationalize the 'more GDNF is better' claim or the missing data."}
+    ]
+  }
+}

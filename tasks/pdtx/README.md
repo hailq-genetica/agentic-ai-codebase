@@ -15,13 +15,13 @@ PD mechanism → therapeutic target → modality choice → evidence strength
 > This is a **runnable MVP slice** of the full plan in `pd_txbench_plan.md` (which targets
 > 550–600 tasks, frozen tool snapshots, and multi-expert review). See "Extending" below.
 
-## Task families (this MVP: 8 seed tasks)
+## Task families (this MVP: 14 seed tasks)
 
 | Family | Dir | Tasks | Negative control |
 |---|---|---|---|
 | Small molecule | `small_molecule/` | `sm_gba1_ambroxol_analog` | `sm_negative_herg_bbb` (strong docking, poor BBB + hERG) |
 | Gene therapy | `gene_therapy/` | `gt_aav_gba1` | `gt_negative_snca_panbrain` (non-specific pan-brain SNCA knockdown) |
-| Cell therapy | `cell_therapy/` | `ct_ipsc_da_neurons` | `ct_negative_residual_pluripotency` (TH+ but OCT4/NANOG high) |
+| Cell therapy | `cell_therapy/` | `ct_ipsc_da_neurons`, `ct_hesc_mda_progenitors_allo` (allogeneic HLA-mismatch), `ct_autologous_ipsc_mda` (autologous, per-line QC), `ct_gdnf_engineered_graft` (GDNF-secreting graft) | `ct_negative_residual_pluripotency` (TH+ but OCT4/NANOG high), `ct_negative_regional_misspecification` (TH+ but not A9, serotonergic→GID), `ct_negative_genomic_instability` (20q11.21/12p + TP53), `ct_negative_gdnf_uncontrolled` (unregulated, irreversible GDNF) |
 | Evidence reasoning | `evidence_reasoning/` | `ev_ambroxol_dmt_claim` | `ev_negative_mouse_to_clinical` (preclinical→clinical overclaim) |
 
 **Negative controls** test whether the model can say **No-Go / Contradicted** instead of being

@@ -1,0 +1,42 @@
+{
+  "task_id": "ct_negative_genomic_instability",
+  "category": "cell_therapy",
+  "is_negative_control": true,
+  "rubric_id": "pdtx_cell_therapy_eval_v1",
+  "gold_label": "No-Go",
+  "preferred_decision": "No-Go",
+  "acceptable_decisions": ["Conditional Go"],
+  "gold_rationale": "Good DA identity and undetectable residual pluripotency do not offset culture-acquired genomic instability. The recurrent 20q11.21 gain (amplifying anti-apoptotic BCL2L1), the 12p gain, and an acquired dominant-negative TP53 mutation each confer selective growth advantage and elevated transformation/tumorigenicity potential, and these risks are invisible to OCT4/NANOG pluripotency QC. With no in vivo tumorigenicity study, the product is not ready. The correct decision is No-Go (at most a Conditional Go contingent on re-deriving a genomically stable line, adding genomic-integrity release criteria — karyotype, CNV/SNP array, driver-gene sequencing — and completing in vivo tumorigenicity studies).",
+  "required_concepts": [
+    "genomic instability as an independent tumorigenicity risk",
+    "pluripotency markers do not detect genomic instability",
+    "recurrent PSC karyotype abnormality (20q11.21, 12p)",
+    "acquired TP53 mutation / oncogenic driver",
+    "in vivo tumorigenicity study required",
+    "genomic-integrity release criteria (karyotype, CNV array, sequencing)",
+    "re-derive genomically stable line"
+  ],
+  "acceptable_variants": [
+    "20q11.21", "BCL2L1", "12p", "chromosome", "karyotype", "aneuploidy",
+    "copy number", "CNV", "SNP array", "TP53", "p53", "driver mutation",
+    "transformation", "teratoma", "tumor", "OCT4", "NANOG", "in vivo",
+    "genomic integrity", "not ready", "release criteria", "WGS", "sequencing"
+  ],
+  "red_flags": [
+    "issues a Go despite culture-acquired genomic abnormalities and an oncogenic TP53 mutation",
+    "treats clean pluripotency QC or good DA identity as sufficient for genomic safety",
+    "ignores the genomic instability / transformation risk",
+    "ignores the absence of an in vivo tumorigenicity study"
+  ],
+  "rubric": {
+    "criteria": [
+      {"name": "cell_identity_reasoning", "weight": 0.20, "scale": "0-5", "description": "Acknowledges the good DA/midbrain identity while not treating it as offsetting the genomic problem."},
+      {"name": "safety_tumorigenicity_analysis", "weight": 0.20, "scale": "0-5", "description": "Correctly identifies genomic instability (20q11.21/12p gains, acquired TP53) as a disqualifying transformation/tumorigenicity risk invisible to pluripotency markers."},
+      {"name": "functional_maturity_assessment", "weight": 0.15, "scale": "0-5", "description": "Weighs the functional dopamine-release data against the genomic-safety problem."},
+      {"name": "manufacturing_reproducibility", "weight": 0.15, "scale": "0-5", "description": "Flags the expansion/process step that selected for genomic abnormalities and the need for genomic monitoring."},
+      {"name": "release_criteria", "weight": 0.15, "scale": "0-5", "description": "States the genomic-integrity release criteria (karyotype, CNV/SNP array, driver-gene sequencing) the product fails."},
+      {"name": "translational_decision", "weight": 0.10, "scale": "0-5", "description": "Reaches No-Go for the right reasons (genomic instability + absent in vivo tumor data)."},
+      {"name": "uncertainty_handling", "weight": 0.05, "scale": "0-5", "description": "Does not rationalize away the genomic / tumor risk."}
+    ]
+  }
+}

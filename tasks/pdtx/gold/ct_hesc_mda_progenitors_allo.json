@@ -1,0 +1,44 @@
+{
+  "task_id": "ct_hesc_mda_progenitors_allo",
+  "category": "cell_therapy",
+  "is_negative_control": false,
+  "rubric_id": "pdtx_cell_therapy_eval_v1",
+  "gold_label": "Conditional Go",
+  "preferred_decision": "Conditional Go",
+  "acceptable_decisions": ["Go"],
+  "gold_rationale": "An allogeneic hESC-derived mDA progenitor product with correct midbrain floor-plate identity (FOXA2/LMX1A/OTX2/EN1), undetectable residual pluripotency, a scalable single master cell bank, and rodent/primate efficacy is a strong clinical candidate (mirroring real allogeneic mDA programs). Progression to first-in-human should be conditional on a tumorigenicity package, a defined potency/release panel, and — critically for an HLA-mismatched allogeneic graft — an immune-management plan (transient immunosuppression with monitoring for rejection and durable graft survival on PET). The allogeneic setting adds immune-rejection risk that an autologous product avoids; grafting at the progenitor stage is a defensible standard choice. Encouraging preclinical data is not a fully de-risked clinical product.",
+  "required_concepts": [
+    "midbrain floor-plate lineage (FOXA2, LMX1A)",
+    "A9 dopaminergic identity (TH, NURR1)",
+    "progenitor-stage grafting rationale",
+    "allogeneic HLA mismatch / immune rejection",
+    "transient immunosuppression",
+    "residual pluripotency / tumorigenicity",
+    "graft survival / PET imaging endpoint",
+    "release criteria / potency assay",
+    "manufacturing from single master bank"
+  ],
+  "acceptable_variants": [
+    "TH", "NURR1", "NR4A2", "PITX3", "FOXA2", "LMX1A", "OTX2", "EN1",
+    "OCT4", "NANOG", "LIN28", "A9", "SNc", "HLA", "immunosuppression",
+    "rejection", "F-DOPA PET", "DAT PET", "teratoma", "tumor", "potency assay",
+    "in vivo", "engraftment", "master cell bank", "GMP"
+  ],
+  "red_flags": [
+    "declares the product clinically ready without a tumorigenicity package or release criteria",
+    "ignores the allogeneic HLA-mismatch / immune-rejection risk or the need for immunosuppression",
+    "ignores residual pluripotency / tumor risk",
+    "ignores graft survival, PET engraftment endpoints, or potency/release criteria"
+  ],
+  "rubric": {
+    "criteria": [
+      {"name": "cell_identity_reasoning", "weight": 0.20, "scale": "0-5", "description": "Assesses A9 midbrain DA identity from the floor-plate marker panel and the progenitor-stage grafting rationale."},
+      {"name": "safety_tumorigenicity_analysis", "weight": 0.20, "scale": "0-5", "description": "Evaluates residual pluripotency/tumor risk AND the allogeneic HLA-mismatch immune-rejection risk and immunosuppression plan."},
+      {"name": "functional_maturity_assessment", "weight": 0.15, "scale": "0-5", "description": "Interprets in vivo maturation, dopaminergic innervation, and PET/motor endpoints."},
+      {"name": "manufacturing_reproducibility", "weight": 0.15, "scale": "0-5", "description": "Addresses single-master-bank scalability and batch reproducibility."},
+      {"name": "release_criteria", "weight": 0.15, "scale": "0-5", "description": "Proposes appropriate identity/purity/safety/potency release criteria."},
+      {"name": "translational_decision", "weight": 0.10, "scale": "0-5", "description": "Calibrated Conditional Go with the right contingencies (tumorigenicity, immune management, release panel)."},
+      {"name": "uncertainty_handling", "weight": 0.05, "scale": "0-5", "description": "Honest about remaining de-risking work; does not overclaim from preclinical data."}
+    ]
+  }
+}
