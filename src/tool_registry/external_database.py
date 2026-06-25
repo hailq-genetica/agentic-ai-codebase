@@ -169,8 +169,8 @@ description = [
         "required_parameters": [
             {
                 "name": 'identifiers',
-                "type": 'str',
-                "description": 'Parameter identifiers',
+                "type": 'list of str',
+                "description": 'List of PDB identifiers string. Pass a list even for a single identifier.',
                 "default": None
             },
         ],
@@ -189,8 +189,8 @@ description = [
             },
             {
                 "name": 'attributes',
-                "type": 'str',
-                "description": 'Parameter attributes',
+                "type": 'list of str',
+                "description": 'List of attributes to retrieve. Pass a list even for a single attribute.',
                 "default": None
             },
         ],
