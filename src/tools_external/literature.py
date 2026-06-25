@@ -256,9 +256,15 @@ def query_scholar(query: str, literature_blacklist: Optional[dict] = None) -> st
     from scholarly import ProxyGenerator, scholarly
 
     bl = _normalize_literature_blacklist(literature_blacklist)
-    pg = ProxyGenerator()
-    pg.FreeProxies()
-    scholarly.use_proxy(pg)
+    # Best-effort free-proxy setup. Proxy fetch can fail, and scholarly/httpx
+    # version mismatches (e.g. httpx>=0.28 dropping the `proxies` kwarg) can raise
+    # here; this must not hard-error the tool, so fall back to a proxy-less query.
+    try:
+        pg = ProxyGenerator()
+        if pg.FreeProxies():
+            scholarly.use_proxy(pg)
+    except Exception:
+        pass
     try:
         search_query = scholarly.search_pubs(query)
         for result in search_query:

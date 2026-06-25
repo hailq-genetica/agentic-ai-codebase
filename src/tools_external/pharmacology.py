@@ -101,6 +101,23 @@ def run_diffdock_with_smiles(pdb_path, smiles_string, local_output_dir, gpu_devi
 
 def docking_autodock_vina(smiles_list, receptor_pdb_file, box_center, box_size, ncpu=1):
     from tdc import Oracle
+    import json as _json
+
+    # Coerce LLM-supplied arguments that may arrive as JSON strings / wrong shapes:
+    # smiles_list -> list[str]; box_center / box_size -> list[float] of length 3.
+    def _as_list(v):
+        if isinstance(v, str):
+            s = v.strip()
+            try:
+                v = _json.loads(s)
+            except (ValueError, _json.JSONDecodeError):
+                v = [p for p in re.split(r"[\s,]+", s.strip("[]() ")) if p]
+        return list(v) if isinstance(v, (list, tuple)) else [v]
+
+    if isinstance(smiles_list, str):
+        smiles_list = _as_list(smiles_list)
+    box_center = [float(x) for x in _as_list(box_center)]
+    box_size = [float(x) for x in _as_list(box_size)]
 
     log = []
 

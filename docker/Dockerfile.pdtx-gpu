@@ -84,6 +84,16 @@ RUN pip install "setuptools<81" gemmi \
 # OpenAI SDK — lets the agent and/or judge run on provider: openai (Responses API).
 RUN pip install openai
 
+# Pin httpx < 0.28: scholarly 1.7.x passes the `proxies=` kwarg that httpx>=0.28
+# removed (breaks query_scholar). Compatible with the openai/anthropic SDKs.
+RUN pip install "httpx<0.28"
+
+# X11 libs for the Open Babel plugins bundled with ADFRsuite/AutoSite — without
+# libSM/libICE/... run_autosite fails: "libSM.so.6: cannot open shared object file".
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        libsm6 libice6 libxext6 libxrender1 \
+    && rm -rf /var/lib/apt/lists/*
+
 RUN mkdir -p /tmp/numba-cache /tmp/mpl /tmp/.cache /tmp/.config \
     && chmod -R 1777 /tmp/numba-cache /tmp/mpl /tmp/.cache /tmp/.config
 

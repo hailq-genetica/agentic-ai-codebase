@@ -49,12 +49,12 @@ description = [
     },
     {
         "name": 'docking_autodock_vina',
-        "description": 'Function docking_autodock_vina',
+        "description": 'Dock one or more small molecules into a receptor protein structure with AutoDock Vina and return binding scores.',
         "required_parameters": [
             {
                 "name": 'smiles_list',
-                "type": 'List[str]',
-                "description": 'List of SMILES strings representing small molecules to dock',
+                "type": 'list of str',
+                "description": 'List of SMILES strings, one entry per compound to dock (e.g. ["CCO", "c1ccccc1O"]). Pass a list even for a single molecule.',
                 "default": None
             },
             {
@@ -65,15 +65,15 @@ description = [
             },
             {
                 "name": 'box_center',
-                "type": 'str',
-                "description": '3D coordinates [x, y, z] of the docking box center',
-                "default": "List[float]"
+                "type": 'list of float',
+                "description": '[x, y, z] coordinates of the docking box center, in Angstroms (e.g. [10.0, 12.5, -3.0]).',
+                "default": None
             },
             {
                 "name": 'box_size',
-                "type": 'str',
-                "description": 'Dimensions [x, y, z] of the docking box',
-                "default": "List[float]"
+                "type": 'list of float',
+                "description": '[x, y, z] dimensions of the docking box, in Angstroms (e.g. [20.0, 20.0, 20.0]).',
+                "default": None
             },
         ],
         "optional_parameters": [

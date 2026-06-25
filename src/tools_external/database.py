@@ -930,6 +930,17 @@ def query_pdb(
             }
         )
 
+    # The LLM may hand back `query` as a JSON string rather than an object;
+    # coerce it so the dict operations below don't raise
+    # "string indices must be integers".
+    if isinstance(query_json, str):
+        try:
+            query_json = json.loads(query_json)
+        except (json.JSONDecodeError, ValueError):
+            return {"error": f"`query` must be a JSON object; could not parse string: {query_json[:200]}"}
+    if not isinstance(query_json, dict):
+        return {"error": f"`query` must be a JSON object, got {type(query_json).__name__}"}
+
     # Ensure return_type is set
     if "return_type" not in query_json:
         query_json["return_type"] = return_type

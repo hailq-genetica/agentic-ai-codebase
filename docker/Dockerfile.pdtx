@@ -39,6 +39,10 @@ RUN pip install -r /tmp/requirements-extra.txt || \
 # OpenAI SDK — lets the agent and/or judge run on provider: openai (Responses API).
 RUN pip install openai
 
+# Pin httpx < 0.28: scholarly 1.7.x passes the `proxies=` kwarg that httpx>=0.28
+# removed (breaks query_scholar). Compatible with the openai/anthropic SDKs.
+RUN pip install "httpx<0.28"
+
 # Writable caches so the image works when run as a non-root --user (which doesn't
 # own site-packages and has no $HOME): numba JIT cache (scanpy uses @njit(cache=True)),
 # matplotlib config, and a home dir for libraries that write to ~/.cache or ~/.config.
