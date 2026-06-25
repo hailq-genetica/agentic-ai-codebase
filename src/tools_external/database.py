@@ -90,10 +90,13 @@ def _query_llm_for_api(prompt, schema, system_template):
             system_prompt = system_template
 
         llm_text = None
+        client_available = False
+        client_error = None
         try:
             from src.agent_control import get_agent_state
             state = get_agent_state()
             if state and state.client:
+                client_available = True
                 messages = [
                     {"type": "message", "role": "system", "content": system_prompt},
                     {"type": "message", "role": "user", "content": prompt},
@@ -104,23 +107,46 @@ def _query_llm_for_api(prompt, schema, system_template):
                     reasoning_effort="medium",
                     isolated=True,
                 )
-                for item in (response.output or []):
-                    if isinstance(item, dict) and item.get("type") == "message":
+                # Extract the assistant text from either response format:
+                # Anthropic/unified items are dicts; raw OpenAI Responses items
+                # are objects (so the dict-only path would miss them and wrongly
+                # report "No LLM available").
+                def _message_text(item):
+                    if isinstance(item, dict):
+                        if item.get("type") != "message":
+                            return None
                         for c in (item.get("content") or []):
-                            if isinstance(c, dict) and c.get("type") == "text":
-                                raw = (c.get("text") or "").strip()
-                                if raw:
-                                    llm_text = raw
-                                    break
-                        if llm_text is not None:
-                            break
-        except Exception:
-            pass
+                            if isinstance(c, dict) and c.get("type") == "text" and (c.get("text") or "").strip():
+                                return c["text"].strip()
+                        return None
+                    if getattr(item, "type", None) == "message":
+                        for c in (getattr(item, "content", None) or []):
+                            t = getattr(c, "text", None)
+                            if t and t.strip():
+                                return t.strip()
+                    return None
+
+                for item in (response.output or []):
+                    t = _message_text(item)
+                    if t:
+                        llm_text = t
+                        break
+        except Exception as e:
+            client_error = str(e)
 
         if llm_text is None:
+            # Distinguish "no agent client" from "client ran but produced no text"
+            # so the error is actionable instead of misleadingly blaming state.
+            if not client_available:
+                err = ("No LLM client available. Database tools generate the API query via the "
+                       "agent's LLM, so run through run_agent.py / run_pdtx.py (which set agent state).")
+            elif client_error:
+                err = f"LLM client call failed while generating the query: {client_error}"
+            else:
+                err = "LLM returned no parseable text for the query."
             return {
                 "success": False,
-                "error": "No LLM available. Database tools require the agent to be run via run_agent.py so agent state (client) is set.",
+                "error": err,
                 "raw_response": "",
             }
 
