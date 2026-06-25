@@ -21,6 +21,7 @@ Usage:
 
 import importlib
 import inspect
+import re
 from pathlib import Path
 from typing import Any
 
@@ -152,6 +153,35 @@ def format_tool_for_llm(tool: dict, provider: str = "openai") -> dict:
 # Public API
 # =============================================================================
 
+# Cache of top-level def names per convention module, for phantom-tool filtering.
+_module_defs_cache: dict[str, "set | None"] = {}
+
+
+def _tool_is_executable(module_name: str, tool_name: str) -> bool:
+    """True if the tool's backing function can actually be resolved at call time.
+
+    The registry generator can mistakenly register nested helper functions (e.g.
+    `ADMET_pred` defined inside `predict_admet_properties`) as top-level tools.
+    These are advertised to the LLM but fail with "Tool not found" when called.
+    A tool is executable iff it has an explicit curated module mapping, or — for
+    the convention-based `external_*` registries — a matching top-level `def` in
+    `src/tools_external/<category>.py`. Anything we can't statically verify
+    (non-external registries, missing source) is kept, to avoid false drops.
+    """
+    if get_tool_module(tool_name):  # explicit curated mapping → trust it
+        return True
+    if not module_name.startswith("external_"):
+        return True  # only convention-verify external_* here
+    if module_name not in _module_defs_cache:
+        cat = module_name.replace("external_", "")
+        src = Path(__file__).resolve().parents[1] / "tools_external" / f"{cat}.py"
+        _module_defs_cache[module_name] = (
+            set(re.findall(r"^def ([A-Za-z_]\w*)", src.read_text(), re.M)) if src.exists() else None
+        )
+    defs = _module_defs_cache[module_name]
+    return True if defs is None else tool_name in defs
+
+
 def get_tools(category: str = None, provider: str = "openai") -> list[dict]:
     """
     Get tools formatted for LLM function calling.
@@ -176,7 +206,8 @@ def get_tools(category: str = None, provider: str = "openai") -> list[dict]:
     for module_name, module in _registry_cache.items():
         if category is None or module_name == category:
             for tool in module.description:
-                tools.append(format_tool_for_llm(tool, provider))
+                if _tool_is_executable(module_name, tool["name"]):
+                    tools.append(format_tool_for_llm(tool, provider))
     return tools
 
 
@@ -236,14 +267,24 @@ def execute_tool(tool_name: str, *args, **kwargs) -> Any:
                 raise ValueError(f"Could not import module for {tool_name} (registry: {module_name}): {e}")
     
     if func is None:
-        available_categories = list_categories()
-        raise ValueError(
-            f"Tool not found: {tool_name}\n"
-            f"Ensure the tool is:\n"
-            f"  1. Defined in a tool registry file (src/tool_registry/*.py)\n"
-            f"  2. Has an explicit module mapping in src/tool_metadata.py if needed\n"
-            f"Available tool categories: {available_categories}"
+        # Suggest close/likely tool names so a hallucinated name (e.g. "ADMET_pred"
+        # for "predict_admet_properties") self-corrects on the next step instead of
+        # the agent guessing blindly.
+        import difflib
+        all_names = sorted(_tool_to_module.keys())
+        lower_map = {n.lower(): n for n in all_names}
+        close = [lower_map[c] for c in difflib.get_close_matches(tool_name.lower(), list(lower_map), n=5, cutoff=0.4)]
+        toks = [t for t in re.split(r"[^a-z0-9]+", tool_name.lower()) if len(t) >= 4]
+        substr = [n for n in all_names if any(t in n.lower() for t in toks)]
+        hints = list(dict.fromkeys(close + substr))[:6]
+        msg = f"Tool not found: {tool_name}"
+        if hints:
+            msg += f"\nDid you mean one of: {', '.join(hints)}?"
+        msg += (
+            "\nUse the exact registered tool name. Tools are defined in "
+            "src/tool_registry/*.py (run with --list-tools to see categories)."
         )
+        raise ValueError(msg)
     
     # Filter invalid kwargs
     if kwargs:
