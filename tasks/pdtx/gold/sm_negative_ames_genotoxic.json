@@ -1,0 +1,40 @@
+{
+  "task_id": "sm_negative_ames_genotoxic",
+  "category": "small_molecule",
+  "is_negative_control": true,
+  "rubric_id": "pdtx_sm_candidate_eval_v1",
+  "gold_label": "No-Go",
+  "preferred_decision": "No-Go",
+  "acceptable_decisions": ["Conditional Go"],
+  "gold_rationale": "The molecule carries aromatic nitro and aromatic amine (aniline) structural alerts and is AMES-positive/genotoxic with likely reactive-metabolite formation. For a chronic, lifelong CNS indication in an older population, mutagenicity is a fundamental, typically disqualifying liability that good CNS penetration and target potency do not offset. The correct decision is No-Go (at most a Conditional Go strictly contingent on scaffold/series redesign that removes the nitro/aniline alerts and clears genotoxicity). Potency and brain penetration must not drive a Go past a genotoxicity signal.",
+  "required_concepts": [
+    "AMES-positive / mutagenicity / genotoxicity",
+    "aromatic nitro and aromatic amine structural alerts",
+    "reactive metabolite / nitrenium-nitroso intermediates",
+    "chronic lifelong dosing makes genotoxicity disqualifying",
+    "good potency / CNS penetration does not offset genotoxicity",
+    "scaffold redesign to remove the alerts"
+  ],
+  "acceptable_variants": [
+    "AMES", "Ames", "mutagenic", "mutagenicity", "genotoxic", "genotoxicity",
+    "nitro", "aniline", "aromatic amine", "structural alert", "toxicophore",
+    "reactive metabolite", "nitrenium", "carcinogenic", "not developable", "redesign"
+  ],
+  "red_flags": [
+    "issues a Go despite an AMES-positive / genotoxic signal",
+    "lets good CNS penetration or potency override the mutagenicity liability",
+    "fails to recognize the nitro / aniline genotoxicity structural alerts",
+    "ignores that chronic lifelong dosing makes genotoxicity disqualifying"
+  ],
+  "rubric": {
+    "criteria": [
+      {"name": "pd_mechanism_relevance", "weight": 0.20, "scale": "0-5", "description": "Engages the PD/target context while keeping the safety problem central."},
+      {"name": "target_moa_reasoning", "weight": 0.15, "scale": "0-5", "description": "Acknowledges target potency without treating it as sufficient."},
+      {"name": "admet_interpretation", "weight": 0.20, "scale": "0-5", "description": "Correctly weighs the AMES-positive / genotoxic signal and structural alerts."},
+      {"name": "safety_risk_identification", "weight": 0.15, "scale": "0-5", "description": "Identifies genotoxicity as disqualifying for chronic dosing."},
+      {"name": "go_no_go_quality", "weight": 0.15, "scale": "0-5", "description": "Reaches No-Go (or tightly Conditional on redesign) for the right reasons."},
+      {"name": "next_experiment_quality", "weight": 0.10, "scale": "0-5", "description": "Next step is scaffold redesign / confirmatory genotoxicity testing, not progression."},
+      {"name": "uncertainty_handling", "weight": 0.05, "scale": "0-5", "description": "Does not rationalize away the genotoxicity signal."}
+    ]
+  }
+}

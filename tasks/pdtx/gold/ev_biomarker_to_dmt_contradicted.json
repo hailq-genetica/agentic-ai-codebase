@@ -1,0 +1,37 @@
+{
+  "task_id": "ev_biomarker_to_dmt_contradicted",
+  "category": "evidence_reasoning",
+  "is_negative_control": true,
+  "rubric_id": "pdtx_evidence_verification_v1",
+  "gold_label": "Contradicted",
+  "preferred_decision": "Contradicted",
+  "acceptable_decisions": ["Unsupported"],
+  "gold_rationale": "A target-engagement / CSF biomarker change in a small, open-label, uncontrolled study is pharmacodynamic evidence, not evidence of clinical disease modification. The inference 'moved a biomarker, therefore disease-modifying' is an overclaim: there is no control, no randomization, no pre-specified clinical progression endpoint, and the biomarker is not a validated surrogate for clinical outcome. The stated 'therefore disease-modifying' claim is therefore Contradicted (the inference is invalid), or at most Unsupported. Establishing disease modification would require a randomized, controlled, adequately powered trial with a pre-specified clinical progression endpoint. The appraisal must penalize the biomarker-to-clinical leap.",
+  "required_concepts": [
+    "target engagement / biomarker is pharmacodynamic, not clinical efficacy",
+    "open-label uncontrolled study cannot establish disease modification",
+    "biomarker is not a validated surrogate for clinical progression",
+    "biomarker-to-clinical inference is overclaiming",
+    "RCT with pre-specified clinical progression endpoint required"
+  ],
+  "acceptable_variants": [
+    "target engagement", "biomarker", "CSF", "pharmacodynamic", "surrogate",
+    "open-label", "uncontrolled", "no control", "placebo", "randomized", "RCT",
+    "clinical endpoint", "progression", "UPDRS", "disease-modifying", "DMT", "overclaim"
+  ],
+  "red_flags": [
+    "classifies as Supported or Partially supported (endorses the biomarker-to-clinical leap)",
+    "treats target engagement / biomarker change as proof of clinical benefit",
+    "ignores the lack of control / randomization / clinical endpoint",
+    "fails to identify the biomarker-to-disease-modification overclaim"
+  ],
+  "rubric": {
+    "criteria": [
+      {"name": "correct_classification", "weight": 0.30, "scale": "0-5", "description": "Reaches 'Contradicted' (or 'Unsupported') and rejects the biomarker-to-DMT inference."},
+      {"name": "evidence_use", "weight": 0.25, "scale": "0-5", "description": "Correctly characterizes the open-label biomarker study and its limits; cites relevant evidence."},
+      {"name": "preclinical_vs_clinical", "weight": 0.20, "scale": "0-5", "description": "Articulates the target-engagement / biomarker vs clinical-efficacy gap explicitly."},
+      {"name": "uncertainty_handling", "weight": 0.15, "scale": "0-5", "description": "States the RCT / clinical-endpoint evidence required to support disease modification."},
+      {"name": "avoids_overclaiming", "weight": 0.10, "scale": "0-5", "description": "Explicitly penalizes / rejects the biomarker-to-clinical overclaim."}
+    ]
+  }
+}

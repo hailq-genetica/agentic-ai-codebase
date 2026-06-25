@@ -1,0 +1,42 @@
+{
+  "task_id": "sm_negative_cyp3a4_ddi",
+  "category": "small_molecule",
+  "is_negative_control": true,
+  "rubric_id": "pdtx_sm_candidate_eval_v1",
+  "gold_label": "No-Go",
+  "preferred_decision": "No-Go",
+  "acceptable_decisions": ["Conditional Go"],
+  "gold_rationale": "The candidate carries methylenedioxyphenyl and imidazole motifs and is a potent CYP3A4 inhibitor that is also CYP3A4-metabolized, with a narrow predicted therapeutic index. For a chronic drug in an older polypharmacy PD population, this DDI profile (perpetrator and victim) plus a narrow index risks clinically significant interactions and unpredictable exposure, and good CNS penetration/potency do not offset it. The correct decision is No-Go (at most a Conditional Go strictly contingent on series redesign that removes the MDP/imidazole CYP3A4 liability and widens the therapeutic index). Potency and brain penetration must not drive a Go past the DDI risk.",
+  "required_concepts": [
+    "potent CYP3A4 inhibition / DDI perpetrator",
+    "also CYP3A4-metabolized / DDI victim",
+    "methylenedioxyphenyl (MDP) and imidazole CYP3A4 motifs",
+    "narrow therapeutic index",
+    "older polypharmacy PD population",
+    "potency / CNS penetration does not offset DDI",
+    "series redesign to remove CYP liability"
+  ],
+  "acceptable_variants": [
+    "CYP3A4", "CYP", "drug-drug interaction", "DDI", "mechanism-based inhibition",
+    "methylenedioxyphenyl", "MDP", "imidazole", "perpetrator", "victim",
+    "therapeutic index", "therapeutic window", "polypharmacy", "elderly",
+    "exposure", "redesign", "not developable"
+  ],
+  "red_flags": [
+    "issues a Go despite potent CYP3A4 inhibition and a narrow therapeutic index",
+    "lets good CNS penetration or potency override the DDI liability",
+    "ignores the polypharmacy population / clinical interaction risk",
+    "fails to recognize the MDP / imidazole CYP3A4 structural liability"
+  ],
+  "rubric": {
+    "criteria": [
+      {"name": "pd_mechanism_relevance", "weight": 0.20, "scale": "0-5", "description": "Engages the PD/target context while keeping the DDI problem central."},
+      {"name": "target_moa_reasoning", "weight": 0.15, "scale": "0-5", "description": "Acknowledges target potency without treating it as sufficient."},
+      {"name": "admet_interpretation", "weight": 0.20, "scale": "0-5", "description": "Correctly weighs the CYP3A4/DDI liability and narrow therapeutic index."},
+      {"name": "safety_risk_identification", "weight": 0.15, "scale": "0-5", "description": "Identifies the DDI risk (perpetrator and victim) in a polypharmacy population as disqualifying."},
+      {"name": "go_no_go_quality", "weight": 0.15, "scale": "0-5", "description": "Reaches No-Go (or tightly Conditional on redesign) for the right reasons."},
+      {"name": "next_experiment_quality", "weight": 0.10, "scale": "0-5", "description": "Next step is series redesign / DDI characterization, not progression."},
+      {"name": "uncertainty_handling", "weight": 0.05, "scale": "0-5", "description": "Does not rationalize away the DDI liability."}
+    ]
+  }
+}

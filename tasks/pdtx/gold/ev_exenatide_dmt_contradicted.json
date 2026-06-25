@@ -1,0 +1,37 @@
+{
+  "task_id": "ev_exenatide_dmt_contradicted",
+  "category": "evidence_reasoning",
+  "is_negative_control": true,
+  "rubric_id": "pdtx_evidence_verification_v1",
+  "gold_label": "Contradicted",
+  "preferred_decision": "Contradicted",
+  "acceptable_decisions": ["Unsupported"],
+  "gold_rationale": "Exenatide had a plausible GLP-1 neuroprotection rationale and an encouraging Phase 2 signal, but the definitive, well-powered Phase 3 trial (Exenatide-PD3) did not demonstrate a disease-modifying benefit on its primary endpoint. The claim that exenatide is a 'proven' disease-modifying therapy is therefore refuted: the correct classification is Contradicted (at most Unsupported). The appraisal must separate the once-promising Phase 2 / mechanism from the negative pivotal trial and not rescue the 'proven' claim.",
+  "required_concepts": [
+    "GLP-1 neuroprotection rationale and encouraging Phase 2 signal",
+    "definitive negative Phase 3 (Exenatide-PD3)",
+    "'proven' disease-modifying is refuted by the pivotal trial",
+    "Phase 2 promise does not equal proven efficacy",
+    "negative pivotal RCT outweighs earlier signal / mechanism"
+  ],
+  "acceptable_variants": [
+    "exenatide", "GLP-1", "GLP-1 receptor agonist", "Exenatide-PD3", "Exenatide-PD",
+    "Phase 3", "Phase III", "Phase 2", "Phase II", "randomized controlled trial",
+    "RCT", "primary endpoint", "no benefit", "negative trial", "disease-modifying", "DMT"
+  ],
+  "red_flags": [
+    "classifies as Supported (proven disease-modifying)",
+    "lets the positive Phase 2 or mechanism rescue the 'proven' claim",
+    "ignores or omits the negative Phase 3 (Exenatide-PD3) evidence",
+    "treats an encouraging earlier-phase signal as proof of disease modification"
+  ],
+  "rubric": {
+    "criteria": [
+      {"name": "correct_classification", "weight": 0.30, "scale": "0-5", "description": "Reaches 'Contradicted' (or 'Unsupported') for the 'proven' claim based on the negative Phase 3."},
+      {"name": "evidence_use", "weight": 0.25, "scale": "0-5", "description": "Identifies the encouraging Phase 2 and the definitive negative Phase 3; cites sources."},
+      {"name": "preclinical_vs_clinical", "weight": 0.20, "scale": "0-5", "description": "Separates the earlier-phase signal / mechanism from the pivotal Phase 3 result."},
+      {"name": "uncertainty_handling", "weight": 0.15, "scale": "0-5", "description": "States residual uncertainty (subgroups/ongoing work) without rescuing the 'proven' claim."},
+      {"name": "avoids_overclaiming", "weight": 0.10, "scale": "0-5", "description": "Does not treat Phase 2 promise as proof of disease modification."}
+    ]
+  }
+}

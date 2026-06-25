@@ -1,0 +1,44 @@
+{
+  "task_id": "sm_lrrk2_inhibitor",
+  "category": "small_molecule",
+  "is_negative_control": false,
+  "rubric_id": "pdtx_sm_candidate_eval_v1",
+  "gold_label": "Conditional Go",
+  "preferred_decision": "Conditional Go",
+  "acceptable_decisions": ["Go"],
+  "gold_rationale": "A brain-penetrant, selective LRRK2 kinase inhibitor is mechanistically well-aligned with LRRK2 gain-of-function PD (elevated kinase activity -> endolysosomal dysfunction), with a tractable target-engagement biomarker (pRab10). Progression should be conditional on demonstrating the CNS exposure and selectivity, clearing standard ADMET/safety liabilities, and — the key gating issue — defining a peripheral on-target safety window: LRRK2 inhibition causes lung (type II pneumocyte / surfactant) and kidney changes, so partial inhibition, reversibility, and pulmonary/renal monitoring are required. Patient stratification toward LRRK2-variant carriers strengthens the case. Mechanistic plausibility is not proven disease modification.",
+  "required_concepts": [
+    "LRRK2 gain-of-function / elevated kinase activity",
+    "kinase inhibition mechanism and selectivity",
+    "pRab10 target-engagement biomarker",
+    "blood-brain barrier / CNS penetration",
+    "peripheral on-target safety (lung type II pneumocyte / kidney)",
+    "therapeutic window / partial inhibition / reversibility",
+    "patient stratification (LRRK2 carriers)",
+    "next experiment"
+  ],
+  "acceptable_variants": [
+    "LRRK2", "G2019S", "kinase", "ATP-competitive", "Rab10", "pRab10", "pRab",
+    "BBB", "blood brain barrier", "CNS penetration", "type II pneumocyte", "lung",
+    "surfactant", "lamellar body", "kidney", "selectivity", "therapeutic window",
+    "carriers", "endolysosomal", "lysosomal"
+  ],
+  "red_flags": [
+    "claims proven disease modification without sufficient clinical evidence",
+    "ignores peripheral on-target LRRK2 safety (lung / kidney)",
+    "ignores blood-brain barrier / CNS penetration",
+    "ignores kinase selectivity or standard ADMET/safety liabilities",
+    "treats potency/selectivity as sufficient without a safety window"
+  ],
+  "rubric": {
+    "criteria": [
+      {"name": "pd_mechanism_relevance", "weight": 0.20, "scale": "0-5", "description": "Connects LRRK2 gain-of-function / kinase activity to the inhibitor mechanism."},
+      {"name": "target_moa_reasoning", "weight": 0.15, "scale": "0-5", "description": "Sound ATP-competitive kinase-inhibition and selectivity reasoning; uses pRab10 biomarker."},
+      {"name": "admet_interpretation", "weight": 0.20, "scale": "0-5", "description": "Sound ADMET incl. BBB, solubility, clearance, CYP, and CNS exposure."},
+      {"name": "safety_risk_identification", "weight": 0.15, "scale": "0-5", "description": "Identifies peripheral on-target (lung/kidney) safety and the therapeutic-window issue."},
+      {"name": "go_no_go_quality", "weight": 0.15, "scale": "0-5", "description": "Conditional Go calibrated to the safety window and CNS exposure."},
+      {"name": "next_experiment_quality", "weight": 0.10, "scale": "0-5", "description": "Proposes a decision-relevant next experiment (e.g. pRab10 engagement + pulmonary safety study)."},
+      {"name": "uncertainty_handling", "weight": 0.05, "scale": "0-5", "description": "Honest about limits; no overclaiming of disease modification."}
+    ]
+  }
+}

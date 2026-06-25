@@ -1,0 +1,37 @@
+{
+  "task_id": "ev_caffeine_causation_unsupported",
+  "category": "evidence_reasoning",
+  "is_negative_control": true,
+  "rubric_id": "pdtx_evidence_verification_v1",
+  "gold_label": "Unsupported",
+  "preferred_decision": "Unsupported",
+  "acceptable_decisions": ["Partially supported"],
+  "gold_rationale": "There is a genuine, replicated inverse epidemiological association between caffeine/coffee intake and PD risk, with some A2A-receptor mechanistic plausibility. But the claim infers causation/prevention from an observational association, which is a logical flaw: confounding, reverse causation (prodromal PD reduces caffeine intake years before diagnosis), and selection effects can produce the association, and interventional evidence that caffeine prevents or modifies PD is lacking. The causal 'prevents' claim is therefore Unsupported. Partially supported is acceptable only if the answer makes explicit that support is for an association, not for causation/prevention. Classifying it Supported would endorse the association-to-causation leap; dismissing the association entirely is also wrong.",
+  "required_concepts": [
+    "real inverse epidemiological association (caffeine/coffee and PD risk)",
+    "association does not establish causation / prevention",
+    "confounding / reverse causation / prodromal effect",
+    "lack of interventional evidence that caffeine prevents or modifies PD",
+    "what evidence would be required (prospective / Mendelian randomization / interventional)"
+  ],
+  "acceptable_variants": [
+    "caffeine", "coffee", "association", "correlation", "causation", "causal",
+    "confounding", "reverse causation", "prodromal", "observational", "epidemiological",
+    "Mendelian randomization", "A2A", "interventional", "prevents", "risk"
+  ],
+  "red_flags": [
+    "classifies as Supported (endorses association-to-causation leap)",
+    "treats an observational association as proof of prevention/causation",
+    "ignores confounding / reverse causation / prodromal explanations",
+    "dismisses the genuine epidemiological association entirely"
+  ],
+  "rubric": {
+    "criteria": [
+      {"name": "correct_classification", "weight": 0.30, "scale": "0-5", "description": "Reaches 'Unsupported' for the causal claim (or 'Partially supported' only if scoped to association, not causation)."},
+      {"name": "evidence_use", "weight": 0.25, "scale": "0-5", "description": "Uses the real epidemiological association evidence and notes the lack of interventional data; cites sources."},
+      {"name": "preclinical_vs_clinical", "weight": 0.20, "scale": "0-5", "description": "Distinguishes observational association from established causation/prevention."},
+      {"name": "uncertainty_handling", "weight": 0.15, "scale": "0-5", "description": "States confounding/reverse-causation caveats and what evidence would establish causation."},
+      {"name": "avoids_overclaiming", "weight": 0.10, "scale": "0-5", "description": "Neither endorses the causation leap nor dismisses the real association."}
+    ]
+  }
+}

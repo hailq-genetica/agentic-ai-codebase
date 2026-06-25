@@ -1,0 +1,41 @@
+{
+  "task_id": "sm_a2a_antagonist_symptomatic",
+  "category": "small_molecule",
+  "is_negative_control": false,
+  "rubric_id": "pdtx_sm_candidate_eval_v1",
+  "gold_label": "Conditional Go",
+  "preferred_decision": "Conditional Go",
+  "acceptable_decisions": ["Go"],
+  "gold_rationale": "An A2A receptor antagonist is a mechanistically sound, well-precedented non-dopaminergic symptomatic adjunct to levodopa that reduces OFF time via striatal indirect-pathway modulation, with CNS penetration and clean predicted ADMET. Progression is reasonable (Conditional Go, or Go) with expectations and endpoints set as symptomatic (OFF time, UPDRS) rather than disease-modifying, attention to dyskinesia and neuropsychiatric adjunct-class effects, an appropriate motor-fluctuation population, and a clear novelty/differentiation case given the marketed precedent. The key correctness criterion is NOT overclaiming neuroprotection or disease modification.",
+  "required_concepts": [
+    "adenosine A2A receptor antagonism",
+    "striatal indirect pathway / reduce OFF time",
+    "symptomatic adjunct to levodopa, not disease-modifying",
+    "blood-brain barrier / CNS penetration",
+    "endpoints (OFF time, UPDRS) appropriate to a symptomatic agent",
+    "novelty / differentiation vs marketed precedent",
+    "next experiment"
+  ],
+  "acceptable_variants": [
+    "A2A", "adenosine", "istradefylline", "indirect pathway", "striatopallidal",
+    "OFF time", "motor fluctuations", "levodopa adjunct", "UPDRS", "dyskinesia",
+    "symptomatic", "non-dopaminergic", "BBB", "CNS penetration"
+  ],
+  "red_flags": [
+    "claims neuroprotection or disease modification for a symptomatic A2A antagonist",
+    "sets disease-modifying endpoints instead of symptomatic OFF-time endpoints",
+    "ignores blood-brain barrier / CNS penetration",
+    "ignores adjunct-class effects (dyskinesia, neuropsychiatric) or novelty/differentiation"
+  ],
+  "rubric": {
+    "criteria": [
+      {"name": "pd_mechanism_relevance", "weight": 0.20, "scale": "0-5", "description": "Correct A2A / indirect-pathway symptomatic rationale; states it is not disease-modifying."},
+      {"name": "target_moa_reasoning", "weight": 0.15, "scale": "0-5", "description": "Sound A2A-antagonism MoA reasoning and class precedent."},
+      {"name": "admet_interpretation", "weight": 0.20, "scale": "0-5", "description": "Sound ADMET incl. BBB, solubility, clearance, CYP, hERG."},
+      {"name": "safety_risk_identification", "weight": 0.15, "scale": "0-5", "description": "Identifies adjunct-class effects (dyskinesia, neuropsychiatric) and any liabilities."},
+      {"name": "go_no_go_quality", "weight": 0.15, "scale": "0-5", "description": "Decision calibrated to a symptomatic agent with appropriate endpoints."},
+      {"name": "next_experiment_quality", "weight": 0.10, "scale": "0-5", "description": "Proposes a decision-relevant next experiment (e.g. OFF-time adjunct study / differentiation)."},
+      {"name": "uncertainty_handling", "weight": 0.05, "scale": "0-5", "description": "Does not overclaim disease modification; scopes the symptomatic benefit honestly."}
+    ]
+  }
+}

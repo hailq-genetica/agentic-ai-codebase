@@ -1,0 +1,40 @@
+{
+  "task_id": "sm_negative_pains_aggregator",
+  "category": "small_molecule",
+  "is_negative_control": true,
+  "rubric_id": "pdtx_sm_candidate_eval_v1",
+  "gold_label": "No-Go",
+  "preferred_decision": "No-Go",
+  "acceptable_decisions": ["Conditional Go"],
+  "gold_rationale": "The candidate is a rhodanine/arylidene with a catechol-like phenol — a classic PAINS motif and likely colloidal aggregator — so the strong docking score and single-assay activity are most likely assay artifacts rather than genuine GCase engagement. There is no orthogonal, detergent/aggregation-controlled confirmation. Progressing on this evidence would chase a false positive. The correct decision is No-Go (at most a Conditional Go strictly contingent on orthogonal, aggregation-controlled validation — detergent-sensitive dose-response, SPR/ITC, cellular target engagement — before any further work). A strong docking score does not constitute target engagement for a PAINS/aggregator scaffold.",
+  "required_concepts": [
+    "PAINS / pan-assay interference scaffold (rhodanine / arylidene)",
+    "colloidal aggregator / detergent-sensitive artifact",
+    "strong docking / single-assay signal is likely an artifact",
+    "need for orthogonal, aggregation-controlled validation",
+    "docking is not target engagement",
+    "kill the hit or require confirmation before progression"
+  ],
+  "acceptable_variants": [
+    "PAINS", "rhodanine", "arylidene", "catechol", "aggregator", "aggregation",
+    "detergent", "Triton", "false positive", "artifact", "SPR", "ITC",
+    "orthogonal assay", "dose-response", "target engagement", "GCase", "glucocerebrosidase"
+  ],
+  "red_flags": [
+    "issues a Go driven by the docking score / single-assay activity",
+    "fails to recognize the PAINS / aggregator liability of the scaffold",
+    "treats strong docking as genuine target engagement",
+    "proposes progression without orthogonal, aggregation-controlled confirmation"
+  ],
+  "rubric": {
+    "criteria": [
+      {"name": "pd_mechanism_relevance", "weight": 0.20, "scale": "0-5", "description": "Engages the GCase/GBA1-PD context while not being distracted by it."},
+      {"name": "target_moa_reasoning", "weight": 0.15, "scale": "0-5", "description": "Recognizes the docking/assay signal as unreliable for a PAINS/aggregator (necessary skepticism)."},
+      {"name": "admet_interpretation", "weight": 0.20, "scale": "0-5", "description": "Notes the scaffold's developability/reactivity liabilities."},
+      {"name": "safety_risk_identification", "weight": 0.15, "scale": "0-5", "description": "Flags the artifact/false-positive risk and reactive-scaffold concerns."},
+      {"name": "go_no_go_quality", "weight": 0.15, "scale": "0-5", "description": "Reaches No-Go (or tightly Conditional) for the right reasons."},
+      {"name": "next_experiment_quality", "weight": 0.10, "scale": "0-5", "description": "Next step is orthogonal aggregation-controlled validation or killing the hit."},
+      {"name": "uncertainty_handling", "weight": 0.05, "scale": "0-5", "description": "Does not overclaim from an artifact-prone signal."}
+    ]
+  }
+}

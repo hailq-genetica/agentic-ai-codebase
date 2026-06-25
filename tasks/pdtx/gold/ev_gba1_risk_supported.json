@@ -1,0 +1,37 @@
+{
+  "task_id": "ev_gba1_risk_supported",
+  "category": "evidence_reasoning",
+  "is_negative_control": false,
+  "rubric_id": "pdtx_evidence_verification_v1",
+  "gold_label": "Supported",
+  "preferred_decision": "Supported",
+  "acceptable_decisions": [],
+  "gold_rationale": "GBA1 variants are among the most common and strongest genetic risk factors for PD, replicated across many case-control and population studies, with a clear mechanistic link (reduced GCase -> lysosomal dysfunction -> α-synuclein). The claim is a risk-association claim and is well established, so the correct classification is Supported. A strong answer is confident but precise that this is a non-deterministic (variably penetrant) risk association, not a deterministic cause or a therapeutic claim, and grounds the appraisal in genetics databases/literature rather than memory.",
+  "required_concepts": [
+    "GBA1 variants are a major genetic risk factor for PD",
+    "replicated genetic association (case-control / population studies)",
+    "mechanistic link (GCase / lysosomal / α-synuclein)",
+    "risk association, not deterministic / fully penetrant",
+    "evidence grounded in databases/literature"
+  ],
+  "acceptable_variants": [
+    "GBA1", "GBA", "glucocerebrosidase", "odds ratio", "OR", "penetrance",
+    "lysosomal", "alpha-synuclein", "α-synuclein", "GWAS", "OpenTargets",
+    "risk factor", "association", "heterozygous"
+  ],
+  "red_flags": [
+    "classifies as Unsupported or Contradicted despite strong replicated evidence",
+    "states GBA1 deterministically causes PD / is fully penetrant",
+    "conflates the genetic risk-association claim with a therapeutic claim",
+    "relies on memory without grounding in databases/literature"
+  ],
+  "rubric": {
+    "criteria": [
+      {"name": "correct_classification", "weight": 0.30, "scale": "0-5", "description": "Reaches 'Supported'."},
+      {"name": "evidence_use", "weight": 0.25, "scale": "0-5", "description": "Uses real genetic-association evidence (databases/literature) and cites sources."},
+      {"name": "preclinical_vs_clinical", "weight": 0.20, "scale": "0-5", "description": "Distinguishes a (non-deterministic) risk association from a deterministic cause or therapeutic claim."},
+      {"name": "uncertainty_handling", "weight": 0.15, "scale": "0-5", "description": "Notes penetrance/variant-severity/ancestry nuance without downgrading a well-established association."},
+      {"name": "avoids_overclaiming", "weight": 0.10, "scale": "0-5", "description": "Confident but precise; neither overstates (deterministic cause) nor understates (denies the association)."}
+    ]
+  }
+}

@@ -15,14 +15,14 @@ PD mechanism → therapeutic target → modality choice → evidence strength
 > This is a **runnable MVP slice** of the full plan in `pd_txbench_plan.md` (which targets
 > 550–600 tasks, frozen tool snapshots, and multi-expert review). See "Extending" below.
 
-## Task families (this MVP: 20 seed tasks)
+## Task families (this MVP: 32 seed tasks)
 
 | Family | Dir | Tasks | Negative control |
 |---|---|---|---|
-| Small molecule | `small_molecule/` | `sm_gba1_ambroxol_analog` | `sm_negative_herg_bbb` (strong docking, poor BBB + hERG) |
+| Small molecule | `small_molecule/` | `sm_gba1_ambroxol_analog`, `sm_lrrk2_inhibitor` (peripheral safety window), `sm_asyn_aggregation_inhibitor` (target-engagement gap), `sm_a2a_antagonist_symptomatic` (symptomatic, not DMT) | `sm_negative_herg_bbb` (strong docking, poor BBB + hERG), `sm_negative_pains_aggregator` (PAINS/aggregator false hit), `sm_negative_ames_genotoxic` (AMES+ / genotoxic), `sm_negative_cyp3a4_ddi` (potent CYP3A4 DDI) |
 | Gene therapy | `gene_therapy/` | `gt_aav_gba1`, `gt_aav_aadc_putamen` (AADC dopamine synthesis, symptomatic), `gt_aav_gdnf_putamen` (AAV-GDNF, coverage + dose control), `gt_aav_prkn_recessive` (PRKN gene addition, recessive PD) | `gt_negative_snca_panbrain` (non-specific pan-brain SNCA knockdown), `gt_negative_aadc_no_dosecontrol` (broad uncontrolled AADC → ectopic dopamine), `gt_negative_crispr_snca_permanent` (permanent in-vivo SNCA knockout), `gt_negative_lrrk2_peripheral` (systemic LRRK2 lowering → lung/kidney toxicity) |
 | Cell therapy | `cell_therapy/` | `ct_ipsc_da_neurons`, `ct_hesc_mda_progenitors_allo` (allogeneic HLA-mismatch), `ct_autologous_ipsc_mda` (autologous, per-line QC), `ct_gdnf_engineered_graft` (GDNF-secreting graft) | `ct_negative_residual_pluripotency` (TH+ but OCT4/NANOG high), `ct_negative_regional_misspecification` (TH+ but not A9, serotonergic→GID), `ct_negative_genomic_instability` (20q11.21/12p + TP53), `ct_negative_gdnf_uncontrolled` (unregulated, irreversible GDNF) |
-| Evidence reasoning | `evidence_reasoning/` | `ev_ambroxol_dmt_claim` | `ev_negative_mouse_to_clinical` (preclinical→clinical overclaim) |
+| Evidence reasoning | `evidence_reasoning/` | `ev_ambroxol_dmt_claim` (Partially supported), `ev_gba1_risk_supported` (Supported anchor) | `ev_negative_mouse_to_clinical` (preclinical→clinical overclaim), `ev_coq10_progression_contradicted` (failed RCT), `ev_exenatide_dmt_contradicted` (negative Phase 3), `ev_novel_compound_unsupported` (no evidence), `ev_caffeine_causation_unsupported` (association≠causation), `ev_biomarker_to_dmt_contradicted` (biomarker→DMT leap) |
 
 **Negative controls** test whether the model can say **No-Go / Contradicted** instead of being
 talked into an unsafe or overclaimed answer — a core failure mode for drug-discovery AI.

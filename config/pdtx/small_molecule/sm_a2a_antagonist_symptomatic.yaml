@@ -1,0 +1,14 @@
+task_file: tasks/pdtx/small_molecule/sm_a2a_antagonist_symptomatic.md
+gold_file: tasks/pdtx/gold/sm_a2a_antagonist_symptomatic.json
+category: small_molecule
+tool_category: external_pharmacology, external_database
+reasoning_effort: high
+interactive: false        # overridden by run_pdtx.py --mode
+capture_telemetry: true
+output_base_dir: output/pdtx/small_molecule/sm_a2a_antagonist_symptomatic/
+
+llm:
+  provider: openai
+  model: gpt-5.5-2026-04-23
+logging:
+  enabled: false

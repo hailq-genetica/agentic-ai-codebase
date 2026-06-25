@@ -1,0 +1,42 @@
+{
+  "task_id": "sm_asyn_aggregation_inhibitor",
+  "category": "small_molecule",
+  "is_negative_control": false,
+  "rubric_id": "pdtx_sm_candidate_eval_v1",
+  "gold_label": "Conditional Go",
+  "preferred_decision": "Conditional Go",
+  "acceptable_decisions": ["Go", "No-Go"],
+  "gold_rationale": "An α-synuclein aggregation modulator is mechanistically aligned with PD Lewy pathology and the candidate has CNS penetration plus preclinical pathology effects. But the mechanism is non-classical: target engagement is hard to define and there is no validated clinical biomarker, and anti-aggregation small molecules have a poor preclinical-to-clinical track record. Progression should be a Conditional Go contingent on developing/validating a target-engagement or pathology biomarker (PET ligand, CSF/seed-amplification readout), confirming CNS exposure, and clearing standard ADMET/safety. A No-Go is defensible if the team cannot define measurable target engagement. The central issue is the biomarker/target-engagement gap, not potency; mechanistic plausibility is not proven disease modification.",
+  "required_concepts": [
+    "α-synuclein aggregation / oligomers / Lewy pathology",
+    "aggregation-modulator mechanism (non-classical target)",
+    "target-engagement / biomarker gap",
+    "blood-brain barrier / CNS penetration",
+    "preclinical-to-clinical translational risk",
+    "ADMET / safety assessment",
+    "next experiment (biomarker / PET / seeding assay)"
+  ],
+  "acceptable_variants": [
+    "alpha-synuclein", "α-synuclein", "synuclein", "aggregation", "oligomer", "fibril",
+    "anle138b", "Lewy", "seed amplification", "RT-QuIC", "PET", "biomarker",
+    "target engagement", "BBB", "blood brain barrier", "CNS penetration"
+  ],
+  "red_flags": [
+    "claims proven disease modification from preclinical pathology effects",
+    "ignores the target-engagement / biomarker measurement problem",
+    "ignores blood-brain barrier / CNS penetration",
+    "ignores the poor clinical track record of anti-aggregation molecules",
+    "treats in vitro aggregation reduction as proof of clinical efficacy"
+  ],
+  "rubric": {
+    "criteria": [
+      {"name": "pd_mechanism_relevance", "weight": 0.20, "scale": "0-5", "description": "Connects α-synuclein aggregation to PD pathology and the candidate."},
+      {"name": "target_moa_reasoning", "weight": 0.15, "scale": "0-5", "description": "Reasons about the non-classical aggregation-modulator MoA and the target-engagement difficulty."},
+      {"name": "admet_interpretation", "weight": 0.20, "scale": "0-5", "description": "Sound ADMET incl. BBB, solubility, clearance, CYP."},
+      {"name": "safety_risk_identification", "weight": 0.15, "scale": "0-5", "description": "Identifies hERG/AMES/DILI and translational risk."},
+      {"name": "go_no_go_quality", "weight": 0.15, "scale": "0-5", "description": "Decision calibrated to the biomarker/engagement gap (Conditional Go, or justified No-Go)."},
+      {"name": "next_experiment_quality", "weight": 0.10, "scale": "0-5", "description": "Proposes a biomarker / target-engagement experiment as the key next step."},
+      {"name": "uncertainty_handling", "weight": 0.05, "scale": "0-5", "description": "Honest about the engagement/biomarker gap; no overclaiming."}
+    ]
+  }
+}

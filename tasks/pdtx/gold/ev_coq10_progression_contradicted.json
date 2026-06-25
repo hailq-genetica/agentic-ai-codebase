@@ -1,0 +1,37 @@
+{
+  "task_id": "ev_coq10_progression_contradicted",
+  "category": "evidence_reasoning",
+  "is_negative_control": true,
+  "rubric_id": "pdtx_evidence_verification_v1",
+  "gold_label": "Contradicted",
+  "preferred_decision": "Contradicted",
+  "acceptable_decisions": ["Unsupported"],
+  "gold_rationale": "Despite a mitochondrial/antioxidant rationale and an early underpowered signal, a large, well-powered randomized controlled trial (NINDS QE3) found no benefit of CoQ10 on PD progression and was stopped for futility. This definitive negative RCT directly refutes the claim that CoQ10 slows progression, so the correct classification is Contradicted (at most Unsupported). The appraisal must not revive the claim from the early underpowered signal or mechanistic plausibility.",
+  "required_concepts": [
+    "mitochondrial / antioxidant rationale and early underpowered signal",
+    "large well-powered RCT (e.g. QE3) found no benefit",
+    "trial stopped for futility",
+    "definitive negative RCT refutes the progression claim",
+    "early signal does not override a definitive negative trial"
+  ],
+  "acceptable_variants": [
+    "CoQ10", "coenzyme Q10", "ubiquinone", "QE3", "QE2", "Phase 3", "Phase III",
+    "randomized controlled trial", "RCT", "futility", "no benefit", "negative trial",
+    "mitochondrial", "antioxidant", "progression"
+  ],
+  "red_flags": [
+    "classifies as Supported or Partially supported",
+    "revives the claim from the early underpowered signal or mechanism",
+    "ignores or omits the definitive negative RCT evidence",
+    "treats mechanistic plausibility as outweighing a negative Phase 3 trial"
+  ],
+  "rubric": {
+    "criteria": [
+      {"name": "correct_classification", "weight": 0.30, "scale": "0-5", "description": "Reaches 'Contradicted' (or 'Unsupported') based on the negative RCT."},
+      {"name": "evidence_use", "weight": 0.25, "scale": "0-5", "description": "Identifies and uses the definitive negative RCT (e.g. QE3) and the early signal; cites sources."},
+      {"name": "preclinical_vs_clinical", "weight": 0.20, "scale": "0-5", "description": "Distinguishes the early underpowered signal / mechanism from the definitive clinical trial result."},
+      {"name": "uncertainty_handling", "weight": 0.15, "scale": "0-5", "description": "States the evidence-based conclusion and residual uncertainty honestly."},
+      {"name": "avoids_overclaiming", "weight": 0.10, "scale": "0-5", "description": "Does not revive a refuted claim from mechanism or an underpowered early signal."}
+    ]
+  }
+}
