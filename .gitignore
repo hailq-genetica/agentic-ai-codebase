@@ -223,6 +223,7 @@ data/agentic_ai_review/
 data/*.tab
 physicochemical_properties.csv
 save_folder/
+src/tools_external/data/
 
 # Script-generated per-task expert-review reports (pdtx_expert_report.py output).
 # Hand-crafted family/positive reports are tracked explicitly.
