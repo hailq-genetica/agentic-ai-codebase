@@ -218,3 +218,18 @@ config_test/
 # PD-TxBench run outputs and downloaded grading data (not source)
 output/pdtx/
 data/agentic_ai_review/
+
+# Stray run artifacts (TDC dataset dumps, tool outputs) — generated, not source
+data/*.tab
+physicochemical_properties.csv
+save_folder/
+
+# Script-generated per-task expert-review reports (pdtx_expert_report.py output).
+# Hand-crafted family/positive reports are tracked explicitly.
+reports/pdtx/ct_negative_residual_pluripotency_expert_review.md
+reports/pdtx/ev_ambroxol_dmt_claim_expert_review.md
+reports/pdtx/ev_negative_mouse_to_clinical_expert_review.md
+reports/pdtx/gt_aav_gba1_expert_review.md
+reports/pdtx/gt_negative_snca_panbrain_expert_review.md
+reports/pdtx/sm_gba1_ambroxol_analog_expert_review.md
+reports/pdtx/sm_negative_herg_bbb_expert_review.md

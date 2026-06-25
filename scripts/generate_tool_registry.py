@@ -160,19 +160,26 @@ def infer_type_from_default(default_value):
 
 
 def parse_tool_file(filepath: str) -> list:
-    """Parse a Python file and extract all public function definitions.
-    
-    Includes all functions except:
+    """Parse a Python file and extract all public, top-level function definitions.
+
+    Includes all module-level functions except:
     - Functions starting with '_' (internal/private functions)
     - Functions starting with '__' (dunder methods)
+
+    Only top-level (module-level) functions are registered. Nested helper
+    functions defined inside another function are NOT registered: they are not
+    importable as `getattr(module, name)`, so registering them would advertise a
+    tool to the LLM that fails with "Tool not found" at call time.
     """
     with open(filepath, 'r') as f:
         source = f.read()
-    
+
     tree = ast.parse(source)
     tools = []
-    
-    for node in ast.walk(tree):
+
+    # Iterate only the module body (top-level statements), not ast.walk, which
+    # would also descend into nested functions.
+    for node in tree.body:
         if isinstance(node, ast.FunctionDef):
             # Skip internal/private functions (starting with _)
             if node.name.startswith('_'):

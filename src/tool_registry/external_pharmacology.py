@@ -682,32 +682,6 @@ description = [
         ],
     },
     {
-        "name": 'ADMET_pred',
-        "description": 'Function ADMET_pred',
-        "required_parameters": [
-            {
-                "name": 'drug',
-                "type": 'str',
-                "description": 'Parameter drug',
-                "default": None
-            },
-            {
-                "name": 'task',
-                "type": 'str',
-                "description": 'Parameter task',
-                "default": None
-            },
-            {
-                "name": 'unit',
-                "type": 'str',
-                "description": 'Parameter unit',
-                "default": None
-            },
-        ],
-        "optional_parameters": [
-        ],
-    },
-    {
         "name": 'apply_vcog_grade',
         "description": 'Apply VCOG-CTCAE grading criteria to an adverse event.',
         "required_parameters": [
