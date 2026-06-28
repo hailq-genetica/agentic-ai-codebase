@@ -1,0 +1,68 @@
+{
+  "task_id": "p25_ev_neg_caffeine_causation",
+  "phase": "phase2_5",
+  "category": "small_molecule",
+  "task_family": "evidence_verification",
+  "is_negative_control": true,
+  "rubric_id": "pdtx25_evidence_verification_v1",
+  "gold_label": "Unsupported \u2014 epidemiological association does not establish a disease-modifying treatment",
+  "preferred_decision": "Unsupported",
+  "acceptable_decisions": [
+    "Contradicted",
+    "Insufficient Evidence"
+  ],
+  "gold_rationale": "A protective epidemiological association is not evidence of a treatment effect; causation cannot be inferred from observational association, and interventional data do not support benefit. The treatment claim is unsupported.",
+  "required_concepts": [
+    "association is not causation",
+    "observational",
+    "epidemiological",
+    "interventional trial",
+    "disease modification not supported"
+  ],
+  "acceptable_variants": [
+    "correlation",
+    "confounding",
+    "no causal",
+    "randomized trial",
+    "no benefit",
+    "reverse causation"
+  ],
+  "red_flags": [
+    "infers causation from an observational association",
+    "treats epidemiological association as clinical treatment efficacy"
+  ],
+  "rubric": {
+    "criteria": [
+      {
+        "name": "claim_classification_correct",
+        "weight": 0.3,
+        "scale": "0-5",
+        "description": "Classifies the claim correctly (Supported / Partially Supported / Unsupported / Contradicted / Insufficient Evidence)."
+      },
+      {
+        "name": "evidence_level_distinction",
+        "weight": 0.25,
+        "scale": "0-5",
+        "description": "Distinguishes in vitro vs animal vs biomarker vs clinical vs approved-therapy evidence."
+      },
+      {
+        "name": "evidence_use",
+        "weight": 0.2,
+        "scale": "0-5",
+        "description": "Uses the supporting and limiting evidence appropriately."
+      },
+      {
+        "name": "uncertainty_handling",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Handles uncertainty honestly and identifies what would change the verdict."
+      },
+      {
+        "name": "unsupported_claim_avoidance",
+        "weight": 0.1,
+        "scale": "0-5",
+        "description": "Avoids unsupported clinical claims (e.g. proven disease modification, causation from association)."
+      }
+    ]
+  }
+}

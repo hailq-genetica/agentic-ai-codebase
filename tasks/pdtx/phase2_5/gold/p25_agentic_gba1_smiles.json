@@ -1,0 +1,86 @@
+{
+  "task_id": "p25_agentic_gba1_smiles",
+  "phase": "phase2_5",
+  "category": "small_molecule",
+  "task_family": "agentic_smiles_episode",
+  "is_negative_control": false,
+  "rubric_id": "pdtx25_agentic_episode_v1",
+  "gold_label": "Conditional Go \u2014 evidence-grounded, conditional on CNS exposure + ADMET/IP clearance",
+  "preferred_decision": "Conditional Go",
+  "acceptable_decisions": [
+    "No-Go",
+    "Go"
+  ],
+  "gold_rationale": "A strong episode forms a correct GCase/GBA1 mechanism hypothesis, integrates tool/literature evidence into a table, assesses ADMET/safety and novelty/IP, and reaches a calibrated decision with a decision-relevant next experiment (e.g. GCase target-engagement assay). The default is Conditional Go pending CNS exposure and ADMET/IP clearance; no overclaiming of disease modification.",
+  "required_concepts": [
+    "GCase",
+    "GBA1",
+    "evidence table",
+    "ADMET",
+    "blood-brain barrier",
+    "novelty or patent risk",
+    "go_no_go",
+    "next experiment"
+  ],
+  "acceptable_variants": [
+    "glucocerebrosidase",
+    "BBB",
+    "brain penetration",
+    "IP risk",
+    "patent",
+    "target engagement",
+    "GCase activity assay",
+    "tool trace"
+  ],
+  "red_flags": [
+    "skips ADMET / CNS exposure assessment",
+    "claims proven disease modification without sufficient clinical evidence",
+    "reaches a decision without proposing a validation experiment"
+  ],
+  "rubric": {
+    "criteria": [
+      {
+        "name": "pd_mechanism_relevance",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Forms a correct PD mechanism hypothesis for the candidate."
+      },
+      {
+        "name": "evidence_integration",
+        "weight": 0.2,
+        "scale": "0-5",
+        "description": "Builds an evidence table that correctly integrates tool/literature findings."
+      },
+      {
+        "name": "admet_safety_assessment",
+        "weight": 0.2,
+        "scale": "0-5",
+        "description": "Assesses ADMET/safety and IP/novelty risk."
+      },
+      {
+        "name": "tool_use_quality",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Selects the right tools, asks good queries, and avoids unnecessary calls (auditable trace)."
+      },
+      {
+        "name": "go_no_go_quality",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Go/No-Go decision is justified and calibrated."
+      },
+      {
+        "name": "next_experiment_actionability",
+        "weight": 0.1,
+        "scale": "0-5",
+        "description": "Proposes an informative next experiment."
+      },
+      {
+        "name": "uncertainty_calibration",
+        "weight": 0.05,
+        "scale": "0-5",
+        "description": "Confidence is calibrated; no overclaiming."
+      }
+    ]
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "task_id": "p25_admet_neg_herg_cyp",
+  "phase": "phase2_5",
+  "category": "small_molecule",
+  "task_family": "admet_cns_assessment",
+  "is_negative_control": true,
+  "rubric_id": "pdtx25_admet_cns_v1",
+  "gold_label": "No-Go (or Conditional Go only after substantial optimization)",
+  "preferred_decision": "No-Go",
+  "acceptable_decisions": [
+    "Conditional Go"
+  ],
+  "gold_rationale": "Low BBB undermines a CNS target; hERG high risk, CYP3A4 inhibition (DDI risk), and poor solubility are serious liabilities for a chronic therapy. Target relevance does not justify a Go; the profile warrants No-Go or optimization first.",
+  "required_concepts": [
+    "low BBB",
+    "CNS exposure",
+    "hERG",
+    "CYP3A4 drug-drug interaction",
+    "poor solubility",
+    "chronic-use safety",
+    "No-Go"
+  ],
+  "acceptable_variants": [
+    "blood-brain barrier",
+    "brain penetration",
+    "cardiotoxicity",
+    "DDI",
+    "CYP inhibition",
+    "long-term safety",
+    "optimization required"
+  ],
+  "red_flags": [
+    "recommends Go on target relevance while ignoring the ADMET liabilities",
+    "ignores the low BBB for a CNS target",
+    "ignores the hERG liability",
+    "ignores the CYP3A4 drug-drug interaction risk"
+  ],
+  "rubric": {
+    "criteria": [
+      {
+        "name": "bbb_cns_interpretation",
+        "weight": 0.25,
+        "scale": "0-5",
+        "description": "Correctly interprets BBB / CNS exposure for a brain target."
+      },
+      {
+        "name": "toxicology_interpretation",
+        "weight": 0.25,
+        "scale": "0-5",
+        "description": "Correctly interprets toxicology alerts (hERG, AMES, DILI, carcinogenicity)."
+      },
+      {
+        "name": "pk_solubility_reasoning",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Reasons about PK, solubility, clearance, and CYP interactions."
+      },
+      {
+        "name": "chronic_use_safety",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Considers chronic-use safety for a long-term PD therapy."
+      },
+      {
+        "name": "decision_quality",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Decision follows from the ADMET/safety profile (does not Go on target relevance alone)."
+      },
+      {
+        "name": "uncertainty",
+        "weight": 0.05,
+        "scale": "0-5",
+        "description": "Honest about predictive limits of in silico ADMET."
+      }
+    ]
+  }
+}

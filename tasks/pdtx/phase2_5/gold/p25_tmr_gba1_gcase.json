@@ -1,0 +1,70 @@
+{
+  "task_id": "p25_tmr_gba1_gcase",
+  "phase": "phase2_5",
+  "category": "small_molecule",
+  "task_family": "target_mechanism_reasoning",
+  "is_negative_control": false,
+  "rubric_id": "pdtx25_target_mechanism_v1",
+  "gold_label": "Mechanistically plausible target; not proven disease-modifying",
+  "preferred_decision": "N/A",
+  "acceptable_decisions": [],
+  "gold_rationale": "GBA1 encodes GCase; reduced GCase activity impairs lysosomal function and is linked to alpha-synuclein accumulation, defining a GBA1-associated PD subgroup. GCase enhancement is therefore mechanistically plausible, but clinical disease modification has not been established and must not be claimed.",
+  "required_concepts": [
+    "GBA1",
+    "glucocerebrosidase",
+    "lysosomal",
+    "alpha-synuclein",
+    "GBA1-associated subgroup",
+    "pharmacological chaperone",
+    "disease modification not proven"
+  ],
+  "acceptable_variants": [
+    "GCase",
+    "lysosome",
+    "a-synuclein",
+    "\u03b1-synuclein",
+    "synuclein",
+    "GBA1 carriers",
+    "patient subgroup",
+    "not proven",
+    "unproven clinically"
+  ],
+  "red_flags": [
+    "claims proven disease modification without sufficient clinical evidence",
+    "confuses symptomatic effect with disease modification"
+  ],
+  "rubric": {
+    "criteria": [
+      {
+        "name": "pd_mechanism_correctness",
+        "weight": 0.3,
+        "scale": "0-5",
+        "description": "Correctly describes the PD mechanism linking the target to disease biology (e.g. GBA1/GCase/lysosome/alpha-synuclein, LRRK2 kinase, mitochondrial)."
+      },
+      {
+        "name": "target_relevance",
+        "weight": 0.25,
+        "scale": "0-5",
+        "description": "Justifies why the proposed target is therapeutically relevant to PD."
+      },
+      {
+        "name": "disease_subtype_reasoning",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Reasons about the relevant patient subgroup / disease subtype where applicable."
+      },
+      {
+        "name": "evidence_uncertainty",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Identifies the main mechanistic and evidentiary uncertainties."
+      },
+      {
+        "name": "overclaiming_avoidance",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Does not claim proven clinical disease modification from mechanistic plausibility."
+      }
+    ]
+  }
+}

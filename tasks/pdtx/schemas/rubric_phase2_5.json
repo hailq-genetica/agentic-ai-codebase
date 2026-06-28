@@ -1,0 +1,94 @@
+{
+  "$schema_note": "PD-TxBench Phase 2.5 rubric catalog. One rubric per small-molecule task family. Each rubric's criteria weights sum to 1.0. The seed-dataset generator (scripts/build_phase2_5_seed.py) copies the matching rubric into every gold/<task_id>.json, so this file is the single source of truth for Phase 2.5 scoring dimensions. Weights follow pd_txbench_phase2.5.md sections 5-12 and the global formula in section 17.1.",
+  "version": "phase2_5_v1",
+  "rubrics": {
+    "pdtx25_target_mechanism_v1": {
+      "task_family": "target_mechanism_reasoning",
+      "criteria": [
+        {"name": "pd_mechanism_correctness", "weight": 0.30, "scale": "0-5", "description": "Correctly describes the PD mechanism linking the target to disease biology (e.g. GBA1/GCase/lysosome/alpha-synuclein, LRRK2 kinase, mitochondrial)."},
+        {"name": "target_relevance", "weight": 0.25, "scale": "0-5", "description": "Justifies why the proposed target is therapeutically relevant to PD."},
+        {"name": "disease_subtype_reasoning", "weight": 0.15, "scale": "0-5", "description": "Reasons about the relevant patient subgroup / disease subtype where applicable."},
+        {"name": "evidence_uncertainty", "weight": 0.15, "scale": "0-5", "description": "Identifies the main mechanistic and evidentiary uncertainties."},
+        {"name": "overclaiming_avoidance", "weight": 0.15, "scale": "0-5", "description": "Does not claim proven clinical disease modification from mechanistic plausibility."}
+      ]
+    },
+    "pdtx25_evidence_verification_v1": {
+      "task_family": "evidence_verification",
+      "criteria": [
+        {"name": "claim_classification_correct", "weight": 0.30, "scale": "0-5", "description": "Classifies the claim correctly (Supported / Partially Supported / Unsupported / Contradicted / Insufficient Evidence)."},
+        {"name": "evidence_level_distinction", "weight": 0.25, "scale": "0-5", "description": "Distinguishes in vitro vs animal vs biomarker vs clinical vs approved-therapy evidence."},
+        {"name": "evidence_use", "weight": 0.20, "scale": "0-5", "description": "Uses the supporting and limiting evidence appropriately."},
+        {"name": "uncertainty_handling", "weight": 0.15, "scale": "0-5", "description": "Handles uncertainty honestly and identifies what would change the verdict."},
+        {"name": "unsupported_claim_avoidance", "weight": 0.10, "scale": "0-5", "description": "Avoids unsupported clinical claims (e.g. proven disease modification, causation from association)."}
+      ]
+    },
+    "pdtx25_candidate_smiles_v1": {
+      "task_family": "candidate_smiles_evaluation",
+      "criteria": [
+        {"name": "pd_mechanism_relevance", "weight": 0.20, "scale": "0-5", "description": "Connects the candidate's target/MoA to PD disease biology."},
+        {"name": "target_moa_reasoning", "weight": 0.15, "scale": "0-5", "description": "Plausible target / mechanism-of-action reasoning for the molecule."},
+        {"name": "evidence_grounding", "weight": 0.15, "scale": "0-5", "description": "Grounds claims in the provided/derived evidence rather than assertion."},
+        {"name": "admet_cns_interpretation", "weight": 0.15, "scale": "0-5", "description": "Sound ADMET and CNS-drug-likeness interpretation incl. BBB, solubility, clearance, CYP."},
+        {"name": "safety_risk_identification", "weight": 0.15, "scale": "0-5", "description": "Identifies hERG/AMES/DILI and other safety liabilities."},
+        {"name": "go_no_go_quality", "weight": 0.10, "scale": "0-5", "description": "Go/No-Go/Conditional Go decision is justified and calibrated to the evidence."},
+        {"name": "next_experiment_actionability", "weight": 0.05, "scale": "0-5", "description": "Proposes an informative, decision-relevant next experiment."},
+        {"name": "uncertainty_calibration", "weight": 0.05, "scale": "0-5", "description": "Confidence is calibrated; no overclaiming."}
+      ]
+    },
+    "pdtx25_admet_cns_v1": {
+      "task_family": "admet_cns_assessment",
+      "criteria": [
+        {"name": "bbb_cns_interpretation", "weight": 0.25, "scale": "0-5", "description": "Correctly interprets BBB / CNS exposure for a brain target."},
+        {"name": "toxicology_interpretation", "weight": 0.25, "scale": "0-5", "description": "Correctly interprets toxicology alerts (hERG, AMES, DILI, carcinogenicity)."},
+        {"name": "pk_solubility_reasoning", "weight": 0.15, "scale": "0-5", "description": "Reasons about PK, solubility, clearance, and CYP interactions."},
+        {"name": "chronic_use_safety", "weight": 0.15, "scale": "0-5", "description": "Considers chronic-use safety for a long-term PD therapy."},
+        {"name": "decision_quality", "weight": 0.15, "scale": "0-5", "description": "Decision follows from the ADMET/safety profile (does not Go on target relevance alone)."},
+        {"name": "uncertainty", "weight": 0.05, "scale": "0-5", "description": "Honest about predictive limits of in silico ADMET."}
+      ]
+    },
+    "pdtx25_docking_binding_v1": {
+      "task_family": "docking_binding_interpretation",
+      "criteria": [
+        {"name": "binding_interpretation_correctness", "weight": 0.30, "scale": "0-5", "description": "Recognizes docking/binding supports a hypothesis but does not prove activity, engagement, exposure, or efficacy."},
+        {"name": "reference_pose_context", "weight": 0.20, "scale": "0-5", "description": "Contextualizes the score against the reference ligand and considers pose quality."},
+        {"name": "admet_integration", "weight": 0.20, "scale": "0-5", "description": "Integrates ADMET/exposure concerns into the interpretation."},
+        {"name": "decision_quality", "weight": 0.15, "scale": "0-5", "description": "Decision is calibrated and not driven by the docking score alone."},
+        {"name": "validation_experiment", "weight": 0.10, "scale": "0-5", "description": "Recommends biochemical or cellular target-engagement validation."},
+        {"name": "uncertainty", "weight": 0.05, "scale": "0-5", "description": "Honest about the limits of docking."}
+      ]
+    },
+    "pdtx25_lead_optimization_v1": {
+      "task_family": "lead_optimization",
+      "criteria": [
+        {"name": "liability_diagnosis", "weight": 0.25, "scale": "0-5", "description": "Correctly identifies the liabilities to address (e.g. solubility, hERG)."},
+        {"name": "modification_rationale", "weight": 0.30, "scale": "0-5", "description": "Proposes chemistry-aware modifications with explicit rationale (not arbitrary changes)."},
+        {"name": "pharmacophore_preservation", "weight": 0.20, "scale": "0-5", "description": "Preserves target engagement / CNS penetration while fixing liabilities."},
+        {"name": "recheck_and_validation", "weight": 0.15, "scale": "0-5", "description": "Lists properties to re-check and an experimental validation step."},
+        {"name": "uncertainty", "weight": 0.10, "scale": "0-5", "description": "Acknowledges trade-offs and that changes must be validated."}
+      ]
+    },
+    "pdtx25_repurposing_v1": {
+      "task_family": "repurposing_translatability",
+      "criteria": [
+        {"name": "repurposing_rationale", "weight": 0.20, "scale": "0-5", "description": "Mechanistic rationale matches the drug to the PD mechanism."},
+        {"name": "human_safety_dosing", "weight": 0.20, "scale": "0-5", "description": "Uses existing human safety and dosing data."},
+        {"name": "cns_exposure", "weight": 0.15, "scale": "0-5", "description": "Reasons about CNS exposure at tolerated human doses."},
+        {"name": "clinical_evidence_interpretation", "weight": 0.20, "scale": "0-5", "description": "Interprets clinical evidence; distinguishes symptomatic vs disease-modifying use."},
+        {"name": "trial_design_relevance", "weight": 0.15, "scale": "0-5", "description": "Proposes relevant endpoints, biomarkers, and patient-subgroup selection."},
+        {"name": "uncertainty", "weight": 0.10, "scale": "0-5", "description": "Honest about evidence gaps."}
+      ]
+    },
+    "pdtx25_agentic_episode_v1": {
+      "task_family": "agentic_smiles_episode",
+      "criteria": [
+        {"name": "pd_mechanism_relevance", "weight": 0.15, "scale": "0-5", "description": "Forms a correct PD mechanism hypothesis for the candidate."},
+        {"name": "evidence_integration", "weight": 0.20, "scale": "0-5", "description": "Builds an evidence table that correctly integrates tool/literature findings."},
+        {"name": "admet_safety_assessment", "weight": 0.20, "scale": "0-5", "description": "Assesses ADMET/safety and IP/novelty risk."},
+        {"name": "tool_use_quality", "weight": 0.15, "scale": "0-5", "description": "Selects the right tools, asks good queries, and avoids unnecessary calls (auditable trace)."},
+        {"name": "go_no_go_quality", "weight": 0.15, "scale": "0-5", "description": "Go/No-Go decision is justified and calibrated."},
+        {"name": "next_experiment_actionability", "weight": 0.10, "scale": "0-5", "description": "Proposes an informative next experiment."},
+        {"name": "uncertainty_calibration", "weight": 0.05, "scale": "0-5", "description": "Confidence is calibrated; no overclaiming."}
+      ]
+    }
+  }
+}

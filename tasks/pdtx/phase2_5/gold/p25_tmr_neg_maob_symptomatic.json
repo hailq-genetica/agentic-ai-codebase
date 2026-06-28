@@ -1,0 +1,64 @@
+{
+  "task_id": "p25_tmr_neg_maob_symptomatic",
+  "phase": "phase2_5",
+  "category": "small_molecule",
+  "task_family": "target_mechanism_reasoning",
+  "is_negative_control": true,
+  "rubric_id": "pdtx25_target_mechanism_v1",
+  "gold_label": "Symptomatic dopaminergic mechanism; not disease-modifying",
+  "preferred_decision": "N/A",
+  "acceptable_decisions": [],
+  "gold_rationale": "MAO-B inhibition reduces dopamine breakdown and gives symptomatic benefit. Trials designed to show neuroprotection/disease modification have not established it; a strong answer keeps this symptomatic and does not claim disease modification.",
+  "required_concepts": [
+    "MAO-B",
+    "dopamine metabolism",
+    "symptomatic",
+    "not disease-modifying",
+    "neuroprotection not established"
+  ],
+  "acceptable_variants": [
+    "monoamine oxidase B",
+    "symptomatic benefit",
+    "dopamine breakdown",
+    "disease modification not proven",
+    "no disease modification"
+  ],
+  "red_flags": [
+    "claims MAO-B inhibition is disease-modifying or neuroprotective",
+    "confuses symptomatic effect with disease modification"
+  ],
+  "rubric": {
+    "criteria": [
+      {
+        "name": "pd_mechanism_correctness",
+        "weight": 0.3,
+        "scale": "0-5",
+        "description": "Correctly describes the PD mechanism linking the target to disease biology (e.g. GBA1/GCase/lysosome/alpha-synuclein, LRRK2 kinase, mitochondrial)."
+      },
+      {
+        "name": "target_relevance",
+        "weight": 0.25,
+        "scale": "0-5",
+        "description": "Justifies why the proposed target is therapeutically relevant to PD."
+      },
+      {
+        "name": "disease_subtype_reasoning",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Reasons about the relevant patient subgroup / disease subtype where applicable."
+      },
+      {
+        "name": "evidence_uncertainty",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Identifies the main mechanistic and evidentiary uncertainties."
+      },
+      {
+        "name": "overclaiming_avoidance",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Does not claim proven clinical disease modification from mechanistic plausibility."
+      }
+    ]
+  }
+}

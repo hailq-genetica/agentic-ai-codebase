@@ -1,0 +1,67 @@
+{
+  "task_id": "p25_ev_ambroxol_dmt_claim",
+  "phase": "phase2_5",
+  "category": "small_molecule",
+  "task_family": "evidence_verification",
+  "is_negative_control": false,
+  "rubric_id": "pdtx25_evidence_verification_v1",
+  "gold_label": "Partially Supported \u2014 mechanistic + early clinical signals, not proven disease modification",
+  "preferred_decision": "Partially Supported",
+  "acceptable_decisions": [
+    "Insufficient Evidence"
+  ],
+  "gold_rationale": "There is mechanistic plausibility and early/biomarker clinical investigation, but no definitive randomized outcome establishing disease modification. The claim of a 'proven' disease-modifying therapy is therefore only partially supported; calling it proven is an overclaim.",
+  "required_concepts": [
+    "GCase chaperone",
+    "early clinical evidence",
+    "not proven",
+    "disease modification",
+    "main uncertainty"
+  ],
+  "acceptable_variants": [
+    "glucocerebrosidase",
+    "biomarker evidence",
+    "phase 3 ongoing",
+    "no definitive RCT",
+    "randomized outcome",
+    "overclaim"
+  ],
+  "red_flags": [
+    "treats early or biomarker clinical evidence as proven disease modification",
+    "classifies the 'proven' claim as fully Supported"
+  ],
+  "rubric": {
+    "criteria": [
+      {
+        "name": "claim_classification_correct",
+        "weight": 0.3,
+        "scale": "0-5",
+        "description": "Classifies the claim correctly (Supported / Partially Supported / Unsupported / Contradicted / Insufficient Evidence)."
+      },
+      {
+        "name": "evidence_level_distinction",
+        "weight": 0.25,
+        "scale": "0-5",
+        "description": "Distinguishes in vitro vs animal vs biomarker vs clinical vs approved-therapy evidence."
+      },
+      {
+        "name": "evidence_use",
+        "weight": 0.2,
+        "scale": "0-5",
+        "description": "Uses the supporting and limiting evidence appropriately."
+      },
+      {
+        "name": "uncertainty_handling",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Handles uncertainty honestly and identifies what would change the verdict."
+      },
+      {
+        "name": "unsupported_claim_avoidance",
+        "weight": 0.1,
+        "scale": "0-5",
+        "description": "Avoids unsupported clinical claims (e.g. proven disease modification, causation from association)."
+      }
+    ]
+  }
+}

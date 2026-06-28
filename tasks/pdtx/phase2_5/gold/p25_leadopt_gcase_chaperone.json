@@ -1,0 +1,70 @@
+{
+  "task_id": "p25_leadopt_gcase_chaperone",
+  "phase": "phase2_5",
+  "category": "small_molecule",
+  "task_family": "lead_optimization",
+  "is_negative_control": false,
+  "rubric_id": "pdtx25_lead_optimization_v1",
+  "gold_label": "Rational, pharmacophore-preserving optimization addressing solubility and hERG",
+  "preferred_decision": "N/A",
+  "acceptable_decisions": [],
+  "gold_rationale": "A strong answer targets the named liabilities with justified medicinal-chemistry changes (e.g. add polarity/ionizable group to improve solubility, remove basic/lipophilic hERG-associated features) while preserving the chaperone pharmacophore and CNS penetration, then re-checks properties and validates experimentally. Arbitrary changes without rationale are penalized.",
+  "required_concepts": [
+    "solubility",
+    "hERG",
+    "preserve pharmacophore",
+    "CNS penetration",
+    "rationale for each modification",
+    "recheck properties",
+    "experimental validation"
+  ],
+  "acceptable_variants": [
+    "lipophilicity",
+    "logP",
+    "polarity",
+    "ionizable group",
+    "reduce basicity",
+    "blood-brain barrier",
+    "brain penetration",
+    "target engagement",
+    "re-test"
+  ],
+  "red_flags": [
+    "proposes arbitrary chemical modifications without rationale",
+    "destroys CNS penetration / pharmacophore while fixing a liability"
+  ],
+  "rubric": {
+    "criteria": [
+      {
+        "name": "liability_diagnosis",
+        "weight": 0.25,
+        "scale": "0-5",
+        "description": "Correctly identifies the liabilities to address (e.g. solubility, hERG)."
+      },
+      {
+        "name": "modification_rationale",
+        "weight": 0.3,
+        "scale": "0-5",
+        "description": "Proposes chemistry-aware modifications with explicit rationale (not arbitrary changes)."
+      },
+      {
+        "name": "pharmacophore_preservation",
+        "weight": 0.2,
+        "scale": "0-5",
+        "description": "Preserves target engagement / CNS penetration while fixing liabilities."
+      },
+      {
+        "name": "recheck_and_validation",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Lists properties to re-check and an experimental validation step."
+      },
+      {
+        "name": "uncertainty",
+        "weight": 0.1,
+        "scale": "0-5",
+        "description": "Acknowledges trade-offs and that changes must be validated."
+      }
+    ]
+  }
+}
