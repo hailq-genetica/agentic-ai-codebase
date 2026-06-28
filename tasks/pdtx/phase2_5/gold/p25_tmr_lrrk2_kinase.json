@@ -1,0 +1,73 @@
+{
+  "task_id": "p25_tmr_lrrk2_kinase",
+  "phase": "phase2_5",
+  "category": "small_molecule",
+  "task_family": "target_mechanism_reasoning",
+  "is_negative_control": false,
+  "rubric_id": "pdtx25_target_mechanism_v1",
+  "gold_label": "Mechanistically grounded kinase target; peripheral safety + unproven disease modification are key uncertainties",
+  "preferred_decision": "N/A",
+  "acceptable_decisions": [],
+  "gold_rationale": "G2019S is a gain-of-function mutation that elevates LRRK2 kinase activity (increased Rab phosphorylation); inhibition is a rational strategy for LRRK2-associated (and possibly idiopathic) PD. Key uncertainties are peripheral on-target effects (lung type II pneumocytes), CNS exposure/selectivity, and the absence of proven clinical disease modification.",
+  "required_concepts": [
+    "LRRK2",
+    "G2019S",
+    "kinase activity",
+    "kinase inhibition",
+    "peripheral on-target safety",
+    "disease modification not proven"
+  ],
+  "acceptable_variants": [
+    "gain of function",
+    "Rab GTPase",
+    "Rab10",
+    "lung",
+    "type II pneumocyte",
+    "selectivity",
+    "brain penetration",
+    "not proven"
+  ],
+  "red_flags": [
+    "claims LRRK2 inhibition is proven disease-modifying",
+    "ignores peripheral / lung on-target safety"
+  ],
+  "rubric": {
+    "criteria": [
+      {
+        "name": "pd_mechanism_correctness",
+        "weight": 0.3,
+        "scale": "0-5",
+        "description": "Correctly describes the PD mechanism linking the target to disease biology (e.g. GBA1/GCase/lysosome/alpha-synuclein, LRRK2 kinase, mitochondrial)."
+      },
+      {
+        "name": "target_relevance",
+        "weight": 0.25,
+        "scale": "0-5",
+        "description": "Justifies why the proposed target is therapeutically relevant to PD."
+      },
+      {
+        "name": "disease_subtype_reasoning",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Reasons about the relevant patient subgroup / disease subtype where applicable."
+      },
+      {
+        "name": "evidence_uncertainty",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Identifies the main mechanistic and evidentiary uncertainties."
+      },
+      {
+        "name": "overclaiming_avoidance",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Does not claim proven clinical disease modification from mechanistic plausibility."
+      }
+    ]
+  },
+  "metadata": {
+    "curator": "phase2_5 seed (hand-authored)",
+    "review_status": "draft",
+    "source_ids": []
+  }
+}

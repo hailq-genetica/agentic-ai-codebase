@@ -1,0 +1,15 @@
+task_file: tasks/pdtx/phase2_5/docking_binding_interpretation/p25_docking_good_admet_engagement.md
+gold_file: tasks/pdtx/phase2_5/gold/p25_docking_good_admet_engagement.json
+category: small_molecule
+task_family: docking_binding_interpretation
+tool_category: external_pharmacology
+reasoning_effort: high
+interactive: false        # overridden by run_pdtx.py --mode
+capture_telemetry: true
+output_base_dir: output/pdtx/phase2_5/docking_binding_interpretation/p25_docking_good_admet_engagement/
+
+llm:
+  provider: anthropic
+  model: claude-opus-4-8
+logging:
+  enabled: false          # set true (+ project/entity) to log to W&B/Weave

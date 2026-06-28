@@ -1,0 +1,76 @@
+{
+  "task_id": "p25_ev_neg_deferiprone_dmt",
+  "phase": "phase2_5",
+  "category": "small_molecule",
+  "task_family": "evidence_verification",
+  "is_negative_control": true,
+  "rubric_id": "pdtx25_evidence_verification_v1",
+  "gold_label": "Contradicted \u2014 FAIRPARK-II showed worsening, not benefit",
+  "preferred_decision": "Contradicted",
+  "acceptable_decisions": [
+    "Unsupported"
+  ],
+  "gold_rationale": "Deferiprone engaged its target (lowered brain iron) yet clinical outcomes worsened in a randomized trial. Target engagement is not clinical benefit; the disease-modification claim is contradicted, and the harm signal is decision-critical.",
+  "required_concepts": [
+    "deferiprone",
+    "iron chelation",
+    "FAIRPARK-II",
+    "worsened outcomes",
+    "harm signal",
+    "target engagement is not clinical benefit",
+    "no disease modification"
+  ],
+  "acceptable_variants": [
+    "brain iron",
+    "chelator",
+    "harm",
+    "worsening",
+    "phase 3",
+    "randomized trial"
+  ],
+  "red_flags": [
+    "treats iron lowering (target engagement) as clinical benefit",
+    "ignores the worsening / harm signal from the randomized trial"
+  ],
+  "rubric": {
+    "criteria": [
+      {
+        "name": "claim_classification_correct",
+        "weight": 0.3,
+        "scale": "0-5",
+        "description": "Classifies the claim correctly (Supported / Partially Supported / Unsupported / Contradicted / Insufficient Evidence)."
+      },
+      {
+        "name": "evidence_level_distinction",
+        "weight": 0.25,
+        "scale": "0-5",
+        "description": "Distinguishes in vitro vs animal vs biomarker vs clinical vs approved-therapy evidence."
+      },
+      {
+        "name": "evidence_use",
+        "weight": 0.2,
+        "scale": "0-5",
+        "description": "Uses the supporting and limiting evidence appropriately."
+      },
+      {
+        "name": "uncertainty_handling",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Handles uncertainty honestly and identifies what would change the verdict."
+      },
+      {
+        "name": "unsupported_claim_avoidance",
+        "weight": 0.1,
+        "scale": "0-5",
+        "description": "Avoids unsupported clinical claims (e.g. proven disease modification, causation from association)."
+      }
+    ]
+  },
+  "metadata": {
+    "curator": "phase2_5 seed (hand-authored)",
+    "review_status": "reviewed",
+    "source_ids": [
+      "FAIRPARK-II, NEJM 2022 (NEJMoa2209254)"
+    ]
+  }
+}

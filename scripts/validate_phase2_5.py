@@ -123,6 +123,37 @@ def main():
             n_ok += 1
             print(f"  ✅ {tid:32s} {family:32s} good={good['final_score']} empty={empty['final_score']}")
 
+    # --- dataset-level summary + soft coverage checks (warnings, not failures) ---
+    from collections import Counter, defaultdict
+    warnings: list[str] = []
+    fam_tasks = defaultdict(list)
+    for t in tasks:
+        fam_tasks[t["task_family"]].append(t)
+    DECISION_FAMILIES = {
+        "evidence_verification", "candidate_smiles_evaluation", "admet_cns_assessment",
+        "docking_binding_interpretation", "repurposing_translatability", "agentic_smiles_episode",
+    }
+    n_neg = sum(1 for t in tasks if t["is_negative_control"])
+    n_reviewed = sum(1 for t in tasks if t.get("review_status") == "reviewed")
+    print(f"Dataset: {len(tasks)} tasks | {n_neg} negative controls "
+          f"({100*n_neg//max(len(tasks),1)}%) | {n_reviewed} source-verified\n")
+    print(f"  {'family':32s} {'n':>2} {'neg':>3}  decisions")
+    for fam in sorted(fam_tasks):
+        ts = fam_tasks[fam]
+        decisions = Counter(t["preferred_decision"] for t in ts)
+        neg = sum(1 for t in ts if t["is_negative_control"])
+        dec_str = ", ".join(f"{d}:{c}" for d, c in decisions.items())
+        print(f"  {fam:32s} {len(ts):>2} {neg:>3}  {dec_str}")
+        if fam in DECISION_FAMILIES:
+            if neg == 0:
+                warnings.append(f"{fam}: no negative control yet")
+            if len([d for d in decisions if d != "N/A"]) < 2:
+                warnings.append(f"{fam}: only one decision type — add decision diversity")
+    if warnings:
+        print(f"\n⚠️  {len(warnings)} coverage suggestion(s):")
+        for w in warnings:
+            print(f"   - {w}")
+
     print()
     if errors:
         print(f"❌ {len(errors)} problem(s):")

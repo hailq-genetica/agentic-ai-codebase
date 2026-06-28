@@ -1,0 +1,74 @@
+{
+  "task_id": "p25_ev_neg_inosine_dmt",
+  "phase": "phase2_5",
+  "category": "small_molecule",
+  "task_family": "evidence_verification",
+  "is_negative_control": true,
+  "rubric_id": "pdtx25_evidence_verification_v1",
+  "gold_label": "Contradicted \u2014 phase 3 SURE-PD3 stopped for futility",
+  "preferred_decision": "Contradicted",
+  "acceptable_decisions": [
+    "Unsupported"
+  ],
+  "gold_rationale": "Inosine elevated urate (target engagement) but produced no clinical benefit and was halted for futility in phase 3. Neither the epidemiological association nor target engagement establishes neuroprotection; the claim is contradicted.",
+  "required_concepts": [
+    "inosine",
+    "urate",
+    "SURE-PD3",
+    "futility",
+    "target engagement is not clinical benefit",
+    "no disease modification"
+  ],
+  "acceptable_variants": [
+    "uric acid",
+    "antioxidant",
+    "epidemiological association",
+    "no benefit",
+    "phase 3"
+  ],
+  "red_flags": [
+    "treats the urate-PD association or urate elevation as proof of neuroprotection",
+    "ignores the phase 3 futility result"
+  ],
+  "rubric": {
+    "criteria": [
+      {
+        "name": "claim_classification_correct",
+        "weight": 0.3,
+        "scale": "0-5",
+        "description": "Classifies the claim correctly (Supported / Partially Supported / Unsupported / Contradicted / Insufficient Evidence)."
+      },
+      {
+        "name": "evidence_level_distinction",
+        "weight": 0.25,
+        "scale": "0-5",
+        "description": "Distinguishes in vitro vs animal vs biomarker vs clinical vs approved-therapy evidence."
+      },
+      {
+        "name": "evidence_use",
+        "weight": 0.2,
+        "scale": "0-5",
+        "description": "Uses the supporting and limiting evidence appropriately."
+      },
+      {
+        "name": "uncertainty_handling",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Handles uncertainty honestly and identifies what would change the verdict."
+      },
+      {
+        "name": "unsupported_claim_avoidance",
+        "weight": 0.1,
+        "scale": "0-5",
+        "description": "Avoids unsupported clinical claims (e.g. proven disease modification, causation from association)."
+      }
+    ]
+  },
+  "metadata": {
+    "curator": "phase2_5 seed (hand-authored)",
+    "review_status": "reviewed",
+    "source_ids": [
+      "SURE-PD3, JAMA 2021 (NCT02642393)"
+    ]
+  }
+}

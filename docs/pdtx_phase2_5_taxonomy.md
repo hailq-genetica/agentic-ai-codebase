@@ -72,18 +72,39 @@ descriptive fields accept any JSON shape.
 
 Negative controls are the design centrepiece: they test whether the model says
 **No-Go / Unsupported / Contradicted** instead of being talked into an unsafe or
-overclaimed answer. The seed slice includes 4 (one each for target-mechanism,
-evidence, candidate-SMILES, and ADMET); the full set follows the matrix in
-`pd_txbench_phase2.5.md` §18 (strong docking + poor BBB, hERG/AMES/DILI/CYP
-liabilities, association≠causation, symptomatic≠disease-modifying, patent-blocked
-analog, weak target–disease link, etc.).
+overclaimed answer. The current slice is **~45% negative controls** spanning every
+decision-making family — strong docking + poor BBB, hERG/AMES/DILI/CYP liabilities,
+genotoxicity structural alerts, docking artifacts (implausible pose / frequent
+hitter), association≠causation, target-engagement≠clinical-benefit, symptomatic≠
+disease-modifying, no-CNS-exposure repurposing, and weak target–disease links. The
+full set follows the matrix in `pd_txbench_phase2.5.md` §18.
 
 ## Seed slice (this pass)
 
-12 tasks covering all 8 families (4 negative controls). This is a runnable
-scaffold that proves the pipeline end-to-end; it is **not** the full §14.1 MVP
-(≈300 static + 15 agentic). Scale up by adding entries to the generator's `TASKS`
-spec — no code changes needed.
+**33 tasks** covering all 8 families (15 negative controls ≈45%; 11 source-verified).
+This is a runnable, balanced slice that proves the pipeline end-to-end; it is **not**
+yet the full §14.1 MVP (≈300 static + 15 agentic). Scale up by adding entries to the
+generator's `TASKS` spec — no code changes needed.
+
+### Authoring & verification workflow
+
+Tasks are **hand-authored** in the `TASKS` spec in `scripts/build_phase2_5_seed.py`
+(one dict per task) and **verified before inclusion**:
+
+- **Clinical-fact tasks** (mostly `evidence_verification`) cite primary sources in a
+  `sources` list and are marked `review_status: "reviewed"`; their trial outcomes
+  were checked against the cited publications. Examples in this slice: Exenatide-PD3
+  (Lancet 2024, negative), STEADY-PD III (Ann Intern Med 2020, negative), SURE-PD3
+  (JAMA 2021, futility), QE3 CoQ10 (JAMA Neurol 2014, futility), FAIRPARK-II
+  deferiprone (NEJM 2022, worsened), GBA1 risk (Sidransky NEJM 2009, Supported anchor).
+- **Real-compound tasks** embed canonical SMILES pulled from PubChem (e.g.
+  istradefylline, safinamide, the LRRK2 tool inhibitor PF-06447475).
+- `sources`/`review_status` are emitted into each gold's `metadata` and the manifest.
+
+To add tasks: append dicts to `TASKS`, run the build script, then the validator. The
+validator prints a dataset summary (per-family counts, negative-control coverage,
+decision distribution, verified count) and warns when a decision family lacks a
+negative control or decision diversity.
 
 Build, validate, and run:
 

@@ -66,5 +66,10 @@
         "description": "Does not claim proven clinical disease modification from mechanistic plausibility."
       }
     ]
+  },
+  "metadata": {
+    "curator": "phase2_5 seed (hand-authored)",
+    "review_status": "draft",
+    "source_ids": []
   }
 }

@@ -73,5 +73,10 @@
         "description": "Honest about evidence gaps."
       }
     ]
+  },
+  "metadata": {
+    "curator": "phase2_5 seed (hand-authored)",
+    "review_status": "draft",
+    "source_ids": []
   }
 }

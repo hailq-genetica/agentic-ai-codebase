@@ -1,0 +1,81 @@
+{
+  "task_id": "p25_repurpose_safinamide_symptomatic",
+  "phase": "phase2_5",
+  "category": "small_molecule",
+  "task_family": "repurposing_translatability",
+  "is_negative_control": false,
+  "rubric_id": "pdtx25_repurposing_v1",
+  "gold_label": "Conditional Go as a symptomatic adjunct \u2014 not disease-modifying without dedicated evidence",
+  "preferred_decision": "Conditional Go",
+  "acceptable_decisions": [
+    "Go"
+  ],
+  "gold_rationale": "Safinamide has strong human safety/dosing data, is CNS-penetrant, and works through symptomatic (dopaminergic + glutamatergic) mechanisms; it is appropriately positioned as a symptomatic adjunct. A disease-modification claim would require a dedicated trial with biomarkers and the right population; it should not be assumed.",
+  "required_concepts": [
+    "MAO-B inhibition",
+    "symptomatic adjunct",
+    "human safety data",
+    "CNS penetration",
+    "symptomatic vs disease-modifying",
+    "not disease-modifying"
+  ],
+  "acceptable_variants": [
+    "safinamide",
+    "glutamate modulation",
+    "levodopa adjunct",
+    "dosing",
+    "brain penetration"
+  ],
+  "red_flags": [
+    "claims safinamide is disease-modifying",
+    "confuses symptomatic adjunct benefit with neuroprotection"
+  ],
+  "rubric": {
+    "criteria": [
+      {
+        "name": "repurposing_rationale",
+        "weight": 0.2,
+        "scale": "0-5",
+        "description": "Mechanistic rationale matches the drug to the PD mechanism."
+      },
+      {
+        "name": "human_safety_dosing",
+        "weight": 0.2,
+        "scale": "0-5",
+        "description": "Uses existing human safety and dosing data."
+      },
+      {
+        "name": "cns_exposure",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Reasons about CNS exposure at tolerated human doses."
+      },
+      {
+        "name": "clinical_evidence_interpretation",
+        "weight": 0.2,
+        "scale": "0-5",
+        "description": "Interprets clinical evidence; distinguishes symptomatic vs disease-modifying use."
+      },
+      {
+        "name": "trial_design_relevance",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Proposes relevant endpoints, biomarkers, and patient-subgroup selection."
+      },
+      {
+        "name": "uncertainty",
+        "weight": 0.1,
+        "scale": "0-5",
+        "description": "Honest about evidence gaps."
+      }
+    ]
+  },
+  "metadata": {
+    "curator": "phase2_5 seed (hand-authored)",
+    "review_status": "reviewed",
+    "source_ids": [
+      "PubChem: safinamide (C17H19FN2O2)",
+      "Approved adjunct to levodopa for OFF episodes"
+    ]
+  }
+}

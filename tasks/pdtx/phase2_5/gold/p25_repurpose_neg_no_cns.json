@@ -1,0 +1,78 @@
+{
+  "task_id": "p25_repurpose_neg_no_cns",
+  "phase": "phase2_5",
+  "category": "small_molecule",
+  "task_family": "repurposing_translatability",
+  "is_negative_control": true,
+  "rubric_id": "pdtx25_repurposing_v1",
+  "gold_label": "No-Go \u2014 a peripherally-restricted drug cannot engage a CNS target despite a good safety record",
+  "preferred_decision": "No-Go",
+  "acceptable_decisions": [
+    "Conditional Go"
+  ],
+  "gold_rationale": "A good human safety record and mechanism match cannot overcome the fact that a P-gp-restricted, non-brain-penetrant drug will not engage a CNS target at tolerated doses. The default is No-Go (or a CNS-penetrant analog / delivery program) unless brain exposure can actually be demonstrated.",
+  "required_concepts": [
+    "CNS penetration",
+    "P-glycoprotein efflux",
+    "no brain exposure",
+    "safety record is insufficient",
+    "mechanism match",
+    "No-Go"
+  ],
+  "acceptable_variants": [
+    "peripherally restricted",
+    "blood-brain barrier",
+    "P-gp substrate",
+    "brain exposure",
+    "CNS-penetrant analog"
+  ],
+  "red_flags": [
+    "assumes CNS exposure from the drug's peripheral safety record",
+    "recommends Go without brain-exposure data"
+  ],
+  "rubric": {
+    "criteria": [
+      {
+        "name": "repurposing_rationale",
+        "weight": 0.2,
+        "scale": "0-5",
+        "description": "Mechanistic rationale matches the drug to the PD mechanism."
+      },
+      {
+        "name": "human_safety_dosing",
+        "weight": 0.2,
+        "scale": "0-5",
+        "description": "Uses existing human safety and dosing data."
+      },
+      {
+        "name": "cns_exposure",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Reasons about CNS exposure at tolerated human doses."
+      },
+      {
+        "name": "clinical_evidence_interpretation",
+        "weight": 0.2,
+        "scale": "0-5",
+        "description": "Interprets clinical evidence; distinguishes symptomatic vs disease-modifying use."
+      },
+      {
+        "name": "trial_design_relevance",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Proposes relevant endpoints, biomarkers, and patient-subgroup selection."
+      },
+      {
+        "name": "uncertainty",
+        "weight": 0.1,
+        "scale": "0-5",
+        "description": "Honest about evidence gaps."
+      }
+    ]
+  },
+  "metadata": {
+    "curator": "phase2_5 seed (hand-authored)",
+    "review_status": "draft",
+    "source_ids": []
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "task_id": "p25_agentic_neg_weak_target",
+  "phase": "phase2_5",
+  "category": "small_molecule",
+  "task_family": "agentic_smiles_episode",
+  "is_negative_control": true,
+  "rubric_id": "pdtx25_agentic_episode_v1",
+  "gold_label": "No-Go \u2014 the target-disease link is weak/unsupported; do not progress on an unsupported rationale",
+  "preferred_decision": "No-Go",
+  "acceptable_decisions": [
+    "Conditional Go"
+  ],
+  "gold_rationale": "A strong episode uses the tools to test the target-disease rationale, finds it weak or absent (no PD genetics/biology), and reaches No-Go (or a low-confidence Conditional Go gated on first establishing target validity). The failure mode is being talked into progression and/or fabricating supporting evidence; absence of evidence must be reported as such.",
+  "required_concepts": [
+    "weak target-disease link",
+    "evidence table",
+    "knowledge graph",
+    "absence of evidence",
+    "target validation",
+    "No-Go",
+    "next experiment"
+  ],
+  "acceptable_variants": [
+    "unsupported rationale",
+    "no genetic link",
+    "target validity",
+    "low confidence",
+    "literature search",
+    "PD genetics"
+  ],
+  "red_flags": [
+    "progresses despite a weak or unsupported target-disease link",
+    "fabricates or assumes supporting evidence that the tools do not provide",
+    "claims disease modification on an unvalidated target"
+  ],
+  "rubric": {
+    "criteria": [
+      {
+        "name": "pd_mechanism_relevance",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Forms a correct PD mechanism hypothesis for the candidate."
+      },
+      {
+        "name": "evidence_integration",
+        "weight": 0.2,
+        "scale": "0-5",
+        "description": "Builds an evidence table that correctly integrates tool/literature findings."
+      },
+      {
+        "name": "admet_safety_assessment",
+        "weight": 0.2,
+        "scale": "0-5",
+        "description": "Assesses ADMET/safety and IP/novelty risk."
+      },
+      {
+        "name": "tool_use_quality",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Selects the right tools, asks good queries, and avoids unnecessary calls (auditable trace)."
+      },
+      {
+        "name": "go_no_go_quality",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Go/No-Go decision is justified and calibrated."
+      },
+      {
+        "name": "next_experiment_actionability",
+        "weight": 0.1,
+        "scale": "0-5",
+        "description": "Proposes an informative next experiment."
+      },
+      {
+        "name": "uncertainty_calibration",
+        "weight": 0.05,
+        "scale": "0-5",
+        "description": "Confidence is calibrated; no overclaiming."
+      }
+    ]
+  },
+  "metadata": {
+    "curator": "phase2_5 seed (hand-authored)",
+    "review_status": "draft",
+    "source_ids": []
+  }
+}

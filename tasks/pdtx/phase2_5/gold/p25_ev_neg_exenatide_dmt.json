@@ -1,0 +1,76 @@
+{
+  "task_id": "p25_ev_neg_exenatide_dmt",
+  "phase": "phase2_5",
+  "category": "small_molecule",
+  "task_family": "evidence_verification",
+  "is_negative_control": true,
+  "rubric_id": "pdtx25_evidence_verification_v1",
+  "gold_label": "Contradicted \u2014 definitive phase 3 (Exenatide-PD3) was negative",
+  "preferred_decision": "Contradicted",
+  "acceptable_decisions": [
+    "Unsupported"
+  ],
+  "gold_rationale": "A definitive phase 3 RCT (Exenatide-PD3, Lancet 2024) found no disease-modifying effect, overriding the earlier positive phase 2 signal. The claim of a proven disease-modifying therapy is contradicted by the highest-quality evidence.",
+  "required_concepts": [
+    "GLP-1 receptor agonist",
+    "phase 3",
+    "Exenatide-PD3",
+    "randomized controlled trial",
+    "MDS-UPDRS",
+    "no disease modification"
+  ],
+  "acceptable_variants": [
+    "GLP-1",
+    "Exenatide PD3",
+    "negative trial",
+    "no benefit",
+    "definitive RCT",
+    "placebo"
+  ],
+  "red_flags": [
+    "cites the positive phase 2 as proof while ignoring the negative phase 3",
+    "classifies the 'proven' claim as Supported"
+  ],
+  "rubric": {
+    "criteria": [
+      {
+        "name": "claim_classification_correct",
+        "weight": 0.3,
+        "scale": "0-5",
+        "description": "Classifies the claim correctly (Supported / Partially Supported / Unsupported / Contradicted / Insufficient Evidence)."
+      },
+      {
+        "name": "evidence_level_distinction",
+        "weight": 0.25,
+        "scale": "0-5",
+        "description": "Distinguishes in vitro vs animal vs biomarker vs clinical vs approved-therapy evidence."
+      },
+      {
+        "name": "evidence_use",
+        "weight": 0.2,
+        "scale": "0-5",
+        "description": "Uses the supporting and limiting evidence appropriately."
+      },
+      {
+        "name": "uncertainty_handling",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Handles uncertainty honestly and identifies what would change the verdict."
+      },
+      {
+        "name": "unsupported_claim_avoidance",
+        "weight": 0.1,
+        "scale": "0-5",
+        "description": "Avoids unsupported clinical claims (e.g. proven disease modification, causation from association)."
+      }
+    ]
+  },
+  "metadata": {
+    "curator": "phase2_5 seed (hand-authored)",
+    "review_status": "reviewed",
+    "source_ids": [
+      "Lancet 2024 Exenatide-PD3 (S0140-6736(24)02808-3)",
+      "Athauda et al. Lancet 2017 (phase 2)"
+    ]
+  }
+}

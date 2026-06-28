@@ -1,0 +1,74 @@
+{
+  "task_id": "p25_tmr_neg_antioxidant_general",
+  "phase": "phase2_5",
+  "category": "small_molecule",
+  "task_family": "target_mechanism_reasoning",
+  "is_negative_control": true,
+  "rubric_id": "pdtx25_target_mechanism_v1",
+  "gold_label": "Invalid overgeneralization \u2014 class-level mechanism does not imply clinical benefit; antioxidant trials failed",
+  "preferred_decision": "N/A",
+  "acceptable_decisions": [],
+  "gold_rationale": "A class-level mechanistic rationale (antioxidant) does not predict clinical benefit; specific antioxidant candidates (CoQ10, inosine) engaged their rationale yet failed in phase 3. Disease modification requires demonstrated target engagement plus a positive clinical outcome, not a mechanistic syllogism.",
+  "required_concepts": [
+    "oxidative stress",
+    "antioxidant",
+    "mechanism does not guarantee clinical benefit",
+    "failed antioxidant trials",
+    "target engagement",
+    "not disease-modifying"
+  ],
+  "acceptable_variants": [
+    "CoQ10",
+    "coenzyme Q10",
+    "inosine",
+    "class effect",
+    "overgeneralization",
+    "no benefit"
+  ],
+  "red_flags": [
+    "infers clinical disease modification from a general mechanistic class",
+    "ignores the failed antioxidant trials (CoQ10 / inosine)"
+  ],
+  "rubric": {
+    "criteria": [
+      {
+        "name": "pd_mechanism_correctness",
+        "weight": 0.3,
+        "scale": "0-5",
+        "description": "Correctly describes the PD mechanism linking the target to disease biology (e.g. GBA1/GCase/lysosome/alpha-synuclein, LRRK2 kinase, mitochondrial)."
+      },
+      {
+        "name": "target_relevance",
+        "weight": 0.25,
+        "scale": "0-5",
+        "description": "Justifies why the proposed target is therapeutically relevant to PD."
+      },
+      {
+        "name": "disease_subtype_reasoning",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Reasons about the relevant patient subgroup / disease subtype where applicable."
+      },
+      {
+        "name": "evidence_uncertainty",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Identifies the main mechanistic and evidentiary uncertainties."
+      },
+      {
+        "name": "overclaiming_avoidance",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Does not claim proven clinical disease modification from mechanistic plausibility."
+      }
+    ]
+  },
+  "metadata": {
+    "curator": "phase2_5 seed (hand-authored)",
+    "review_status": "reviewed",
+    "source_ids": [
+      "QE3 (CoQ10) JAMA Neurol 2014",
+      "SURE-PD3 (inosine) JAMA 2021"
+    ]
+  }
+}

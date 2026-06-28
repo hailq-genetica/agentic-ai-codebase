@@ -66,5 +66,10 @@
         "description": "Acknowledges trade-offs and that changes must be validated."
       }
     ]
+  },
+  "metadata": {
+    "curator": "phase2_5 seed (hand-authored)",
+    "review_status": "draft",
+    "source_ids": []
   }
 }
