@@ -44,6 +44,27 @@ python run_pdtx.py --report
 Tasks live in `tasks/pdtx/`, configs in `config/pdtx/`, the LLM-as-judge scorer in `src/pdtx_eval/`.
 See `tasks/pdtx/README.md` and `docs/pdtx_scoring_guide.md`.
 
+### PD-TxBench Phase 2.5 (small-molecule deep-dive)
+
+A small-molecule-focused slice that reuses the same runner/judge with **8 small-molecule
+task families** (target-mechanism reasoning, evidence verification, candidate-SMILES
+evaluation, ADMET/CNS assessment, docking/binding interpretation, lead optimization,
+repurposing/translatability, and agentic episodes). Phase 2.5 golds keep
+`category: small_molecule` and add `phase: phase2_5` + `task_family`, which route
+deliverable validation to a per-family schema and add a per-family leaderboard breakdown.
+
+```bash
+python scripts/build_phase2_5_seed.py        # (re)generate the seed dataset from the spec
+python scripts/validate_phase2_5.py          # offline end-to-end validation (no API key)
+python run_pdtx.py --config config/pdtx/phase2_5   # run + judge-score all Phase 2.5 tasks
+```
+
+The current slice is **56 hand-authored tasks** across all 8 families (~50% negative
+controls, 19 source-verified — clinical-fact tasks checked against primary sources and
+real-compound SMILES from PubChem), growing toward the §14.1 MVP (~300 static + 15
+agentic). See `docs/pdtx_phase2_5_taxonomy.md` for the contract and authoring/verification
+workflow, and `pd_txbench_phase2.5.md` for the full plan.
+
 ## Config
 
 Each run is driven by a YAML config. Key fields:

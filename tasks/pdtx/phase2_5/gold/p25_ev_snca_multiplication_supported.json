@@ -1,0 +1,72 @@
+{
+  "task_id": "p25_ev_snca_multiplication_supported",
+  "phase": "phase2_5",
+  "category": "small_molecule",
+  "task_family": "evidence_verification",
+  "is_negative_control": false,
+  "rubric_id": "pdtx25_evidence_verification_v1",
+  "gold_label": "Supported \u2014 SNCA multiplications cause dominant PD with a gene-dosage effect",
+  "preferred_decision": "Supported",
+  "acceptable_decisions": [],
+  "gold_rationale": "Human genetic studies establish SNCA duplication/triplication as causal for autosomal-dominant PD with a dosage effect (triplication more severe than duplication). The claim is supported; the caveat is rarity and the link to common sporadic disease.",
+  "required_concepts": [
+    "SNCA",
+    "alpha-synuclein",
+    "gene multiplication",
+    "autosomal dominant",
+    "gene dosage"
+  ],
+  "acceptable_variants": [
+    "duplication",
+    "triplication",
+    "a-synuclein",
+    "dominant inheritance",
+    "causal mutation"
+  ],
+  "red_flags": [
+    "classifies strong causal genetic evidence as merely associational",
+    "ignores the gene-dosage relationship"
+  ],
+  "rubric": {
+    "criteria": [
+      {
+        "name": "claim_classification_correct",
+        "weight": 0.3,
+        "scale": "0-5",
+        "description": "Classifies the claim correctly (Supported / Partially Supported / Unsupported / Contradicted / Insufficient Evidence)."
+      },
+      {
+        "name": "evidence_level_distinction",
+        "weight": 0.25,
+        "scale": "0-5",
+        "description": "Distinguishes in vitro vs animal vs biomarker vs clinical vs approved-therapy evidence."
+      },
+      {
+        "name": "evidence_use",
+        "weight": 0.2,
+        "scale": "0-5",
+        "description": "Uses the supporting and limiting evidence appropriately."
+      },
+      {
+        "name": "uncertainty_handling",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Handles uncertainty honestly and identifies what would change the verdict."
+      },
+      {
+        "name": "unsupported_claim_avoidance",
+        "weight": 0.1,
+        "scale": "0-5",
+        "description": "Avoids unsupported clinical claims (e.g. proven disease modification, causation from association)."
+      }
+    ]
+  },
+  "metadata": {
+    "curator": "phase2_5 seed (hand-authored)",
+    "review_status": "reviewed",
+    "source_ids": [
+      "Singleton et al. Science 2003 (SNCA triplication)",
+      "Chartier-Harlin et al. Lancet 2004 (SNCA duplication)"
+    ]
+  }
+}

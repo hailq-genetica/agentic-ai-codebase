@@ -1,0 +1,71 @@
+{
+  "task_id": "p25_leadopt_neg_destroys_pharmacophore",
+  "phase": "phase2_5",
+  "category": "small_molecule",
+  "task_family": "lead_optimization",
+  "is_negative_control": true,
+  "rubric_id": "pdtx25_lead_optimization_v1",
+  "gold_label": "Reject \u2014 the proposed change removes the pharmacophore and would abolish target engagement",
+  "preferred_decision": "N/A",
+  "acceptable_decisions": [],
+  "gold_rationale": "Removing the hydroxyl (key H-bond) and the basic center would likely abolish GCase engagement, so the proposed change is counterproductive despite improving logP/metabolism. The correct approach preserves the pharmacophore and addresses metabolism/logP elsewhere (e.g. block a distal soft spot, modulate peripheral lipophilicity), then re-checks potency/clearance and validates.",
+  "required_concepts": [
+    "pharmacophore",
+    "key hydrogen bond",
+    "target engagement abolished",
+    "potency-property trade-off",
+    "preserve pharmacophore",
+    "recheck properties",
+    "experimental validation"
+  ],
+  "acceptable_variants": [
+    "catalytic residue",
+    "loses potency",
+    "counterproductive",
+    "distal modification",
+    "soft spot"
+  ],
+  "red_flags": [
+    "endorses removing the pharmacophore to improve properties",
+    "optimizes physicochemical properties at the expense of target engagement"
+  ],
+  "rubric": {
+    "criteria": [
+      {
+        "name": "liability_diagnosis",
+        "weight": 0.25,
+        "scale": "0-5",
+        "description": "Correctly identifies the liabilities to address (e.g. solubility, hERG)."
+      },
+      {
+        "name": "modification_rationale",
+        "weight": 0.3,
+        "scale": "0-5",
+        "description": "Proposes chemistry-aware modifications with explicit rationale (not arbitrary changes)."
+      },
+      {
+        "name": "pharmacophore_preservation",
+        "weight": 0.2,
+        "scale": "0-5",
+        "description": "Preserves target engagement / CNS penetration while fixing liabilities."
+      },
+      {
+        "name": "recheck_and_validation",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Lists properties to re-check and an experimental validation step."
+      },
+      {
+        "name": "uncertainty",
+        "weight": 0.1,
+        "scale": "0-5",
+        "description": "Acknowledges trade-offs and that changes must be validated."
+      }
+    ]
+  },
+  "metadata": {
+    "curator": "phase2_5 seed (hand-authored)",
+    "review_status": "draft",
+    "source_ids": []
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "task_id": "p25_smiles_neg_reactive_michael",
+  "phase": "phase2_5",
+  "category": "small_molecule",
+  "task_family": "candidate_smiles_evaluation",
+  "is_negative_control": true,
+  "rubric_id": "pdtx25_candidate_smiles_v1",
+  "gold_label": "No-Go \u2014 an untargeted Michael-acceptor warhead implies non-specific reactivity and toxicity risk",
+  "preferred_decision": "No-Go",
+  "acceptable_decisions": [
+    "Conditional Go"
+  ],
+  "gold_rationale": "An unactivated acrylamide on a non-targeted scaffold is a reactive Michael acceptor with non-specific covalent-binding, off-target, and idiosyncratic-toxicity liabilities \u2014 unacceptable for a chronic therapy unless the warhead is removed or made selective. No-Go as-is.",
+  "required_concepts": [
+    "reactive group",
+    "Michael acceptor",
+    "covalent reactivity",
+    "off-target toxicity",
+    "chronic-use safety",
+    "No-Go"
+  ],
+  "acceptable_variants": [
+    "acrylamide",
+    "electrophile",
+    "warhead",
+    "non-specific binding",
+    "idiosyncratic toxicity",
+    "glutathione"
+  ],
+  "red_flags": [
+    "ignores the reactive Michael-acceptor / covalent-reactivity liability",
+    "recommends Go on target relevance despite indiscriminate reactivity"
+  ],
+  "rubric": {
+    "criteria": [
+      {
+        "name": "pd_mechanism_relevance",
+        "weight": 0.2,
+        "scale": "0-5",
+        "description": "Connects the candidate's target/MoA to PD disease biology."
+      },
+      {
+        "name": "target_moa_reasoning",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Plausible target / mechanism-of-action reasoning for the molecule."
+      },
+      {
+        "name": "evidence_grounding",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Grounds claims in the provided/derived evidence rather than assertion."
+      },
+      {
+        "name": "admet_cns_interpretation",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Sound ADMET and CNS-drug-likeness interpretation incl. BBB, solubility, clearance, CYP."
+      },
+      {
+        "name": "safety_risk_identification",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Identifies hERG/AMES/DILI and other safety liabilities."
+      },
+      {
+        "name": "go_no_go_quality",
+        "weight": 0.1,
+        "scale": "0-5",
+        "description": "Go/No-Go/Conditional Go decision is justified and calibrated to the evidence."
+      },
+      {
+        "name": "next_experiment_actionability",
+        "weight": 0.05,
+        "scale": "0-5",
+        "description": "Proposes an informative, decision-relevant next experiment."
+      },
+      {
+        "name": "uncertainty_calibration",
+        "weight": 0.05,
+        "scale": "0-5",
+        "description": "Confidence is calibrated; no overclaiming."
+      }
+    ]
+  },
+  "metadata": {
+    "curator": "phase2_5 seed (hand-authored)",
+    "review_status": "draft",
+    "source_ids": []
+  }
+}

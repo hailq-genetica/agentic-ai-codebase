@@ -1,0 +1,92 @@
+{
+  "task_id": "p25_smiles_gcase_activator",
+  "phase": "phase2_5",
+  "category": "small_molecule",
+  "task_family": "candidate_smiles_evaluation",
+  "is_negative_control": false,
+  "rubric_id": "pdtx25_candidate_smiles_v1",
+  "gold_label": "Conditional Go \u2014 attractive activator concept, conditional on cellular target engagement and CNS exposure",
+  "preferred_decision": "Conditional Go",
+  "acceptable_decisions": [
+    "Go",
+    "No-Go"
+  ],
+  "gold_rationale": "A non-inhibitory GCase activator could avoid the inhibitory-chaperone paradox and is mechanistically attractive for GBA1-PD. Progression is conditional on demonstrating increased lysosomal GCase activity in patient cells and CNS exposure; mechanism is not proven disease modification.",
+  "required_concepts": [
+    "glucocerebrosidase",
+    "non-inhibitory activator",
+    "pharmacological chaperone",
+    "lysosomal",
+    "blood-brain barrier",
+    "target engagement",
+    "next experiment"
+  ],
+  "acceptable_variants": [
+    "GCase",
+    "GBA1",
+    "activator vs chaperone",
+    "GCase activity assay",
+    "CNS penetration"
+  ],
+  "red_flags": [
+    "claims proven disease modification from the activator mechanism",
+    "ignores CNS exposure or the need for cellular target-engagement"
+  ],
+  "rubric": {
+    "criteria": [
+      {
+        "name": "pd_mechanism_relevance",
+        "weight": 0.2,
+        "scale": "0-5",
+        "description": "Connects the candidate's target/MoA to PD disease biology."
+      },
+      {
+        "name": "target_moa_reasoning",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Plausible target / mechanism-of-action reasoning for the molecule."
+      },
+      {
+        "name": "evidence_grounding",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Grounds claims in the provided/derived evidence rather than assertion."
+      },
+      {
+        "name": "admet_cns_interpretation",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Sound ADMET and CNS-drug-likeness interpretation incl. BBB, solubility, clearance, CYP."
+      },
+      {
+        "name": "safety_risk_identification",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Identifies hERG/AMES/DILI and other safety liabilities."
+      },
+      {
+        "name": "go_no_go_quality",
+        "weight": 0.1,
+        "scale": "0-5",
+        "description": "Go/No-Go/Conditional Go decision is justified and calibrated to the evidence."
+      },
+      {
+        "name": "next_experiment_actionability",
+        "weight": 0.05,
+        "scale": "0-5",
+        "description": "Proposes an informative, decision-relevant next experiment."
+      },
+      {
+        "name": "uncertainty_calibration",
+        "weight": 0.05,
+        "scale": "0-5",
+        "description": "Confidence is calibrated; no overclaiming."
+      }
+    ]
+  },
+  "metadata": {
+    "curator": "phase2_5 seed (hand-authored)",
+    "review_status": "draft",
+    "source_ids": []
+  }
+}

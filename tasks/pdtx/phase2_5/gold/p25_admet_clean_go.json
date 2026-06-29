@@ -1,0 +1,76 @@
+{
+  "task_id": "p25_admet_clean_go",
+  "phase": "phase2_5",
+  "category": "small_molecule",
+  "task_family": "admet_cns_assessment",
+  "is_negative_control": false,
+  "rubric_id": "pdtx25_admet_cns_v1",
+  "gold_label": "Go \u2014 clean predicted ADMET profile, pending experimental confirmation",
+  "preferred_decision": "Go",
+  "acceptable_decisions": [
+    "Conditional Go"
+  ],
+  "gold_rationale": "High BBB, AMES negative, low hERG, no CYP3A4 issue, good solubility support progression. A strong answer still notes that in silico predictions need experimental confirmation and that a clean ADMET profile does not establish efficacy or disease modification.",
+  "required_concepts": [
+    "blood-brain barrier",
+    "clean ADMET profile",
+    "in silico predictions need confirmation",
+    "Go",
+    "no efficacy claim from ADMET"
+  ],
+  "acceptable_variants": [
+    "brain penetration",
+    "favorable ADMET",
+    "experimental validation",
+    "predicted properties"
+  ],
+  "red_flags": [
+    "overclaims efficacy or disease modification from a clean ADMET profile",
+    "treats in silico ADMET predictions as definitive"
+  ],
+  "rubric": {
+    "criteria": [
+      {
+        "name": "bbb_cns_interpretation",
+        "weight": 0.25,
+        "scale": "0-5",
+        "description": "Correctly interprets BBB / CNS exposure for a brain target."
+      },
+      {
+        "name": "toxicology_interpretation",
+        "weight": 0.25,
+        "scale": "0-5",
+        "description": "Correctly interprets toxicology alerts (hERG, AMES, DILI, carcinogenicity)."
+      },
+      {
+        "name": "pk_solubility_reasoning",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Reasons about PK, solubility, clearance, and CYP interactions."
+      },
+      {
+        "name": "chronic_use_safety",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Considers chronic-use safety for a long-term PD therapy."
+      },
+      {
+        "name": "decision_quality",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Decision follows from the ADMET/safety profile (does not Go on target relevance alone)."
+      },
+      {
+        "name": "uncertainty",
+        "weight": 0.05,
+        "scale": "0-5",
+        "description": "Honest about predictive limits of in silico ADMET."
+      }
+    ]
+  },
+  "metadata": {
+    "curator": "phase2_5 seed (hand-authored)",
+    "review_status": "draft",
+    "source_ids": []
+  }
+}

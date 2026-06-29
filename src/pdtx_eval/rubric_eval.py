@@ -28,7 +28,7 @@ RED_FLAG_PENALTY = 0.10  # fractional score reduction per triggered red flag (ca
 def _decision_strings(deliverable: Any) -> str:
     """Extract the decision field(s) from a deliverable for string comparison."""
     if isinstance(deliverable, dict):
-        for key in ("go_no_go", "classification", "decision"):
+        for key in ("go_no_go", "classification", "claim_classification", "decision"):
             if key in deliverable and deliverable[key]:
                 return str(deliverable[key])
     return schemas.deliverable_text(deliverable)
@@ -70,9 +70,7 @@ def evaluate_deliverable(
     category = gold["category"]
     criteria = gold["rubric"]["criteria"]
 
-    valid, schema_errors = schemas.validate_output(
-        deliverable if isinstance(deliverable, dict) else {}, category
-    ) if isinstance(deliverable, dict) else (False, ["deliverable is not a JSON object"])
+    valid, schema_errors = schemas.validate_for_gold(deliverable, gold)
 
     if client is None:
         return _evaluate_offline(deliverable, gold, valid, schema_errors)
@@ -128,6 +126,7 @@ def _evaluate_with_judge(task_prompt, deliverable, gold, client, valid, schema_e
     return {
         "method": "judge",
         "category": gold["category"],
+        "task_family": gold.get("task_family"),
         "rubric_id": gold.get("rubric_id"),
         "schema_valid": valid,
         "schema_errors": schema_errors,
@@ -172,14 +171,22 @@ def _evaluate_offline(deliverable, gold, valid, schema_errors) -> dict:
     decision = _decision_strings(deliverable)
     preferred = gold.get("preferred_decision", "")
     acceptable = gold.get("acceptable_decisions", [])
-    decision_correct = (
-        preferred.lower() in decision.lower()
-        or any(a.lower() in decision.lower() for a in acceptable)
-    )
+    # Some Phase 2.5 families (e.g. target-mechanism, lead-optimization) make no
+    # Go/No-Go call; their gold preferred_decision is "N/A" and the decision is
+    # not scored.
+    if preferred.strip().upper() in ("N/A", "NA", "NONE", ""):
+        decision_match, decision_correct = "n/a", True
+    else:
+        decision_correct = (
+            preferred.lower() in decision.lower()
+            or any(a.lower() in decision.lower() for a in acceptable)
+        )
+        decision_match = "match" if decision_correct else "mismatch"
 
     return {
         "method": "offline",
         "category": gold["category"],
+        "task_family": gold.get("task_family"),
         "rubric_id": gold.get("rubric_id"),
         "schema_valid": valid,
         "schema_errors": schema_errors,
@@ -188,7 +195,7 @@ def _evaluate_offline(deliverable, gold, valid, schema_errors) -> dict:
         "criterion_scores": criterion_scores,
         "rubric_score": rubric_score,
         "red_flags_triggered": triggered,
-        "decision_match": "match" if decision_correct else "mismatch",
+        "decision_match": decision_match,
         "decision_correct": decision_correct,
         "decision_found": decision,
         "final_score": final_score,

@@ -1,0 +1,78 @@
+{
+  "task_id": "p25_docking_neg_selectivity_offtarget",
+  "phase": "phase2_5",
+  "category": "small_molecule",
+  "task_family": "docking_binding_interpretation",
+  "is_negative_control": true,
+  "rubric_id": "pdtx25_docking_binding_v1",
+  "gold_label": "No-Go (or selectivity-gated) \u2014 strong target docking is offset by predicted hERG/off-target binding",
+  "preferred_decision": "No-Go",
+  "acceptable_decisions": [
+    "Conditional Go"
+  ],
+  "gold_rationale": "A good on-target docking score does not establish a viable candidate when the same compound is predicted to bind an anti-target (hERG) and an off-target kinase comparably. Selectivity must be resolved first; progression is gated on a selectivity panel (No-Go as-is).",
+  "required_concepts": [
+    "selectivity",
+    "anti-target",
+    "off-target",
+    "hERG",
+    "docking is not sufficient",
+    "No-Go"
+  ],
+  "acceptable_variants": [
+    "kinome selectivity",
+    "off-target kinase",
+    "cardiotoxicity",
+    "selectivity panel",
+    "binding is not enough"
+  ],
+  "red_flags": [
+    "recommends progression on the on-target score while ignoring off-target/anti-target binding",
+    "ignores the hERG selectivity risk"
+  ],
+  "rubric": {
+    "criteria": [
+      {
+        "name": "binding_interpretation_correctness",
+        "weight": 0.3,
+        "scale": "0-5",
+        "description": "Recognizes docking/binding supports a hypothesis but does not prove activity, engagement, exposure, or efficacy."
+      },
+      {
+        "name": "reference_pose_context",
+        "weight": 0.2,
+        "scale": "0-5",
+        "description": "Contextualizes the score against the reference ligand and considers pose quality."
+      },
+      {
+        "name": "admet_integration",
+        "weight": 0.2,
+        "scale": "0-5",
+        "description": "Integrates ADMET/exposure concerns into the interpretation."
+      },
+      {
+        "name": "decision_quality",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Decision is calibrated and not driven by the docking score alone."
+      },
+      {
+        "name": "validation_experiment",
+        "weight": 0.1,
+        "scale": "0-5",
+        "description": "Recommends biochemical or cellular target-engagement validation."
+      },
+      {
+        "name": "uncertainty",
+        "weight": 0.05,
+        "scale": "0-5",
+        "description": "Honest about the limits of docking."
+      }
+    ]
+  },
+  "metadata": {
+    "curator": "phase2_5 seed (hand-authored)",
+    "review_status": "draft",
+    "source_ids": []
+  }
+}

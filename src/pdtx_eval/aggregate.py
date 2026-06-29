@@ -18,9 +18,12 @@ def aggregate(evaluations: list[dict]) -> dict:
     decision_correct, red_flags_triggered, schema_valid.
     """
     by_category = defaultdict(list)
+    by_task_family = defaultdict(list)
     by_mode = defaultdict(list)
     for e in evaluations:
         by_category[e.get("category", "unknown")].append(e)
+        if e.get("task_family"):
+            by_task_family[e["task_family"]].append(e)
         by_mode[e.get("mode", "unknown")].append(e)
 
     def _summ(group):
@@ -35,6 +38,7 @@ def aggregate(evaluations: list[dict]) -> dict:
     return {
         "overall": _summ(evaluations),
         "by_category": {k: _summ(v) for k, v in sorted(by_category.items())},
+        "by_task_family": {k: _summ(v) for k, v in sorted(by_task_family.items())},
         "by_mode": {k: _summ(v) for k, v in sorted(by_mode.items())},
         "tasks": [
             {
@@ -96,6 +100,20 @@ def render_markdown(summary: dict) -> str:
             f"| {cat} | {s['n']} | {s['mean_final_score']} | {s['decision_accuracy']} "
             f"| {s['schema_valid_rate']} | {s['red_flag_rate']} |"
         )
+    by_family = summary.get("by_task_family", {})
+    if by_family:
+        lines += [
+            "",
+            "## By task family (Phase 2.5)",
+            "",
+            "| Task family | N | Mean score | Decision acc | Schema valid | Red-flag rate |",
+            "|---|--:|--:|--:|--:|--:|",
+        ]
+        for fam, s in by_family.items():
+            lines.append(
+                f"| {fam} | {s['n']} | {s['mean_final_score']} | {s['decision_accuracy']} "
+                f"| {s['schema_valid_rate']} | {s['red_flag_rate']} |"
+            )
     lines += ["", "## By mode", "", "| Mode | N | Mean score | Decision acc |", "|---|--:|--:|--:|"]
     for mode, s in summary.get("by_mode", {}).items():
         lines.append(f"| {mode} | {s['n']} | {s['mean_final_score']} | {s['decision_accuracy']} |")

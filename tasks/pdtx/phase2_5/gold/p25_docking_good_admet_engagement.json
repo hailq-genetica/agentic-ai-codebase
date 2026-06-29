@@ -1,0 +1,77 @@
+{
+  "task_id": "p25_docking_good_admet_engagement",
+  "phase": "phase2_5",
+  "category": "small_molecule",
+  "task_family": "docking_binding_interpretation",
+  "is_negative_control": false,
+  "rubric_id": "pdtx25_docking_binding_v1",
+  "gold_label": "Conditional Go \u2014 encouraging binding hypothesis + good ADMET, still requires target-engagement validation",
+  "preferred_decision": "Conditional Go",
+  "acceptable_decisions": [
+    "Go"
+  ],
+  "gold_rationale": "A score better than the reference with a good pose and clean ADMET strengthens the binding hypothesis and de-risks exposure/safety, but docking still does not prove target engagement or efficacy. Progression is conditional on a biochemical/cellular engagement assay (e.g. GCase activity).",
+  "required_concepts": [
+    "docking is not proof of target engagement",
+    "reference ligand",
+    "pose quality",
+    "target engagement assay",
+    "blood-brain barrier"
+  ],
+  "acceptable_variants": [
+    "binding hypothesis",
+    "GCase activity assay",
+    "cellular assay",
+    "brain penetration",
+    "in vitro validation"
+  ],
+  "red_flags": [
+    "treats a good docking score + good ADMET as proof of efficacy",
+    "skips target-engagement validation"
+  ],
+  "rubric": {
+    "criteria": [
+      {
+        "name": "binding_interpretation_correctness",
+        "weight": 0.3,
+        "scale": "0-5",
+        "description": "Recognizes docking/binding supports a hypothesis but does not prove activity, engagement, exposure, or efficacy."
+      },
+      {
+        "name": "reference_pose_context",
+        "weight": 0.2,
+        "scale": "0-5",
+        "description": "Contextualizes the score against the reference ligand and considers pose quality."
+      },
+      {
+        "name": "admet_integration",
+        "weight": 0.2,
+        "scale": "0-5",
+        "description": "Integrates ADMET/exposure concerns into the interpretation."
+      },
+      {
+        "name": "decision_quality",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Decision is calibrated and not driven by the docking score alone."
+      },
+      {
+        "name": "validation_experiment",
+        "weight": 0.1,
+        "scale": "0-5",
+        "description": "Recommends biochemical or cellular target-engagement validation."
+      },
+      {
+        "name": "uncertainty",
+        "weight": 0.05,
+        "scale": "0-5",
+        "description": "Honest about the limits of docking."
+      }
+    ]
+  },
+  "metadata": {
+    "curator": "phase2_5 seed (hand-authored)",
+    "review_status": "draft",
+    "source_ids": []
+  }
+}

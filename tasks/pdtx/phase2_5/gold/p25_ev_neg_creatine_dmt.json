@@ -1,0 +1,74 @@
+{
+  "task_id": "p25_ev_neg_creatine_dmt",
+  "phase": "phase2_5",
+  "category": "small_molecule",
+  "task_family": "evidence_verification",
+  "is_negative_control": true,
+  "rubric_id": "pdtx25_evidence_verification_v1",
+  "gold_label": "Contradicted \u2014 large phase 3 NET-PD LS-1 stopped for futility",
+  "preferred_decision": "Contradicted",
+  "acceptable_decisions": [
+    "Unsupported"
+  ],
+  "gold_rationale": "A large, definitive phase 3 trial found no benefit and was stopped for futility; the progression-slowing claim is contradicted by high-quality randomized evidence.",
+  "required_concepts": [
+    "creatine",
+    "NET-PD LS-1",
+    "phase 3",
+    "futility",
+    "no benefit",
+    "no disease modification"
+  ],
+  "acceptable_variants": [
+    "bioenergetic",
+    "mitochondrial",
+    "large trial",
+    "randomized",
+    "no improvement"
+  ],
+  "red_flags": [
+    "treats the bioenergetic rationale or small early studies as proof",
+    "ignores the definitive negative phase 3"
+  ],
+  "rubric": {
+    "criteria": [
+      {
+        "name": "claim_classification_correct",
+        "weight": 0.3,
+        "scale": "0-5",
+        "description": "Classifies the claim correctly (Supported / Partially Supported / Unsupported / Contradicted / Insufficient Evidence)."
+      },
+      {
+        "name": "evidence_level_distinction",
+        "weight": 0.25,
+        "scale": "0-5",
+        "description": "Distinguishes in vitro vs animal vs biomarker vs clinical vs approved-therapy evidence."
+      },
+      {
+        "name": "evidence_use",
+        "weight": 0.2,
+        "scale": "0-5",
+        "description": "Uses the supporting and limiting evidence appropriately."
+      },
+      {
+        "name": "uncertainty_handling",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Handles uncertainty honestly and identifies what would change the verdict."
+      },
+      {
+        "name": "unsupported_claim_avoidance",
+        "weight": 0.1,
+        "scale": "0-5",
+        "description": "Avoids unsupported clinical claims (e.g. proven disease modification, causation from association)."
+      }
+    ]
+  },
+  "metadata": {
+    "curator": "phase2_5 seed (hand-authored)",
+    "review_status": "reviewed",
+    "source_ids": [
+      "NET-PD LS-1, JAMA 2015 (NCT00449865)"
+    ]
+  }
+}

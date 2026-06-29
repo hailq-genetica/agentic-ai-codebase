@@ -1,0 +1,15 @@
+task_file: tasks/pdtx/phase2_5/candidate_smiles_evaluation/p25_smiles_gcase_activator.md
+gold_file: tasks/pdtx/phase2_5/gold/p25_smiles_gcase_activator.json
+category: small_molecule
+task_family: candidate_smiles_evaluation
+tool_category: external_pharmacology, external_database
+reasoning_effort: high
+interactive: false        # overridden by run_pdtx.py --mode
+capture_telemetry: true
+output_base_dir: output/pdtx/phase2_5/candidate_smiles_evaluation/p25_smiles_gcase_activator/
+
+llm:
+  provider: anthropic
+  model: claude-opus-4-8
+logging:
+  enabled: false          # set true (+ project/entity) to log to W&B/Weave

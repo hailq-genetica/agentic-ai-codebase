@@ -1,0 +1,15 @@
+task_file: tasks/pdtx/phase2_5/lead_optimization/p25_leadopt_neg_destroys_pharmacophore.md
+gold_file: tasks/pdtx/phase2_5/gold/p25_leadopt_neg_destroys_pharmacophore.json
+category: small_molecule
+task_family: lead_optimization
+tool_category: external_pharmacology
+reasoning_effort: high
+interactive: false        # overridden by run_pdtx.py --mode
+capture_telemetry: true
+output_base_dir: output/pdtx/phase2_5/lead_optimization/p25_leadopt_neg_destroys_pharmacophore/
+
+llm:
+  provider: anthropic
+  model: claude-opus-4-8
+logging:
+  enabled: false          # set true (+ project/entity) to log to W&B/Weave

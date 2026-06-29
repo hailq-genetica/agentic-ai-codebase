@@ -1,0 +1,94 @@
+{
+  "task_id": "p25_agentic_lrrk2_episode",
+  "phase": "phase2_5",
+  "category": "small_molecule",
+  "task_family": "agentic_smiles_episode",
+  "is_negative_control": false,
+  "rubric_id": "pdtx25_agentic_episode_v1",
+  "gold_label": "Conditional Go \u2014 valid MoA, conditional on selectivity, peripheral safety, and CNS exposure",
+  "preferred_decision": "Conditional Go",
+  "acceptable_decisions": [
+    "No-Go",
+    "Go"
+  ],
+  "gold_rationale": "A strong episode forms a correct LRRK2 kinase mechanism hypothesis, integrates tool/literature evidence (kinome selectivity, pRab10 engagement biomarker, peripheral lung-safety class effect, IP), assesses ADMET/CNS exposure, and reaches a calibrated decision with a pRab10 target-engagement next experiment. Default is Conditional Go pending selectivity, peripheral safety, and CNS-exposure data; no overclaiming of disease modification.",
+  "required_concepts": [
+    "LRRK2",
+    "kinase inhibition",
+    "evidence table",
+    "selectivity",
+    "peripheral on-target safety",
+    "blood-brain barrier",
+    "target engagement",
+    "go_no_go",
+    "next experiment"
+  ],
+  "acceptable_variants": [
+    "Rab10",
+    "pRab10",
+    "kinome",
+    "lung",
+    "IP risk",
+    "patent",
+    "brain penetration",
+    "tool trace"
+  ],
+  "red_flags": [
+    "skips ADMET / CNS exposure or peripheral-safety assessment",
+    "claims proven disease modification without sufficient clinical evidence",
+    "reaches a decision without proposing a target-engagement validation experiment"
+  ],
+  "rubric": {
+    "criteria": [
+      {
+        "name": "pd_mechanism_relevance",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Forms a correct PD mechanism hypothesis for the candidate."
+      },
+      {
+        "name": "evidence_integration",
+        "weight": 0.2,
+        "scale": "0-5",
+        "description": "Builds an evidence table that correctly integrates tool/literature findings."
+      },
+      {
+        "name": "admet_safety_assessment",
+        "weight": 0.2,
+        "scale": "0-5",
+        "description": "Assesses ADMET/safety and IP/novelty risk."
+      },
+      {
+        "name": "tool_use_quality",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Selects the right tools, asks good queries, and avoids unnecessary calls (auditable trace)."
+      },
+      {
+        "name": "go_no_go_quality",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Go/No-Go decision is justified and calibrated."
+      },
+      {
+        "name": "next_experiment_actionability",
+        "weight": 0.1,
+        "scale": "0-5",
+        "description": "Proposes an informative next experiment."
+      },
+      {
+        "name": "uncertainty_calibration",
+        "weight": 0.05,
+        "scale": "0-5",
+        "description": "Confidence is calibrated; no overclaiming."
+      }
+    ]
+  },
+  "metadata": {
+    "curator": "phase2_5 seed (hand-authored)",
+    "review_status": "reviewed",
+    "source_ids": [
+      "PubChem: PF-06447475 (C17H15N5O)"
+    ]
+  }
+}

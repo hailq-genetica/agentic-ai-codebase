@@ -1,0 +1,73 @@
+{
+  "task_id": "p25_tmr_asyn_aggregation",
+  "phase": "phase2_5",
+  "category": "small_molecule",
+  "task_family": "target_mechanism_reasoning",
+  "is_negative_control": false,
+  "rubric_id": "pdtx25_target_mechanism_v1",
+  "gold_label": "Plausible disease-relevant target; toxic-species definition, target engagement, and CNS exposure are key uncertainties",
+  "preferred_decision": "N/A",
+  "acceptable_decisions": [],
+  "gold_rationale": "Alpha-synuclein aggregation is central to Lewy pathology, so small-molecule aggregation inhibition is mechanistically relevant. The major uncertainties are which conformer/oligomer is pathogenic, how to demonstrate in vivo target engagement, and achieving CNS exposure; clinical disease modification is unproven.",
+  "required_concepts": [
+    "alpha-synuclein",
+    "aggregation",
+    "Lewy pathology",
+    "toxic species",
+    "target engagement",
+    "disease modification not proven"
+  ],
+  "acceptable_variants": [
+    "a-synuclein",
+    "\u03b1-synuclein",
+    "synuclein",
+    "oligomer",
+    "fibril",
+    "misfolding",
+    "brain penetration",
+    "not proven"
+  ],
+  "red_flags": [
+    "claims aggregation inhibition is proven disease-modifying",
+    "assumes a single toxic species with no uncertainty"
+  ],
+  "rubric": {
+    "criteria": [
+      {
+        "name": "pd_mechanism_correctness",
+        "weight": 0.3,
+        "scale": "0-5",
+        "description": "Correctly describes the PD mechanism linking the target to disease biology (e.g. GBA1/GCase/lysosome/alpha-synuclein, LRRK2 kinase, mitochondrial)."
+      },
+      {
+        "name": "target_relevance",
+        "weight": 0.25,
+        "scale": "0-5",
+        "description": "Justifies why the proposed target is therapeutically relevant to PD."
+      },
+      {
+        "name": "disease_subtype_reasoning",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Reasons about the relevant patient subgroup / disease subtype where applicable."
+      },
+      {
+        "name": "evidence_uncertainty",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Identifies the main mechanistic and evidentiary uncertainties."
+      },
+      {
+        "name": "overclaiming_avoidance",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Does not claim proven clinical disease modification from mechanistic plausibility."
+      }
+    ]
+  },
+  "metadata": {
+    "curator": "phase2_5 seed (hand-authored)",
+    "review_status": "draft",
+    "source_ids": []
+  }
+}

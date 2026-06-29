@@ -39,6 +39,29 @@ def load_output_schema() -> dict:
     return _load_json(_SCHEMA_DIR / "output_schema_v2.json")
 
 
+def load_output_schema_phase2_5() -> dict:
+    return _load_json(_SCHEMA_DIR / "output_schema_phase2_5.json")
+
+
+def _validate_against(schema_doc: dict, subschema: dict, deliverable: dict) -> tuple[bool, list[str]]:
+    """Validate a deliverable against one definition, resolving internal $ref.
+
+    Uses jsonschema when installed; otherwise falls back to required-key presence.
+    """
+    try:
+        import jsonschema  # type: ignore
+
+        validator_cls = jsonschema.validators.validator_for(schema_doc)
+        resolver = jsonschema.RefResolver.from_schema(schema_doc)
+        validator = validator_cls(subschema, resolver=resolver)
+        errors = [f"{'/'.join(str(p) for p in e.path)}: {e.message}" for e in validator.iter_errors(deliverable)]
+        return (len(errors) == 0), errors
+    except ImportError:
+        required = subschema.get("required", [])
+        errors = [f"missing required field: {k}" for k in required if k not in deliverable]
+        return (len(errors) == 0), errors
+
+
 def validate_output(deliverable: dict, category: str) -> tuple[bool, list[str]]:
     """Validate a result.json deliverable against its per-category output schema.
 
@@ -49,22 +72,30 @@ def validate_output(deliverable: dict, category: str) -> tuple[bool, list[str]]:
         return False, [f"unknown category: {category}"]
 
     schema_doc = load_output_schema()
-    subschema = schema_doc["definitions"][category]
+    return _validate_against(schema_doc, schema_doc["definitions"][category], deliverable)
 
-    try:
-        import jsonschema  # type: ignore
 
-        # Resolve internal $ref against the full document.
-        validator_cls = jsonschema.validators.validator_for(schema_doc)
-        resolver = jsonschema.RefResolver.from_schema(schema_doc)
-        validator = validator_cls(subschema, resolver=resolver)
-        errors = [f"{'/'.join(str(p) for p in e.path)}: {e.message}" for e in validator.iter_errors(deliverable)]
-        return (len(errors) == 0), errors
-    except ImportError:
-        # Lightweight fallback: required-key presence only.
-        required = subschema.get("required", [])
-        errors = [f"missing required field: {k}" for k in required if k not in deliverable]
-        return (len(errors) == 0), errors
+def validate_output_phase2_5(deliverable: dict, task_family: str) -> tuple[bool, list[str]]:
+    """Validate a Phase 2.5 deliverable against its per-task_family output schema."""
+    schema_doc = load_output_schema_phase2_5()
+    subschema = schema_doc["definitions"].get(task_family)
+    if subschema is None:
+        return False, [f"unknown phase2_5 task_family: {task_family}"]
+    return _validate_against(schema_doc, subschema, deliverable)
+
+
+def validate_for_gold(deliverable: Any, gold: dict) -> tuple[bool, list[str]]:
+    """Validate a deliverable against the schema implied by its gold file.
+
+    Phase 2.5 golds carry ``phase == "phase2_5"`` and a ``task_family``; they are
+    validated against the per-family Phase 2.5 schema. Everything else uses the
+    per-category Phase 2 schema. Non-dict deliverables are invalid.
+    """
+    if not isinstance(deliverable, dict):
+        return False, ["deliverable is not a JSON object"]
+    if gold.get("phase") == "phase2_5":
+        return validate_output_phase2_5(deliverable, gold.get("task_family", ""))
+    return validate_output(deliverable, gold["category"])
 
 
 import re
