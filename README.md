@@ -59,10 +59,11 @@ python scripts/validate_phase2_5.py          # offline end-to-end validation (no
 python run_pdtx.py --config config/pdtx/phase2_5   # run + judge-score all Phase 2.5 tasks
 ```
 
-The current pass is a runnable **seed slice** (33 hand-authored tasks across all 8 families,
-~45% negative controls, with clinical-fact tasks verified against primary sources and
-real-compound SMILES from PubChem). See `docs/pdtx_phase2_5_taxonomy.md` for the contract
-and authoring/verification workflow, and `pd_txbench_phase2.5.md` for the full plan.
+The current slice is **56 hand-authored tasks** across all 8 families (~50% negative
+controls, 19 source-verified — clinical-fact tasks checked against primary sources and
+real-compound SMILES from PubChem), growing toward the §14.1 MVP (~300 static + 15
+agentic). See `docs/pdtx_phase2_5_taxonomy.md` for the contract and authoring/verification
+workflow, and `pd_txbench_phase2.5.md` for the full plan.
 
 ## Config
 

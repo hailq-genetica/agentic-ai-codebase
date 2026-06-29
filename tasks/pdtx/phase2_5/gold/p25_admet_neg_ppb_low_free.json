@@ -1,0 +1,78 @@
+{
+  "task_id": "p25_admet_neg_ppb_low_free",
+  "phase": "phase2_5",
+  "category": "small_molecule",
+  "task_family": "admet_cns_assessment",
+  "is_negative_control": true,
+  "rubric_id": "pdtx25_admet_cns_v1",
+  "gold_label": "No-Go (or optimize) \u2014 ~0.1% free fraction with mid-nanomolar potency is unlikely to give adequate free brain exposure",
+  "preferred_decision": "No-Go",
+  "acceptable_decisions": [
+    "Conditional Go"
+  ],
+  "gold_rationale": "Target engagement is driven by the unbound concentration; a 99.9% protein-bound compound with only mid-nanomolar potency and low solubility is unlikely to achieve a sufficient free brain concentration at tolerable doses. The profile warrants No-Go / optimization, not a Go on total exposure.",
+  "required_concepts": [
+    "plasma protein binding",
+    "free fraction",
+    "unbound concentration",
+    "free drug hypothesis",
+    "potency",
+    "No-Go"
+  ],
+  "acceptable_variants": [
+    "protein binding",
+    "Kp,uu",
+    "free brain concentration",
+    "solubility",
+    "optimization required"
+  ],
+  "red_flags": [
+    "reasons from total rather than unbound concentration",
+    "recommends Go despite a ~0.1% free fraction and modest potency"
+  ],
+  "rubric": {
+    "criteria": [
+      {
+        "name": "bbb_cns_interpretation",
+        "weight": 0.25,
+        "scale": "0-5",
+        "description": "Correctly interprets BBB / CNS exposure for a brain target."
+      },
+      {
+        "name": "toxicology_interpretation",
+        "weight": 0.25,
+        "scale": "0-5",
+        "description": "Correctly interprets toxicology alerts (hERG, AMES, DILI, carcinogenicity)."
+      },
+      {
+        "name": "pk_solubility_reasoning",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Reasons about PK, solubility, clearance, and CYP interactions."
+      },
+      {
+        "name": "chronic_use_safety",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Considers chronic-use safety for a long-term PD therapy."
+      },
+      {
+        "name": "decision_quality",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Decision follows from the ADMET/safety profile (does not Go on target relevance alone)."
+      },
+      {
+        "name": "uncertainty",
+        "weight": 0.05,
+        "scale": "0-5",
+        "description": "Honest about predictive limits of in silico ADMET."
+      }
+    ]
+  },
+  "metadata": {
+    "curator": "phase2_5 seed (hand-authored)",
+    "review_status": "draft",
+    "source_ids": []
+  }
+}

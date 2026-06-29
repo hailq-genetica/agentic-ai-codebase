@@ -1,0 +1,74 @@
+{
+  "task_id": "p25_leadopt_herg_basicity",
+  "phase": "phase2_5",
+  "category": "small_molecule",
+  "task_family": "lead_optimization",
+  "is_negative_control": false,
+  "rubric_id": "pdtx25_lead_optimization_v1",
+  "gold_label": "Lower basic-amine pKa / lipophilicity to reduce hERG while protecting potency and CNS exposure",
+  "preferred_decision": "N/A",
+  "acceptable_decisions": [],
+  "gold_rationale": "hERG binding here is driven by a basic, lipophilic amine; rational fixes lower the pKa (e.g. fluorination near the basic center), trim lipophilicity, or introduce polarity, each justified and balanced against potency and CNS penetration. The answer re-checks hERG/potency/BBB and validates experimentally; arbitrary edits are penalized.",
+  "required_concepts": [
+    "hERG",
+    "basic amine",
+    "pKa",
+    "lipophilicity",
+    "preserve potency",
+    "preserve CNS penetration",
+    "recheck properties",
+    "experimental validation"
+  ],
+  "acceptable_variants": [
+    "reduce basicity",
+    "fluorination",
+    "logP",
+    "polarity",
+    "patch clamp",
+    "brain penetration",
+    "Kp,uu"
+  ],
+  "red_flags": [
+    "proposes arbitrary changes without rationale",
+    "kills CNS penetration or potency while reducing hERG"
+  ],
+  "rubric": {
+    "criteria": [
+      {
+        "name": "liability_diagnosis",
+        "weight": 0.25,
+        "scale": "0-5",
+        "description": "Correctly identifies the liabilities to address (e.g. solubility, hERG)."
+      },
+      {
+        "name": "modification_rationale",
+        "weight": 0.3,
+        "scale": "0-5",
+        "description": "Proposes chemistry-aware modifications with explicit rationale (not arbitrary changes)."
+      },
+      {
+        "name": "pharmacophore_preservation",
+        "weight": 0.2,
+        "scale": "0-5",
+        "description": "Preserves target engagement / CNS penetration while fixing liabilities."
+      },
+      {
+        "name": "recheck_and_validation",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Lists properties to re-check and an experimental validation step."
+      },
+      {
+        "name": "uncertainty",
+        "weight": 0.1,
+        "scale": "0-5",
+        "description": "Acknowledges trade-offs and that changes must be validated."
+      }
+    ]
+  },
+  "metadata": {
+    "curator": "phase2_5 seed (hand-authored)",
+    "review_status": "draft",
+    "source_ids": []
+  }
+}

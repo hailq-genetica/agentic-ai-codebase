@@ -1,0 +1,79 @@
+{
+  "task_id": "p25_admet_neg_tdi_reactive_metabolite",
+  "phase": "phase2_5",
+  "category": "small_molecule",
+  "task_family": "admet_cns_assessment",
+  "is_negative_control": true,
+  "rubric_id": "pdtx25_admet_cns_v1",
+  "gold_label": "No-Go (or address the alert) \u2014 TDI + reactive-metabolite liability is high-risk for chronic dosing",
+  "preferred_decision": "No-Go",
+  "acceptable_decisions": [
+    "Conditional Go"
+  ],
+  "gold_rationale": "Mechanism-based (time-dependent) CYP inhibition and an aniline-derived reactive metabolite signal idiosyncratic-toxicity and unpredictable-DDI risk that escalate with chronic dosing; a good BBB/AMES/hERG profile does not offset this. No-Go unless the metabolic liability/structural alert is removed.",
+  "required_concepts": [
+    "time-dependent inhibition",
+    "mechanism-based inhibition",
+    "reactive metabolite",
+    "structural alert",
+    "idiosyncratic toxicity",
+    "chronic-use safety",
+    "No-Go"
+  ],
+  "acceptable_variants": [
+    "TDI",
+    "aniline",
+    "covalent binding",
+    "drug-drug interaction",
+    "bioactivation"
+  ],
+  "red_flags": [
+    "ignores the time-dependent CYP inhibition / reactive-metabolite liability",
+    "recommends Go because the CNS/AMES/hERG profile is otherwise good"
+  ],
+  "rubric": {
+    "criteria": [
+      {
+        "name": "bbb_cns_interpretation",
+        "weight": 0.25,
+        "scale": "0-5",
+        "description": "Correctly interprets BBB / CNS exposure for a brain target."
+      },
+      {
+        "name": "toxicology_interpretation",
+        "weight": 0.25,
+        "scale": "0-5",
+        "description": "Correctly interprets toxicology alerts (hERG, AMES, DILI, carcinogenicity)."
+      },
+      {
+        "name": "pk_solubility_reasoning",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Reasons about PK, solubility, clearance, and CYP interactions."
+      },
+      {
+        "name": "chronic_use_safety",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Considers chronic-use safety for a long-term PD therapy."
+      },
+      {
+        "name": "decision_quality",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Decision follows from the ADMET/safety profile (does not Go on target relevance alone)."
+      },
+      {
+        "name": "uncertainty",
+        "weight": 0.05,
+        "scale": "0-5",
+        "description": "Honest about predictive limits of in silico ADMET."
+      }
+    ]
+  },
+  "metadata": {
+    "curator": "phase2_5 seed (hand-authored)",
+    "review_status": "draft",
+    "source_ids": []
+  }
+}

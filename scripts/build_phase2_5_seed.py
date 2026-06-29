@@ -1358,6 +1358,887 @@ TASKS = [
             "claims disease modification on an unvalidated target",
         ],
     },
+
+    # =====================================================================
+    # Batch 2 toward the §14.1 MVP counts. Clinical-fact and real-compound
+    # tasks are source-verified (review_status="reviewed").
+    # =====================================================================
+
+    # ---- Family 2: evidence verification ---------------------------------
+    {
+        "id": "p25_ev_neg_nilotinib_dmt",
+        "family": "evidence_verification",
+        "difficulty": "hard",
+        "neg": True,
+        "review_status": "reviewed",
+        "sources": ["NILO-PD, JAMA Neurology 2021 (NCT03205488)"],
+        "title": "Claim check: nilotinib is a disease-modifying PD therapy",
+        "intro": "Classify the following therapeutic claim using the available evidence.",
+        "context": [
+            "**Claim:** \"Nilotinib (a c-Abl kinase inhibitor) is a disease-modifying therapy for Parkinson's disease.\"",
+            "**Background:** open-label data generated excitement, but the randomized phase 2A **NILO-PD** trial found no symptomatic benefit, **low CSF exposure**, and no change in dopamine metabolites; the authors concluded findings do not warrant further PD testing.",
+        ],
+        "job": [
+            "Classify the claim (claim_classification).",
+            "Note the low CNS (CSF) exposure and lack of clinical/biomarker effect in the randomized trial.",
+            "State the evidence level and why the claim is not supported.",
+        ],
+        "tools": TOOLS_DB,
+        "preferred_decision": "Contradicted",
+        "acceptable_decisions": ["Unsupported"],
+        "gold_label": "Contradicted/Unsupported — randomized NILO-PD showed no benefit and low CSF exposure",
+        "gold_rationale": "The randomized NILO-PD trial showed no symptomatic benefit, low CSF exposure, and no biomarker change, overriding open-label enthusiasm. The disease-modification claim is not supported.",
+        "required_concepts": [
+            "c-Abl kinase", "nilotinib", "NILO-PD", "low CSF exposure", "no benefit", "no disease modification",
+        ],
+        "acceptable_variants": [
+            "Abl", "CNS exposure", "randomized trial", "open-label", "biomarker", "phase 2",
+        ],
+        "red_flags": [
+            "cites the open-label data as proof while ignoring the negative randomized NILO-PD",
+            "ignores the low CSF / CNS exposure",
+        ],
+    },
+    {
+        "id": "p25_ev_neg_creatine_dmt",
+        "family": "evidence_verification",
+        "difficulty": "medium",
+        "neg": True,
+        "review_status": "reviewed",
+        "sources": ["NET-PD LS-1, JAMA 2015 (NCT00449865)"],
+        "title": "Claim check: creatine slows Parkinson's disease progression",
+        "intro": "Classify the following therapeutic claim using the available evidence.",
+        "context": [
+            "**Claim:** \"Creatine monohydrate slows clinical progression in Parkinson's disease.\"",
+            "**Background:** the large phase 3 **NET-PD LS-1** trial (n=1741, 10 g/day) was terminated for **futility** with no improvement vs placebo (JAMA 2015).",
+        ],
+        "job": [
+            "Classify the claim (claim_classification).",
+            "Distinguish the bioenergetic rationale from the definitive clinical result.",
+            "State the evidence level and the implication of the futility termination.",
+        ],
+        "tools": TOOLS_DB,
+        "preferred_decision": "Contradicted",
+        "acceptable_decisions": ["Unsupported"],
+        "gold_label": "Contradicted — large phase 3 NET-PD LS-1 stopped for futility",
+        "gold_rationale": "A large, definitive phase 3 trial found no benefit and was stopped for futility; the progression-slowing claim is contradicted by high-quality randomized evidence.",
+        "required_concepts": [
+            "creatine", "NET-PD LS-1", "phase 3", "futility", "no benefit", "no disease modification",
+        ],
+        "acceptable_variants": [
+            "bioenergetic", "mitochondrial", "large trial", "randomized", "no improvement",
+        ],
+        "red_flags": [
+            "treats the bioenergetic rationale or small early studies as proof",
+            "ignores the definitive negative phase 3",
+        ],
+    },
+    {
+        "id": "p25_ev_neg_pioglitazone_dmt",
+        "family": "evidence_verification",
+        "difficulty": "medium",
+        "neg": True,
+        "review_status": "reviewed",
+        "sources": ["FS-ZONE, Lancet Neurology 2015"],
+        "title": "Claim check: pioglitazone modifies Parkinson's disease progression",
+        "intro": "Classify the following therapeutic claim using the available evidence.",
+        "context": [
+            "**Claim:** \"Pioglitazone (a PPAR-gamma agonist) modifies progression in early Parkinson's disease.\"",
+            "**Background:** the phase 2 futility trial **FS-ZONE** (Lancet Neurology 2015) concluded pioglitazone is unlikely to modify progression and that further trials are not recommended.",
+        ],
+        "job": [
+            "Classify the claim (claim_classification).",
+            "Separate the anti-inflammatory/mitochondrial rationale from the clinical futility result.",
+            "State the evidence level and the implication for the claim.",
+        ],
+        "tools": TOOLS_DB,
+        "preferred_decision": "Contradicted",
+        "acceptable_decisions": ["Unsupported"],
+        "gold_label": "Contradicted — phase 2 FS-ZONE futility trial was negative",
+        "gold_rationale": "The FS-ZONE futility trial found pioglitazone unlikely to modify progression and did not support further study; the claim is contradicted by the randomized result.",
+        "required_concepts": [
+            "pioglitazone", "PPAR-gamma", "FS-ZONE", "futility", "no disease modification",
+        ],
+        "acceptable_variants": [
+            "PPAR gamma", "anti-inflammatory", "phase 2", "no benefit", "not recommended",
+        ],
+        "red_flags": [
+            "treats the anti-inflammatory rationale as clinical proof",
+            "ignores the futility result",
+        ],
+    },
+    {
+        "id": "p25_ev_snca_multiplication_supported",
+        "family": "evidence_verification",
+        "difficulty": "medium",
+        "neg": False,
+        "review_status": "reviewed",
+        "sources": ["Singleton et al. Science 2003 (SNCA triplication)", "Chartier-Harlin et al. Lancet 2004 (SNCA duplication)"],
+        "title": "Claim check: SNCA multiplications cause autosomal-dominant PD",
+        "intro": "Classify the following claim using the available evidence.",
+        "context": [
+            "**Claim:** \"SNCA gene multiplications (duplication/triplication) cause autosomal-dominant Parkinson's disease in a gene-dosage-dependent manner.\"",
+            "**Background:** SNCA triplication and duplication families show dominant PD with earlier/more severe disease for triplication (higher alpha-synuclein dosage) — strong human genetic evidence.",
+        ],
+        "job": [
+            "Classify the claim (claim_classification).",
+            "State the evidence level (human genetics) and the gene-dosage relationship.",
+            "State the main uncertainty (rarity; relationship to common sporadic PD).",
+        ],
+        "tools": TOOLS_DB,
+        "preferred_decision": "Supported",
+        "acceptable_decisions": [],
+        "gold_label": "Supported — SNCA multiplications cause dominant PD with a gene-dosage effect",
+        "gold_rationale": "Human genetic studies establish SNCA duplication/triplication as causal for autosomal-dominant PD with a dosage effect (triplication more severe than duplication). The claim is supported; the caveat is rarity and the link to common sporadic disease.",
+        "required_concepts": [
+            "SNCA", "alpha-synuclein", "gene multiplication", "autosomal dominant", "gene dosage",
+        ],
+        "acceptable_variants": [
+            "duplication", "triplication", "a-synuclein", "dominant inheritance", "causal mutation",
+        ],
+        "red_flags": [
+            "classifies strong causal genetic evidence as merely associational",
+            "ignores the gene-dosage relationship",
+        ],
+    },
+    {
+        "id": "p25_ev_neg_levodopa_dmt",
+        "family": "evidence_verification",
+        "difficulty": "hard",
+        "neg": True,
+        "review_status": "reviewed",
+        "sources": ["ELLDOPA, Fahn et al. NEJM 2004"],
+        "title": "Claim check: levodopa is proven to slow PD progression",
+        "intro": "Classify the following therapeutic claim using the available evidence.",
+        "context": [
+            "**Claim:** \"Levodopa is proven to slow the progression of Parkinson's disease.\"",
+            "**Background:** levodopa is the most effective symptomatic therapy. In **ELLDOPA** (NEJM 2004) the clinical scores favored levodopa but the DAT-imaging substudy trended the opposite way, so the trial could not establish a disease-modifying (neuroprotective) effect; levodopa remains symptomatic.",
+        ],
+        "job": [
+            "Classify the claim (claim_classification).",
+            "Distinguish the strong symptomatic effect from an unproven disease-modifying effect, noting the discordant clinical vs imaging results.",
+            "State what would be needed to support a disease-modification claim.",
+        ],
+        "tools": TOOLS_DB,
+        "preferred_decision": "Unsupported",
+        "acceptable_decisions": ["Contradicted"],
+        "gold_label": "Unsupported — levodopa is symptomatic; ELLDOPA could not establish disease modification",
+        "gold_rationale": "Levodopa's benefit in ELLDOPA is confounded by a strong symptomatic effect, and the clinical/imaging results were discordant, so disease modification was not established. The 'proven to slow progression' claim is unsupported; levodopa is symptomatic.",
+        "required_concepts": [
+            "levodopa", "symptomatic", "ELLDOPA", "disease modification not established",
+            "symptomatic confound",
+        ],
+        "acceptable_variants": [
+            "DAT imaging", "neuroprotection", "confounding", "not disease-modifying", "symptomatic benefit",
+        ],
+        "red_flags": [
+            "treats levodopa's symptomatic benefit as proof of disease modification",
+            "ignores the symptomatic confound / discordant imaging in ELLDOPA",
+        ],
+    },
+
+    # ---- Family 1: target-mechanism reasoning ----------------------------
+    {
+        "id": "p25_tmr_mitophagy_pink1_parkin",
+        "family": "target_mechanism_reasoning",
+        "difficulty": "medium",
+        "neg": False,
+        "title": "Enhancing PINK1/Parkin mitophagy with a small molecule",
+        "intro": "Explain the rationale for a small molecule that enhances PINK1/Parkin-dependent mitophagy and identify the main uncertainties.",
+        "context": [
+            "**Disease context:** Parkinson's disease, including recessive PD from PINK1/PRKN loss-of-function.",
+            "**Proposed target / MoA:** enhance mitophagy (e.g. PINK1 activation or USP30 deubiquitinase inhibition) to clear damaged mitochondria.",
+        ],
+        "job": [
+            "Explain the PINK1/Parkin mitophagy pathway and its link to PD (recessive genetics; mitochondrial quality control).",
+            "Justify mitophagy enhancement as a strategy and the relevant patient subgroup.",
+            "Identify the main uncertainties: whether enhancement helps in sporadic PD, target engagement, and CNS exposure.",
+            "Be explicit that the strategy is not proven disease-modifying.",
+        ],
+        "tools": TOOLS_DB,
+        "preferred_decision": "N/A",
+        "acceptable_decisions": [],
+        "gold_label": "Genetically grounded mitochondrial-QC target; applicability beyond recessive PD and target engagement are key uncertainties",
+        "gold_rationale": "PINK1/Parkin mediate mitophagy; loss-of-function causes recessive PD, so enhancing mitophagy (PINK1 activation / USP30 inhibition) is mechanistically grounded. Key uncertainties: benefit in sporadic PD, demonstrating in vivo target engagement, and CNS exposure; disease modification is unproven.",
+        "required_concepts": [
+            "PINK1", "Parkin", "mitophagy", "mitochondrial quality control", "recessive PD",
+            "target engagement", "disease modification not proven",
+        ],
+        "acceptable_variants": [
+            "PRKN", "USP30", "loss of function", "sporadic PD", "brain penetration", "not proven",
+        ],
+        "red_flags": [
+            "claims mitophagy enhancement is proven disease-modifying",
+            "assumes recessive-PD biology generalizes to all PD without uncertainty",
+        ],
+    },
+    {
+        "id": "p25_tmr_nlrp3_neuroinflammation",
+        "family": "target_mechanism_reasoning",
+        "difficulty": "medium",
+        "neg": False,
+        "title": "Targeting NLRP3 inflammasome-driven neuroinflammation",
+        "intro": "Explain the rationale for a small-molecule NLRP3 inflammasome inhibitor in PD and identify the main uncertainties.",
+        "context": [
+            "**Disease context:** Parkinson's disease with microglial neuroinflammation.",
+            "**Proposed target / MoA:** small-molecule NLRP3 inflammasome inhibition to reduce microglial IL-1beta-driven inflammation.",
+        ],
+        "job": [
+            "Explain NLRP3/microglial inflammation and its proposed link to alpha-synuclein pathology and neurodegeneration.",
+            "Justify NLRP3 inhibition as a strategy.",
+            "Identify the main uncertainties: whether inflammation is causal/upstream vs reactive, target engagement, and CNS exposure.",
+            "Be explicit that the strategy is not proven disease-modifying.",
+        ],
+        "tools": TOOLS_DB,
+        "preferred_decision": "N/A",
+        "acceptable_decisions": [],
+        "gold_label": "Plausible neuroinflammation target; causality (upstream vs reactive) and CNS engagement are key uncertainties",
+        "gold_rationale": "NLRP3-driven microglial inflammation is implicated in PD and linked to alpha-synuclein, so inhibition is plausible. The central uncertainty is whether neuroinflammation is causally upstream or a reactive consequence, plus CNS target engagement; disease modification is unproven.",
+        "required_concepts": [
+            "NLRP3 inflammasome", "neuroinflammation", "microglia", "IL-1beta", "causality uncertainty",
+            "disease modification not proven",
+        ],
+        "acceptable_variants": [
+            "interleukin-1", "alpha-synuclein", "a-synuclein", "upstream vs reactive", "brain penetration",
+        ],
+        "red_flags": [
+            "claims NLRP3 inhibition is proven disease-modifying",
+            "assumes neuroinflammation is causally upstream without acknowledging uncertainty",
+        ],
+    },
+    {
+        "id": "p25_tmr_cabl_kinase",
+        "family": "target_mechanism_reasoning",
+        "difficulty": "medium",
+        "neg": False,
+        "review_status": "reviewed",
+        "sources": ["NILO-PD, JAMA Neurology 2021"],
+        "title": "c-Abl kinase inhibition rationale in Parkinson's disease",
+        "intro": "Explain the rationale for small-molecule c-Abl kinase inhibition in PD and identify the main uncertainties.",
+        "context": [
+            "**Disease context:** Parkinson's disease with oxidative stress and alpha-synuclein/parkin pathology.",
+            "**Proposed target / MoA:** c-Abl kinase inhibition (c-Abl is activated under oxidative stress and impairs parkin and promotes alpha-synuclein toxicity).",
+        ],
+        "job": [
+            "Explain how c-Abl activation contributes to PD pathology.",
+            "Justify c-Abl inhibition as a strategy and the relevant evidence.",
+            "Identify the main uncertainties — critically, CNS exposure (the clinical c-Abl inhibitor nilotinib had low CSF exposure and a negative randomized trial).",
+            "Be explicit that the strategy is not proven disease-modifying.",
+        ],
+        "tools": TOOLS_DB,
+        "preferred_decision": "N/A",
+        "acceptable_decisions": [],
+        "gold_label": "Mechanistically plausible target undermined in practice by poor CNS exposure; not proven disease-modifying",
+        "gold_rationale": "c-Abl activation links oxidative stress to parkin impairment and alpha-synuclein toxicity, so inhibition is mechanistically plausible. The key practical uncertainty is CNS exposure: nilotinib showed low CSF exposure and a negative randomized trial, so a brain-penetrant c-Abl inhibitor would be needed; disease modification is unproven.",
+        "required_concepts": [
+            "c-Abl kinase", "oxidative stress", "parkin", "alpha-synuclein", "CNS exposure",
+            "disease modification not proven",
+        ],
+        "acceptable_variants": [
+            "Abl", "nilotinib", "CSF exposure", "a-synuclein", "brain penetration", "not proven",
+        ],
+        "red_flags": [
+            "claims c-Abl inhibition is proven disease-modifying",
+            "ignores the CNS-exposure problem demonstrated by nilotinib",
+        ],
+    },
+    {
+        "id": "p25_tmr_neg_dopamine_replacement",
+        "family": "target_mechanism_reasoning",
+        "difficulty": "medium",
+        "neg": True,
+        "title": "Mechanism error: 'restoring dopamine modifies the disease'",
+        "intro": "Evaluate the following mechanistic argument and identify what is wrong with it.",
+        "context": [
+            "**Argument:** \"Parkinson's motor symptoms come from dopamine deficiency, so a small molecule that restores dopamine (e.g. enhancing synthesis or replacing it) is disease-modifying.\"",
+        ],
+        "job": [
+            "Explain the difference between correcting the dopaminergic deficit (symptomatic) and altering the underlying neurodegeneration (disease-modifying).",
+            "Note that dopaminergic therapies improve symptoms but do not halt neuronal loss.",
+            "State what a disease-modifying mechanism would have to do instead.",
+        ],
+        "tools": TOOLS_DB,
+        "preferred_decision": "N/A",
+        "acceptable_decisions": [],
+        "gold_label": "Invalid — restoring dopamine is symptomatic, not disease-modifying",
+        "gold_rationale": "Dopaminergic therapies treat the neurotransmitter deficit and relieve symptoms but do not stop the underlying alpha-synuclein-associated neurodegeneration. Restoring dopamine is symptomatic; disease modification requires slowing/stopping neuronal loss.",
+        "required_concepts": [
+            "dopamine deficiency", "symptomatic", "neurodegeneration continues", "not disease-modifying",
+            "neuronal loss",
+        ],
+        "acceptable_variants": [
+            "dopamine replacement", "levodopa", "symptomatic benefit", "does not halt", "neuroprotection",
+        ],
+        "red_flags": [
+            "equates correcting the dopamine deficit with disease modification",
+            "claims symptomatic dopaminergic therapy stops neurodegeneration",
+        ],
+    },
+
+    # ---- Family 3: candidate SMILES evaluation ---------------------------
+    {
+        "id": "p25_smiles_pimavanserin_nonmotor",
+        "family": "candidate_smiles_evaluation",
+        "difficulty": "medium",
+        "neg": False,
+        "review_status": "reviewed",
+        "sources": ["PubChem: pimavanserin (C25H34FN3O2)", "FDA approval 2016 (PD psychosis)"],
+        "title": "Evaluate a 5-HT2A inverse agonist for PD psychosis",
+        "intro": "Evaluate this small molecule as a Parkinson's disease therapeutic and frame its indication correctly.",
+        "context": [
+            "**Disease context:** Parkinson's disease psychosis (hallucinations/delusions) — a non-motor complication.",
+            "**Proposed target / MoA:** selective serotonin 5-HT2A inverse agonist/antagonist (non-dopaminergic, so it does not worsen motor symptoms).",
+        ],
+        "data_block": {
+            "candidate_name": "Pimavanserin (5-HT2A inverse agonist, approved for PD psychosis)",
+            "smiles": "CC(C)COC1=CC=C(C=C1)CNC(=O)N(CC2=CC=C(C=C2)F)C3CCN(CC3)C",
+            "known_or_hypothetical": "known",
+        },
+        "job": [
+            "Assess the 5-HT2A MoA and why a non-dopaminergic agent is advantageous for PD psychosis.",
+            "Assess CNS exposure and ADMET, including the QT-prolongation caution.",
+            "Frame the indication: symptomatic non-motor benefit, not disease modification.",
+            "Give a calibrated go_no_go for the PD-psychosis indication and a next step.",
+        ],
+        "tools": TOOLS_PHARM,
+        "preferred_decision": "Conditional Go",
+        "acceptable_decisions": ["Go"],
+        "gold_label": "Conditional Go for the symptomatic non-motor (PD psychosis) indication — not disease-modifying",
+        "gold_rationale": "5-HT2A inverse agonism treats PD psychosis without worsening motor symptoms (non-dopaminergic), and is approved for that indication. A strong answer supports the symptomatic non-motor use, manages the QT-prolongation risk, and does not claim disease modification.",
+        "required_concepts": [
+            "5-HT2A inverse agonist", "PD psychosis", "non-dopaminergic", "symptomatic", "not disease-modifying",
+            "QT prolongation",
+        ],
+        "acceptable_variants": [
+            "serotonin 2A", "pimavanserin", "hallucinations", "non-motor", "brain penetration", "QTc",
+        ],
+        "red_flags": [
+            "claims the agent is disease-modifying",
+            "ignores the QT-prolongation safety consideration",
+        ],
+    },
+    {
+        "id": "p25_smiles_neg_reactive_michael",
+        "family": "candidate_smiles_evaluation",
+        "difficulty": "hard",
+        "neg": True,
+        "title": "Candidate bearing a reactive Michael-acceptor warhead",
+        "intro": "Evaluate whether this small-molecule candidate should progress to experimental validation.",
+        "context": [
+            "**Disease context:** Parkinson's disease, chronic therapy.",
+            "**Proposed target / MoA:** the target may be PD-relevant, but assess the molecule on its own merits.",
+        ],
+        "data_block": {
+            "candidate_name": "Hypothetical compound R (illustrative)",
+            "smiles": "C=CC(=O)Nc1ccc(cc1)C(=O)Nc1cccc(c1)N1CCOCC1",
+            "note": "Contains an unactivated acrylamide (Michael acceptor) on a non-targeted scaffold.",
+            "known_or_hypothetical": "hypothetical",
+        },
+        "job": [
+            "Identify the reactive functional group and the liabilities it implies (non-specific covalent reactivity, off-target/idiosyncratic toxicity, GSH/thiol trapping).",
+            "Reason about whether an untargeted covalent warhead is acceptable for a chronic CNS therapy.",
+            "Give a calibrated go_no_go; do not let target relevance excuse indiscriminate reactivity.",
+        ],
+        "tools": TOOLS_PHARM,
+        "preferred_decision": "No-Go",
+        "acceptable_decisions": ["Conditional Go"],
+        "gold_label": "No-Go — an untargeted Michael-acceptor warhead implies non-specific reactivity and toxicity risk",
+        "gold_rationale": "An unactivated acrylamide on a non-targeted scaffold is a reactive Michael acceptor with non-specific covalent-binding, off-target, and idiosyncratic-toxicity liabilities — unacceptable for a chronic therapy unless the warhead is removed or made selective. No-Go as-is.",
+        "required_concepts": [
+            "reactive group", "Michael acceptor", "covalent reactivity", "off-target toxicity",
+            "chronic-use safety", "No-Go",
+        ],
+        "acceptable_variants": [
+            "acrylamide", "electrophile", "warhead", "non-specific binding", "idiosyncratic toxicity",
+            "glutathione",
+        ],
+        "red_flags": [
+            "ignores the reactive Michael-acceptor / covalent-reactivity liability",
+            "recommends Go on target relevance despite indiscriminate reactivity",
+        ],
+    },
+    {
+        "id": "p25_smiles_neg_high_mw_cns_mpo",
+        "family": "candidate_smiles_evaluation",
+        "difficulty": "hard",
+        "neg": True,
+        "title": "Oversized, polar candidate failing CNS druglikeness for a brain target",
+        "intro": "Evaluate whether this small-molecule candidate should progress to experimental validation.",
+        "context": [
+            "**Disease context:** Parkinson's disease, **CNS target** (brain exposure required).",
+            "**Proposed target / MoA:** PD-relevant CNS target.",
+        ],
+        "data_block": {
+            "candidate_name": "Hypothetical compound M (illustrative)",
+            "smiles": "O=C(NCCNC(=O)c1ccc(cc1)C(=O)O)c1ccc(cc1)S(=O)(=O)N1CCN(CC1)c1ccccc1",
+            "descriptors": {"approx_MW": "~565", "approx_TPSA": "~140 A^2", "HBD": 3, "HBA": 9, "approx_clogP": "low"},
+            "known_or_hypothetical": "hypothetical",
+        },
+        "job": [
+            "Assess CNS drug-likeness against standard CNS property guidelines (e.g. MW, TPSA, HBD).",
+            "Reason about likely BBB penetration for a brain target given these descriptors.",
+            "Give a calibrated go_no_go; do not progress a CNS-targeted molecule unlikely to reach the brain.",
+        ],
+        "tools": TOOLS_PHARM,
+        "preferred_decision": "No-Go",
+        "acceptable_decisions": ["Conditional Go"],
+        "gold_label": "No-Go — high MW/TPSA/HBD predict poor CNS penetration for a brain target",
+        "gold_rationale": "MW ~565, TPSA ~140 A^2, and multiple H-bond donors/acceptors fall well outside CNS-drug guidelines and predict poor BBB penetration. For a CNS target this is disqualifying without a major redesign (No-Go); the molecule likely cannot engage a brain target.",
+        "required_concepts": [
+            "CNS drug-likeness", "molecular weight", "TPSA", "hydrogen bond donors", "blood-brain barrier",
+            "No-Go",
+        ],
+        "acceptable_variants": [
+            "CNS MPO", "polar surface area", "HBD", "brain penetration", "BBB", "redesign",
+        ],
+        "red_flags": [
+            "ignores the poor CNS physicochemical profile for a brain target",
+            "recommends Go despite predicted poor BBB penetration",
+        ],
+    },
+    {
+        "id": "p25_smiles_asyn_aggregation_inhibitor",
+        "family": "candidate_smiles_evaluation",
+        "difficulty": "medium",
+        "neg": False,
+        "title": "Evaluate an alpha-synuclein aggregation-modulator candidate",
+        "intro": "Evaluate whether this small-molecule candidate should progress to experimental validation.",
+        "context": [
+            "**Disease context:** Parkinson's disease with alpha-synuclein aggregation.",
+            "**Proposed target / MoA:** small molecule proposed to bind aggregated alpha-synuclein and modulate fibril formation.",
+        ],
+        "data_block": {
+            "candidate_name": "Hypothetical compound S (benzothiazole aggregation binder)",
+            "smiles": "Nc1ccc(cc1)-c1nc2ccccc2s1",
+            "known_or_hypothetical": "hypothetical",
+        },
+        "job": [
+            "Assess the aggregation-modulation MoA and the central challenge of defining/engaging the toxic species.",
+            "Assess CNS drug-likeness/BBB and selectivity (aggregation binders can be non-specific / amyloid-pan-binders).",
+            "Give a calibrated go_no_go and a target-engagement next experiment (e.g. cellular aggregation/seeding assay).",
+        ],
+        "tools": TOOLS_PHARM,
+        "preferred_decision": "Conditional Go",
+        "acceptable_decisions": ["No-Go"],
+        "gold_label": "Conditional Go — plausible aggregation modulator, conditional on target engagement and selectivity",
+        "gold_rationale": "A benzothiazole-type aggregation binder is a plausible alpha-synuclein modulator, but the toxic species is ill-defined, and such scaffolds risk non-specific amyloid binding. Progression is conditional on demonstrating selective target engagement (cellular seeding/aggregation assay) and CNS exposure; binding is not disease modification.",
+        "required_concepts": [
+            "alpha-synuclein", "aggregation", "toxic species", "target engagement", "selectivity",
+            "blood-brain barrier", "next experiment",
+        ],
+        "acceptable_variants": [
+            "a-synuclein", "fibril", "seeding assay", "amyloid binder", "non-specific", "brain penetration",
+        ],
+        "red_flags": [
+            "treats in vitro aggregation binding as proof of disease modification",
+            "ignores selectivity / non-specific amyloid binding or CNS exposure",
+        ],
+    },
+    {
+        "id": "p25_smiles_gcase_activator",
+        "family": "candidate_smiles_evaluation",
+        "difficulty": "medium",
+        "neg": False,
+        "title": "Evaluate a non-inhibitory GCase activator candidate",
+        "intro": "Evaluate whether this small-molecule candidate should progress to experimental validation.",
+        "context": [
+            "**Disease context:** GBA1-associated Parkinson's disease.",
+            "**Proposed target / MoA:** a non-inhibitory small-molecule **activator** of glucocerebrosidase (distinct from an active-site pharmacological chaperone), intended to raise lysosomal GCase activity without the inhibitory-chaperone paradox.",
+        ],
+        "data_block": {
+            "candidate_name": "Hypothetical compound G (non-inhibitory GCase activator)",
+            "smiles": "O=C(Nc1ccc(F)cc1)c1ccc(cc1)N1CCN(C)CC1",
+            "known_or_hypothetical": "hypothetical",
+        },
+        "job": [
+            "Contrast a non-inhibitory activator with an active-site pharmacological chaperone (and the inhibitory-chaperone paradox).",
+            "Assess CNS drug-likeness/BBB and the need to show increased lysosomal GCase activity in cells.",
+            "Give a calibrated go_no_go and a target-engagement next experiment.",
+        ],
+        "tools": TOOLS_PHARM,
+        "preferred_decision": "Conditional Go",
+        "acceptable_decisions": ["Go", "No-Go"],
+        "gold_label": "Conditional Go — attractive activator concept, conditional on cellular target engagement and CNS exposure",
+        "gold_rationale": "A non-inhibitory GCase activator could avoid the inhibitory-chaperone paradox and is mechanistically attractive for GBA1-PD. Progression is conditional on demonstrating increased lysosomal GCase activity in patient cells and CNS exposure; mechanism is not proven disease modification.",
+        "required_concepts": [
+            "glucocerebrosidase", "non-inhibitory activator", "pharmacological chaperone", "lysosomal",
+            "blood-brain barrier", "target engagement", "next experiment",
+        ],
+        "acceptable_variants": [
+            "GCase", "GBA1", "activator vs chaperone", "GCase activity assay", "CNS penetration",
+        ],
+        "red_flags": [
+            "claims proven disease modification from the activator mechanism",
+            "ignores CNS exposure or the need for cellular target-engagement",
+        ],
+    },
+
+    # ---- Family 4: ADMET / CNS assessment --------------------------------
+    {
+        "id": "p25_admet_neg_pgp_efflux",
+        "family": "admet_cns_assessment",
+        "difficulty": "medium",
+        "neg": True,
+        "title": "ADMET review of a P-gp-effluxed candidate for a CNS target",
+        "intro": "Interpret the predicted ADMET profile and decide whether the candidate should progress.",
+        "context": [
+            "**Therapeutic context:** Parkinson's disease, **CNS target**, chronic dosing.",
+        ],
+        "data_block": {
+            "candidate": "Compound P",
+            "predicted_properties": {
+                "passive_permeability": "moderate",
+                "pgp_substrate": "yes (high efflux ratio)",
+                "predicted_brain_Kp_uu": "low (<0.1)",
+                "ames": "negative",
+                "herg": "low risk",
+                "solubility": "moderate",
+            },
+        },
+        "job": [
+            "Explain why P-gp efflux limits unbound brain exposure (Kp,uu) even with acceptable passive permeability.",
+            "Reason about engaging a CNS target given a low predicted Kp,uu.",
+            "Give a calibrated go_no_go driven by CNS exposure, not by the otherwise clean profile.",
+        ],
+        "tools": "external_pharmacology",
+        "preferred_decision": "No-Go",
+        "acceptable_decisions": ["Conditional Go"],
+        "gold_label": "No-Go (or optimize) — P-gp efflux gives low Kp,uu; the CNS target won't be engaged",
+        "gold_rationale": "A high P-gp efflux ratio yields low unbound brain exposure (Kp,uu) regardless of passive permeability; a clean AMES/hERG/solubility profile cannot compensate. For a CNS target this is disqualifying without reducing efflux (No-Go / optimization).",
+        "required_concepts": [
+            "P-glycoprotein efflux", "Kp,uu", "unbound brain exposure", "CNS target", "blood-brain barrier",
+            "No-Go",
+        ],
+        "acceptable_variants": [
+            "P-gp substrate", "efflux ratio", "brain penetration", "free drug", "optimization required",
+        ],
+        "red_flags": [
+            "ignores P-gp efflux and treats passive permeability as sufficient for CNS exposure",
+            "recommends Go because AMES/hERG/solubility are clean",
+        ],
+    },
+    {
+        "id": "p25_admet_neg_ppb_low_free",
+        "family": "admet_cns_assessment",
+        "difficulty": "hard",
+        "neg": True,
+        "title": "ADMET review: very high plasma protein binding and low free fraction",
+        "intro": "Interpret the predicted ADMET profile and decide whether the candidate should progress.",
+        "context": [
+            "**Therapeutic context:** Parkinson's disease, CNS target; moderate target potency (mid-nanomolar).",
+        ],
+        "data_block": {
+            "candidate": "Compound B2",
+            "predicted_properties": {
+                "plasma_protein_binding": "99.9% (free fraction ~0.1%)",
+                "bbb": "moderate",
+                "potency": "mid-nanomolar",
+                "ames": "negative",
+                "herg": "low risk",
+                "solubility": "low",
+            },
+        },
+        "job": [
+            "Explain why the unbound (free) concentration — not total — drives target engagement, and the impact of 99.9% PPB.",
+            "Combine the very low free fraction with mid-nanomolar potency and low solubility to judge whether a sufficient free brain concentration is achievable.",
+            "Give a calibrated go_no_go.",
+        ],
+        "tools": "external_pharmacology",
+        "preferred_decision": "No-Go",
+        "acceptable_decisions": ["Conditional Go"],
+        "gold_label": "No-Go (or optimize) — ~0.1% free fraction with mid-nanomolar potency is unlikely to give adequate free brain exposure",
+        "gold_rationale": "Target engagement is driven by the unbound concentration; a 99.9% protein-bound compound with only mid-nanomolar potency and low solubility is unlikely to achieve a sufficient free brain concentration at tolerable doses. The profile warrants No-Go / optimization, not a Go on total exposure.",
+        "required_concepts": [
+            "plasma protein binding", "free fraction", "unbound concentration", "free drug hypothesis",
+            "potency", "No-Go",
+        ],
+        "acceptable_variants": [
+            "protein binding", "Kp,uu", "free brain concentration", "solubility", "optimization required",
+        ],
+        "red_flags": [
+            "reasons from total rather than unbound concentration",
+            "recommends Go despite a ~0.1% free fraction and modest potency",
+        ],
+    },
+    {
+        "id": "p25_admet_neg_tdi_reactive_metabolite",
+        "family": "admet_cns_assessment",
+        "difficulty": "hard",
+        "neg": True,
+        "title": "ADMET review: time-dependent CYP inhibition / reactive metabolite",
+        "intro": "Interpret the predicted ADMET profile and decide whether the candidate should progress for chronic PD use.",
+        "context": [
+            "**Therapeutic context:** chronic, long-term therapy for Parkinson's disease.",
+        ],
+        "data_block": {
+            "candidate": "Compound T",
+            "predicted_properties": {
+                "bbb": "good",
+                "ames": "negative",
+                "herg": "low risk",
+                "cyp3a4": "time-dependent (mechanism-based) inhibition",
+                "structural_alert": "aniline -> predicted reactive metabolite",
+                "solubility": "moderate",
+            },
+        },
+        "job": [
+            "Explain the risk from mechanism-based (time-dependent) CYP inhibition and a predicted reactive metabolite (idiosyncratic toxicity, unpredictable DDIs, covalent protein binding).",
+            "Weigh this against the otherwise good CNS/safety profile for a chronic therapy.",
+            "Give a calibrated go_no_go.",
+        ],
+        "tools": "external_pharmacology",
+        "preferred_decision": "No-Go",
+        "acceptable_decisions": ["Conditional Go"],
+        "gold_label": "No-Go (or address the alert) — TDI + reactive-metabolite liability is high-risk for chronic dosing",
+        "gold_rationale": "Mechanism-based (time-dependent) CYP inhibition and an aniline-derived reactive metabolite signal idiosyncratic-toxicity and unpredictable-DDI risk that escalate with chronic dosing; a good BBB/AMES/hERG profile does not offset this. No-Go unless the metabolic liability/structural alert is removed.",
+        "required_concepts": [
+            "time-dependent inhibition", "mechanism-based inhibition", "reactive metabolite", "structural alert",
+            "idiosyncratic toxicity", "chronic-use safety", "No-Go",
+        ],
+        "acceptable_variants": [
+            "TDI", "aniline", "covalent binding", "drug-drug interaction", "bioactivation",
+        ],
+        "red_flags": [
+            "ignores the time-dependent CYP inhibition / reactive-metabolite liability",
+            "recommends Go because the CNS/AMES/hERG profile is otherwise good",
+        ],
+    },
+    {
+        "id": "p25_admet_peripheral_target_ok",
+        "family": "admet_cns_assessment",
+        "difficulty": "medium",
+        "neg": False,
+        "title": "ADMET review of a candidate for a peripheral PD-relevant target",
+        "intro": "Interpret the predicted ADMET profile and decide whether the candidate should progress.",
+        "context": [
+            "**Therapeutic context:** a Parkinson's-relevant **peripheral** mechanism where the target is outside the CNS (brain penetration is NOT required, and could even be undesirable).",
+        ],
+        "data_block": {
+            "candidate": "Compound PK1",
+            "predicted_properties": {
+                "bbb": "low (peripherally restricted)",
+                "ames": "negative",
+                "herg": "low risk",
+                "cyp3a4_inhibitor": "no",
+                "solubility": "good",
+                "clearance": "moderate",
+            },
+        },
+        "job": [
+            "Decide whether low BBB penetration is a liability given that the target is peripheral.",
+            "Assess the rest of the ADMET/safety profile for chronic use.",
+            "Give a calibrated go_no_go; do not reflexively penalize low BBB when CNS exposure is not needed.",
+        ],
+        "tools": "external_pharmacology",
+        "preferred_decision": "Go",
+        "acceptable_decisions": ["Conditional Go"],
+        "gold_label": "Go — low BBB is acceptable (even preferable) for a peripheral target with an otherwise clean profile",
+        "gold_rationale": "For a peripheral target, low brain penetration is acceptable and can reduce CNS off-target risk; with AMES negative, low hERG, no CYP issue, and good solubility, the profile supports progression. A strong answer does not reflexively demand BBB penetration when the target is peripheral.",
+        "required_concepts": [
+            "peripheral target", "brain penetration not required", "clean ADMET profile", "chronic-use safety",
+            "Go",
+        ],
+        "acceptable_variants": [
+            "peripherally restricted", "low BBB acceptable", "CNS off-target", "favorable ADMET",
+        ],
+        "red_flags": [
+            "penalizes low BBB even though the target is peripheral",
+            "demands CNS exposure when it is not required by the mechanism",
+        ],
+    },
+
+    # ---- Family 5: docking / binding interpretation ----------------------
+    {
+        "id": "p25_docking_neg_selectivity_offtarget",
+        "family": "docking_binding_interpretation",
+        "difficulty": "hard",
+        "neg": True,
+        "title": "Docking that is strong at the target but also at an anti-target",
+        "intro": "Interpret the docking/binding evidence for this compound and recommend a decision.",
+        "context": [
+            "**Target:** a PD-relevant kinase.",
+        ],
+        "data_block": {
+            "compound": "Compound K",
+            "target_docking_kcal_mol": -9.3,
+            "reference_ligand_kcal_mol": -8.1,
+            "anti_target_docking": {"hERG_model": "favorable", "off_target_kinase": "comparable to on-target"},
+            "pose_quality": "good at the target",
+            "admet_summary": "acceptable",
+        },
+        "job": [
+            "State what the strong on-target score establishes and why the anti-target/off-target docking matters.",
+            "Integrate selectivity (hERG and off-target kinase) into the interpretation.",
+            "Recommend a go_no_go and the selectivity experiment needed.",
+        ],
+        "tools": "external_pharmacology",
+        "preferred_decision": "No-Go",
+        "acceptable_decisions": ["Conditional Go"],
+        "gold_label": "No-Go (or selectivity-gated) — strong target docking is offset by predicted hERG/off-target binding",
+        "gold_rationale": "A good on-target docking score does not establish a viable candidate when the same compound is predicted to bind an anti-target (hERG) and an off-target kinase comparably. Selectivity must be resolved first; progression is gated on a selectivity panel (No-Go as-is).",
+        "required_concepts": [
+            "selectivity", "anti-target", "off-target", "hERG", "docking is not sufficient", "No-Go",
+        ],
+        "acceptable_variants": [
+            "kinome selectivity", "off-target kinase", "cardiotoxicity", "selectivity panel",
+            "binding is not enough",
+        ],
+        "red_flags": [
+            "recommends progression on the on-target score while ignoring off-target/anti-target binding",
+            "ignores the hERG selectivity risk",
+        ],
+    },
+    {
+        "id": "p25_docking_fragment_weak_score",
+        "family": "docking_binding_interpretation",
+        "difficulty": "medium",
+        "neg": False,
+        "title": "Interpret a fragment hit with a modest docking score",
+        "intro": "Interpret the docking/binding evidence for this fragment and recommend a decision.",
+        "context": [
+            "**Target:** GCase (GBA1 product); fragment-based screening context.",
+        ],
+        "data_block": {
+            "compound": "Fragment Fr-1 (MW ~190)",
+            "docking_score_kcal_mol": -6.2,
+            "reference_drug_like_ligand_kcal_mol": -8.0,
+            "ligand_efficiency": "high (favorable per-heavy-atom)",
+            "pose_quality": "makes a key catalytic-residue contact",
+            "admet_summary": "fragment-like, very soluble",
+        },
+        "job": [
+            "Explain why a fragment's lower absolute docking score is expected and why ligand efficiency / a key interaction matter more here.",
+            "State what docking does not establish (real binding affinity, target engagement).",
+            "Recommend a go_no_go for a fragment-to-lead campaign and the biophysical confirmation needed (e.g. SPR/ITC/crystallography).",
+        ],
+        "tools": "external_pharmacology",
+        "preferred_decision": "Conditional Go",
+        "acceptable_decisions": ["Go", "No-Go"],
+        "gold_label": "Conditional Go — promising fragment by ligand efficiency / key contact, pending biophysical confirmation",
+        "gold_rationale": "Fragments are expected to have modest absolute scores; high ligand efficiency and a key catalytic-residue contact make this a reasonable fragment-to-lead starting point. Docking does not confirm binding, so progression is conditional on biophysical validation (SPR/ITC/crystallography) before elaboration.",
+        "required_concepts": [
+            "fragment", "ligand efficiency", "key interaction", "docking is not affinity", "biophysical confirmation",
+        ],
+        "acceptable_variants": [
+            "fragment-based", "per heavy atom", "SPR", "ITC", "crystallography", "target engagement",
+        ],
+        "red_flags": [
+            "rejects the fragment merely because its absolute docking score is lower than a drug-like ligand",
+            "treats the docking score as confirmed binding affinity",
+        ],
+    },
+
+    # ---- Family 6: lead optimization -------------------------------------
+    {
+        "id": "p25_leadopt_herg_basicity",
+        "family": "lead_optimization",
+        "difficulty": "medium",
+        "neg": False,
+        "title": "Reduce hERG liability driven by a basic amine while keeping CNS exposure",
+        "intro": "Propose a rational lead-optimization strategy for this scaffold.",
+        "context": [
+            "**Scaffold:** a CNS-penetrant PD lead with good potency.",
+            "**Profile:** hERG inhibition associated with a strongly basic amine (high pKa) and lipophilicity; otherwise acceptable.",
+        ],
+        "job": [
+            "State the optimization goal and the structural driver of the hERG liability.",
+            "Propose modifications (e.g. lower amine pKa, add fluorine adjacent to the basic center, reduce lipophilicity, add a polar/zwitterionic element) — each with rationale, expected benefit, and risk.",
+            "Preserve target potency and CNS penetration (note that excessive polarity can reduce BBB).",
+            "List the properties to re-check (hERG, potency, BBB/Kp,uu, solubility) and the experimental validation step.",
+        ],
+        "tools": "external_pharmacology",
+        "preferred_decision": "N/A",
+        "acceptable_decisions": [],
+        "gold_label": "Lower basic-amine pKa / lipophilicity to reduce hERG while protecting potency and CNS exposure",
+        "gold_rationale": "hERG binding here is driven by a basic, lipophilic amine; rational fixes lower the pKa (e.g. fluorination near the basic center), trim lipophilicity, or introduce polarity, each justified and balanced against potency and CNS penetration. The answer re-checks hERG/potency/BBB and validates experimentally; arbitrary edits are penalized.",
+        "required_concepts": [
+            "hERG", "basic amine", "pKa", "lipophilicity", "preserve potency", "preserve CNS penetration",
+            "recheck properties", "experimental validation",
+        ],
+        "acceptable_variants": [
+            "reduce basicity", "fluorination", "logP", "polarity", "patch clamp", "brain penetration", "Kp,uu",
+        ],
+        "red_flags": [
+            "proposes arbitrary changes without rationale",
+            "kills CNS penetration or potency while reducing hERG",
+        ],
+    },
+    {
+        "id": "p25_leadopt_neg_destroys_pharmacophore",
+        "family": "lead_optimization",
+        "difficulty": "hard",
+        "neg": True,
+        "title": "Critique a proposed 'optimization' that removes the key pharmacophore",
+        "intro": "Critically evaluate the proposed optimization and provide a corrected strategy.",
+        "context": [
+            "**Scaffold:** a GCase chaperone lead whose key interaction is a hydrogen bond from a hydroxyl to a catalytic residue.",
+            "**Proposed change (to critique):** \"to improve metabolic stability and logP, remove the hydroxyl group and the basic nitrogen.\"",
+        ],
+        "job": [
+            "Judge whether the proposed change is sound; identify that removing the pharmacophore hydroxyl/basic center will likely abolish target engagement.",
+            "Explain the potency-vs-property trade-off and why this 'optimization' is counterproductive.",
+            "Provide a corrected strategy that fixes the liabilities while preserving the pharmacophore.",
+            "List the properties to re-check and an experimental validation step.",
+        ],
+        "tools": "external_pharmacology",
+        "preferred_decision": "N/A",
+        "acceptable_decisions": [],
+        "gold_label": "Reject — the proposed change removes the pharmacophore and would abolish target engagement",
+        "gold_rationale": "Removing the hydroxyl (key H-bond) and the basic center would likely abolish GCase engagement, so the proposed change is counterproductive despite improving logP/metabolism. The correct approach preserves the pharmacophore and addresses metabolism/logP elsewhere (e.g. block a distal soft spot, modulate peripheral lipophilicity), then re-checks potency/clearance and validates.",
+        "required_concepts": [
+            "pharmacophore", "key hydrogen bond", "target engagement abolished", "potency-property trade-off",
+            "preserve pharmacophore", "recheck properties", "experimental validation",
+        ],
+        "acceptable_variants": [
+            "catalytic residue", "loses potency", "counterproductive", "distal modification", "soft spot",
+        ],
+        "red_flags": [
+            "endorses removing the pharmacophore to improve properties",
+            "optimizes physicochemical properties at the expense of target engagement",
+        ],
+    },
+
+    # ---- Family 7: repurposing / translatability -------------------------
+    {
+        "id": "p25_repurpose_nilotinib_cabl",
+        "family": "repurposing_translatability",
+        "difficulty": "hard",
+        "neg": True,
+        "review_status": "reviewed",
+        "sources": ["NILO-PD, JAMA Neurology 2021", "PubChem: nilotinib (C28H22F3N7O)"],
+        "title": "Repurposing nilotinib (c-Abl inhibitor) for Parkinson's disease",
+        "intro": "Evaluate whether nilotinib is a strong repurposing candidate for Parkinson's disease.",
+        "context": [
+            "**Candidate:** nilotinib, an approved c-Abl/BCR-ABL kinase inhibitor (oncology), proposed for PD via c-Abl inhibition.",
+            "**Key facts:** large molecule with known poor CNS penetration; the randomized **NILO-PD** trial showed low CSF exposure, no symptomatic benefit, and no biomarker change; oncology dosing carries QT and other risks.",
+        ],
+        "data_block": {
+            "candidate_name": "Nilotinib",
+            "smiles": "CC1=C(C=C(C=C1)C(=O)NC2=CC(=CC(=C2)C(F)(F)F)N3C=C(N=C3)C)NC4=NC=CC(=N4)C5=CN=CC=C5",
+            "known_or_hypothetical": "known",
+        },
+        "job": [
+            "Give the repurposing rationale (c-Abl) and mechanism match.",
+            "Reason about CNS exposure at tolerated doses using the NILO-PD CSF/clinical data.",
+            "Interpret the clinical evidence and the safety profile; distinguish target rationale from demonstrated benefit.",
+            "Give a calibrated go_no_go.",
+        ],
+        "tools": TOOLS_DB,
+        "preferred_decision": "No-Go",
+        "acceptable_decisions": ["Conditional Go"],
+        "gold_label": "No-Go — attractive target but poor CNS exposure and a negative randomized trial",
+        "gold_rationale": "Despite a plausible c-Abl rationale, nilotinib has poor CNS penetration (low CSF exposure in NILO-PD), showed no clinical or biomarker benefit in a randomized trial, and carries oncology-dose safety risks. Repurposing nilotinib itself is a No-Go; a brain-penetrant c-Abl inhibitor would be a separate program.",
+        "required_concepts": [
+            "c-Abl kinase", "nilotinib", "CNS exposure", "low CSF exposure", "NILO-PD", "no benefit", "No-Go",
+        ],
+        "acceptable_variants": [
+            "Abl", "brain penetration", "randomized trial", "QT", "safety", "brain-penetrant analog",
+        ],
+        "red_flags": [
+            "assumes CNS exposure / benefit from the target rationale despite the NILO-PD data",
+            "recommends Go ignoring the negative randomized trial and CNS-exposure problem",
+        ],
+    },
 ]
 
 

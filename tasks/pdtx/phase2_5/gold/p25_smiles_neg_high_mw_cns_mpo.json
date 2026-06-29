@@ -1,0 +1,91 @@
+{
+  "task_id": "p25_smiles_neg_high_mw_cns_mpo",
+  "phase": "phase2_5",
+  "category": "small_molecule",
+  "task_family": "candidate_smiles_evaluation",
+  "is_negative_control": true,
+  "rubric_id": "pdtx25_candidate_smiles_v1",
+  "gold_label": "No-Go \u2014 high MW/TPSA/HBD predict poor CNS penetration for a brain target",
+  "preferred_decision": "No-Go",
+  "acceptable_decisions": [
+    "Conditional Go"
+  ],
+  "gold_rationale": "MW ~565, TPSA ~140 A^2, and multiple H-bond donors/acceptors fall well outside CNS-drug guidelines and predict poor BBB penetration. For a CNS target this is disqualifying without a major redesign (No-Go); the molecule likely cannot engage a brain target.",
+  "required_concepts": [
+    "CNS drug-likeness",
+    "molecular weight",
+    "TPSA",
+    "hydrogen bond donors",
+    "blood-brain barrier",
+    "No-Go"
+  ],
+  "acceptable_variants": [
+    "CNS MPO",
+    "polar surface area",
+    "HBD",
+    "brain penetration",
+    "BBB",
+    "redesign"
+  ],
+  "red_flags": [
+    "ignores the poor CNS physicochemical profile for a brain target",
+    "recommends Go despite predicted poor BBB penetration"
+  ],
+  "rubric": {
+    "criteria": [
+      {
+        "name": "pd_mechanism_relevance",
+        "weight": 0.2,
+        "scale": "0-5",
+        "description": "Connects the candidate's target/MoA to PD disease biology."
+      },
+      {
+        "name": "target_moa_reasoning",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Plausible target / mechanism-of-action reasoning for the molecule."
+      },
+      {
+        "name": "evidence_grounding",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Grounds claims in the provided/derived evidence rather than assertion."
+      },
+      {
+        "name": "admet_cns_interpretation",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Sound ADMET and CNS-drug-likeness interpretation incl. BBB, solubility, clearance, CYP."
+      },
+      {
+        "name": "safety_risk_identification",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Identifies hERG/AMES/DILI and other safety liabilities."
+      },
+      {
+        "name": "go_no_go_quality",
+        "weight": 0.1,
+        "scale": "0-5",
+        "description": "Go/No-Go/Conditional Go decision is justified and calibrated to the evidence."
+      },
+      {
+        "name": "next_experiment_actionability",
+        "weight": 0.05,
+        "scale": "0-5",
+        "description": "Proposes an informative, decision-relevant next experiment."
+      },
+      {
+        "name": "uncertainty_calibration",
+        "weight": 0.05,
+        "scale": "0-5",
+        "description": "Confidence is calibrated; no overclaiming."
+      }
+    ]
+  },
+  "metadata": {
+    "curator": "phase2_5 seed (hand-authored)",
+    "review_status": "draft",
+    "source_ids": []
+  }
+}

@@ -81,10 +81,12 @@ full set follows the matrix in `pd_txbench_phase2.5.md` §18.
 
 ## Seed slice (this pass)
 
-**33 tasks** covering all 8 families (15 negative controls ≈45%; 11 source-verified).
-This is a runnable, balanced slice that proves the pipeline end-to-end; it is **not**
-yet the full §14.1 MVP (≈300 static + 15 agentic). Scale up by adding entries to the
-generator's `TASKS` spec — no code changes needed.
+**56 tasks** covering all 8 families (28 negative controls ≈50%; 19 source-verified).
+This is a runnable, balanced slice growing toward the full §14.1 MVP (≈300 static +
+15 agentic). Current per-family counts vs MVP target: target-mechanism 9/40, evidence
+13/40, candidate-SMILES 10/50, ADMET/CNS 8/40, docking 5/30, lead-opt 4/30,
+repurposing 4/30, agentic 3/15. Scale up by adding entries to the generator's `TASKS`
+spec — no code changes needed.
 
 ### Authoring & verification workflow
 

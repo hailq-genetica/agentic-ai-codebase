@@ -1,0 +1,83 @@
+{
+  "task_id": "p25_repurpose_nilotinib_cabl",
+  "phase": "phase2_5",
+  "category": "small_molecule",
+  "task_family": "repurposing_translatability",
+  "is_negative_control": true,
+  "rubric_id": "pdtx25_repurposing_v1",
+  "gold_label": "No-Go \u2014 attractive target but poor CNS exposure and a negative randomized trial",
+  "preferred_decision": "No-Go",
+  "acceptable_decisions": [
+    "Conditional Go"
+  ],
+  "gold_rationale": "Despite a plausible c-Abl rationale, nilotinib has poor CNS penetration (low CSF exposure in NILO-PD), showed no clinical or biomarker benefit in a randomized trial, and carries oncology-dose safety risks. Repurposing nilotinib itself is a No-Go; a brain-penetrant c-Abl inhibitor would be a separate program.",
+  "required_concepts": [
+    "c-Abl kinase",
+    "nilotinib",
+    "CNS exposure",
+    "low CSF exposure",
+    "NILO-PD",
+    "no benefit",
+    "No-Go"
+  ],
+  "acceptable_variants": [
+    "Abl",
+    "brain penetration",
+    "randomized trial",
+    "QT",
+    "safety",
+    "brain-penetrant analog"
+  ],
+  "red_flags": [
+    "assumes CNS exposure / benefit from the target rationale despite the NILO-PD data",
+    "recommends Go ignoring the negative randomized trial and CNS-exposure problem"
+  ],
+  "rubric": {
+    "criteria": [
+      {
+        "name": "repurposing_rationale",
+        "weight": 0.2,
+        "scale": "0-5",
+        "description": "Mechanistic rationale matches the drug to the PD mechanism."
+      },
+      {
+        "name": "human_safety_dosing",
+        "weight": 0.2,
+        "scale": "0-5",
+        "description": "Uses existing human safety and dosing data."
+      },
+      {
+        "name": "cns_exposure",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Reasons about CNS exposure at tolerated human doses."
+      },
+      {
+        "name": "clinical_evidence_interpretation",
+        "weight": 0.2,
+        "scale": "0-5",
+        "description": "Interprets clinical evidence; distinguishes symptomatic vs disease-modifying use."
+      },
+      {
+        "name": "trial_design_relevance",
+        "weight": 0.15,
+        "scale": "0-5",
+        "description": "Proposes relevant endpoints, biomarkers, and patient-subgroup selection."
+      },
+      {
+        "name": "uncertainty",
+        "weight": 0.1,
+        "scale": "0-5",
+        "description": "Honest about evidence gaps."
+      }
+    ]
+  },
+  "metadata": {
+    "curator": "phase2_5 seed (hand-authored)",
+    "review_status": "reviewed",
+    "source_ids": [
+      "NILO-PD, JAMA Neurology 2021",
+      "PubChem: nilotinib (C28H22F3N7O)"
+    ]
+  }
+}

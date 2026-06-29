@@ -1,0 +1,15 @@
+task_file: tasks/pdtx/phase2_5/admet_cns_assessment/p25_admet_neg_ppb_low_free.md
+gold_file: tasks/pdtx/phase2_5/gold/p25_admet_neg_ppb_low_free.json
+category: small_molecule
+task_family: admet_cns_assessment
+tool_category: external_pharmacology
+reasoning_effort: high
+interactive: false        # overridden by run_pdtx.py --mode
+capture_telemetry: true
+output_base_dir: output/pdtx/phase2_5/admet_cns_assessment/p25_admet_neg_ppb_low_free/
+
+llm:
+  provider: anthropic
+  model: claude-opus-4-8
+logging:
+  enabled: false          # set true (+ project/entity) to log to W&B/Weave
